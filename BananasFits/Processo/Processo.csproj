@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{81D14E72-1FCC-448C-B98C-C94A4A672233}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Processo</RootNamespace>
+    <AssemblyName>Processo</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MySql.Data.6.9.3\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6">
+      <HintPath>..\packages\MySql.ConnectorNET.Entity.6.8.3.2\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zxing">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database\DatabaseContext.cs" />
+    <Compile Include="Database\Interfaces\IDatabaseContext.cs" />
+    <Compile Include="Database\Interfaces\IServicoRepositorio.cs" />
+    <Compile Include="Database\Interfaces\IPessoaFisicaRepositorio.cs" />
+    <Compile Include="Database\Interfaces\IPessoaJuridicaRepositorio.cs" />
+    <Compile Include="Database\Interfaces\IEnderecoRepositorio.cs" />
+    <Compile Include="Database\Interfaces\IUsuarioRepositorio.cs" />
+    <Compile Include="Database\Mapeamento\ServicoMap.cs" />
+    <Compile Include="Database\Mapeamento\EntidadeBaseMap.cs" />
+    <Compile Include="Database\Mapeamento\EnderecoMap.cs" />
+    <Compile Include="Database\Mapeamento\PessoaFisicaMap.cs" />
+    <Compile Include="Database\Mapeamento\PessoaJuridicaMap.cs" />
+    <Compile Include="Database\Mapeamento\UsuarioMap.cs" />
+    <Compile Include="Database\Repositorios\ServicoRepositorio.cs" />
+    <Compile Include="Database\Repositorios\RepositorioBase.cs" />
+    <Compile Include="Database\Repositorios\EnderecoRepositorio.cs" />
+    <Compile Include="Database\Repositorios\PessoaJuridicaRepositorio.cs" />
+    <Compile Include="Database\Repositorios\PessoaFisicaRepositorio.cs" />
+    <Compile Include="Database\Repositorios\UsuarioRepositorio.cs" />
+    <Compile Include="Entidades\Avaliacao.cs" />
+    <Compile Include="Entidades\Servico.cs" />
+    <Compile Include="Entidades\Endereco.cs" />
+    <Compile Include="Entidades\EntidadeBase.cs" />
+    <Compile Include="Entidades\Moeda.cs" />
+    <Compile Include="Entidades\PessoaFisica.cs" />
+    <Compile Include="Entidades\PessoaJuridica.cs" />
+    <Compile Include="Entidades\Usuario.cs" />
+    <Compile Include="Negocio\Interfaces\INegocioBase.cs" />
+    <Compile Include="Negocio\Interfaces\IPessoaJuridicaNegocio.cs" />
+    <Compile Include="Negocio\Interfaces\IPessoaFisicaNegocio.cs" />
+    <Compile Include="Negocio\Interfaces\IServicoNegocio.cs" />
+    <Compile Include="Negocio\Interfaces\IUsuarioNegocio.cs" />
+    <Compile Include="Negocio\NegocioBase.cs" />
+    <Compile Include="Negocio\NegocioException.cs" />
+    <Compile Include="Negocio\ServicoNegocio.cs" />
+    <Compile Include="Negocio\PessoaJuridicaNegocio.cs" />
+    <Compile Include="Negocio\PessoaFisicaNegocio.cs" />
+    <Compile Include="Negocio\UsuarioNegocio.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Database\Interfaces\IRepositorioBase.cs" />
+    <Compile Include="UnityOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

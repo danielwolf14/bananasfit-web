@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Banana's FIT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="banana' FIT">
+    <meta name="author" content="Moove">
+    <link rel="shortcut icon" href="~/images/ico.png" type="image/x-icon" />
+    <!--JS-->
+    <!--CSS-->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/site")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <!--MENU-->
+    <nav class="navbar navbar-default nav-pills" role="navigation" style="border-radius: 0px;border: 0px;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img class="img-responsive " src="~/images/bananaBrand.png" style="width: 55px; height: 50px; ">
+
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("HOME", "Index", "Home")</li>
+                @*<li>@Html.ActionLink("BUSCAR ACADEMIAS", "BuscarPessoaJuridica")</li>*@
+                @*<li>@Html.ActionLink("COMPRAR FITS", "ComprarFits", "Usuario")</li>*@
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+               
+                @*<li>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="input-group" style="max-width:190px;">
+                            <input type="text" class="form-control" placeholder="Insira um texto aqui">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                </li>*@
+
+                <li>@Html.ActionLink("CONTATO", "Contato", "Home")</li>
+                @if (Session["usuario"] == null)
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CADASTRO <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Pessoa Física", "CadastrarPessoaFisica", "Usuario")</li>
+                            <li>@Html.ActionLink("Pessoa Jurídica", "CadastrarPessoaJuridica", "Usuario")</li>
+                        </ul>
+                    </li>
+                }
+                @if (Session["usuario"] == null)
+                {
+                    <li>@Html.ActionLink("LOGIN", "Login", "Usuario")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("LOGOUT", "Logout", "Usuario")</li>
+                }
+
+                @if (Session["usuario"] != null)
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAINEL <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Minha Conta", "MinhaConta", "Usuario")</li>
+                            @if(((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                            {
+                            <li>@Html.ActionLink("Listar Serviços", "Listar", "Servico")</li>
+                            <li class="disabled">@Html.ActionLink("Listar Pessoas Jurídicas", "CadastrarPessoaJuridica", "Usuario")</li>
+                            <li class="disabled">@Html.ActionLink("Listar Pessoas Físicas", "CadastrarPessoaJuridica", "Usuario")</li>
+                            }
+                        
+                        </ul>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </nav><br />
+
+    <!--Mensagens de sucesso e erro-->
+    <div class="container mensagens">
+        @if (!string.IsNullOrEmpty((string)TempData["mensagemSucesso"]))
+        {
+            <div class="row">
+                <div class="alert alert-success alert-dismissible col-lg-4 col-lg-offset-4" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <span>@TempData["mensagemSucesso"]</span>
+                </div>
+            </div>
+        }
+        @if (TempData["mensagemErro"] != null && ((IList<string>)TempData["mensagemErro"]).Count > 0)
+        {
+            <div class="row">
+                <div class="alert alert-danger alert-dismissible col-lg-4 col-lg-offset-4" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <ul>
+                        @foreach (var item in ((IList<string>)TempData["mensagemErro"]))
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+    <!--CONTAINER PARA CARREGAMENTO DINAMICO-->
+    <div id="container" class="container-fluid">
+        @RenderBody()
+    </div>
+    <!--FOOTER-->
+    <div class="navbar-fixed-bottom " style="background-color: #333333;">
+        <div style="text-align: center">
+            <span>
+                <a href="https://www.facebook.com/bananasfit"><i id="social" class="fa fa-facebook-square fa-2x" style="color:#3C5A95"></i></a>
+                <a href="https://twitter.com/bananasfit"><i id="social" class="fa fa-twitter-square fa-2x" style="color:#3198CA"></i></a>
+                <a href="https://plus.google.com/bananasfit"><i id="social" class="fa fa-google-plus-square fa-2x" style="color:#DB3E33"></i></a>
+                <a href="mailto:bananasfit@gmail.com"><i id="social" class="fa fa-envelope-square fa-2x" style="color:#FEC80D"></i></a>
+            </span><br>
+            @*<span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Termos", "Termos", "Home")</span>
+                <span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Sobre", "Sobre", "Home")</span>
+                <span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Privacidade", "Privacidade", "Home")</span>*@
+            <br />
+            <span class="label" style="cursor: pointer; margin-top: 7px; ">© Copyright 2014 - MOOVE BRASIL</span>
+
+        </div>
+    </div>
+</body>
+</html>

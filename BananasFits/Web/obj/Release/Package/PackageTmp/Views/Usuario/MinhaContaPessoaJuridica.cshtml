@@ -1,0 +1,161 @@
+﻿@model Web.ViewModels.DetalharPessoaJuridicaViewModel
+
+<div class="container">
+    <div class="row">
+
+        @*<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">*@
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+
+
+            <div class="panel panel-">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Minha Conta
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(false)
+                        @Html.HiddenFor(e => e.Chave)
+                        <div class="row clearfix">
+                            <div class="col-md-6 column">
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <span id="inputform">Nome</span>
+                                    @Html.TextBoxFor(e => e.Nome, new { @class = "form-control input-sm", placeholder = "Nome" })
+                                </div><br />
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <span id="inputform">Razão Social</span>
+                                    @Html.TextBoxFor(e => e.RazaoSocial, new { @class = "form-control input-sm", placeholder = "Razão Social" })
+                                </div><br />
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                    <span id="inputform">Email</span>
+                                    @Html.TextBoxFor(e => e.Email, new { @class = "form-control input-sm", placeholder = "Email" })
+                                </div><br />
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                    <span id="inputform">Telefone</span>
+                                    @Html.TextBoxFor(e => e.Telefone, new { @class = "form-control input-sm", placeholder = "Telefone" })
+                                </div><br />
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                    <span id="inputform">Celular</span>
+                                    @Html.TextBoxFor(e => e.Celular, new { @class = "form-control input-sm", placeholder = "Celular" })
+                                </div><br />
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                                    <span id="inputform">CNPJ</span>
+                                    @Html.TextBoxFor(e => e.CNPJ, new { @class = "form-control input-sm", placeholder = "CNPJ" })
+                                </div>
+
+                                <br />
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <span id="inputform">Senha</span>
+                                    @Html.TextBoxFor(e => e.Password, new { @class = "form-control input-sm", placeholder = "Senha" })
+                                </div>
+                                <br />
+
+                                <div class="input-group ">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-th-list"></i></span>
+                                    <span id="inputform">Serviços</span>
+                                    <input disabled="disabled" type="text" name="servicos" id="servicos" class="form-control input-sm" placeholder="Serviços">
+                                </div>
+                                <br />
+                            </div>
+                            <div class="col-md-6 column">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <span id="inputform">CEP</span>
+                                    @Html.TextBoxFor(e => e.Endereco.CEP, new { @class = "form-control input-sm", placeholder = "CEP" })
+                                </div>
+                                <br />
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <span id="inputform">Rua</span>
+                                    @Html.TextBoxFor(e => e.Endereco.Rua, new { @class = "form-control input-sm", placeholder = "Rua" })
+                                </div>
+
+                                <br />
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <span id="inputform">Número</span>
+                                    @Html.TextBoxFor(e => e.Endereco.Numero, new { @class = "form-control input-sm", placeholder = "Número" })
+                                </div>
+
+                                <br />
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <span id="inputform">Complemento</span>
+                                    @Html.TextBoxFor(e => e.Endereco.Complemento, new { @class = "form-control input-sm", placeholder = "Complemento" })
+                                </div>
+                                <br />
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <span id="inputform">Bairro</span>
+                                    @Html.TextBoxFor(e => e.Endereco.Bairro, new { @class = "form-control input-sm", placeholder = "Bairro" })
+                                </div>
+                                <br />
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <span id="inputform">Cidade</span>
+                                    @Html.TextBoxFor(e => e.Endereco.Cidade, new { @class = "form-control input-sm", placeholder = "Cidade" })
+                                </div>
+                                <br />
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <span id="inputform">Estado</span>
+                                    @Html.TextBoxFor(e => e.Endereco.Estado, new { @class = "form-control input-sm", placeholder = "Estado" })
+
+                                </div>
+                                <br />
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-qrcode"></i></span>
+                                    <span id="inputform">Quantidade de Moedas</span>
+                                    @Html.TextBoxFor(e => e.QuantidadeMoedas, new { @class = "form-control input-sm", placeholder = "Moedas", disabled = "disabled" })
+                                </div>
+                                <br />
+                            </div>
+                           
+                        </div>
+                        <div class="input-group ">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-th-list"></i></span>
+                            <span id="inputform">Descrição</span>
+                            @Html.TextAreaFor(e => e.Descricao, new { @class = "form-control input-sm", placeholder = "Descrição" })
+                        </div>
+                        <br />
+                        <div>Insira sua Imagem</div>
+                        @Html.TextBoxFor(e => e.Imagem, new { @class = "form-control input-sm", placeholder = "Imagem", type = "file" })
+
+                        <br />
+                        <br />
+                        <div class="pull-right" style="margin-top:-6px;">
+                            <a href="#" id="submit" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href="@Url.Action("Inativar", "Usuario", new { chave = Model.Chave})  " data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a href="@Url.Action("AssociarServico", "Servico")  " data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-plus"></i>Inserir Serviços</a>
+                        </div>
+                    }
+                    <br /><br /><br />
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#submit").click(function () {
+        $("form").submit();
+    });
+</script>

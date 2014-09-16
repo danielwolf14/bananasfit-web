@@ -1,0 +1,93 @@
+﻿@model PagedList.IPagedList<Processo.Entidades.Servico>
+@using PagedList.Mvc;
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1 toppad">
+            <div class="panel panel-">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        <span style="font-size:25px; font-weight:bold;">Lista de Serviços</span>
+                        <button style="float:right;" class="btn btn-success" data-title="Inserir" data-toggle="modal" data-target="#inserir" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-plus"></span>  Inserir</button>
+                    </h1>
+                </div>
+                <div class="panel-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table id="mytable" class="table table-bordred table-striped" style="max-width:885px;">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>ID</th>
+                                                <th>Nome</th>
+                                                <th>Editar</th>
+                                                <th>Deletar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td><input type="checkbox" class="checkthis" /></td>
+                                                    <td>@item.Chave</td>
+                                                    <td>@item.Nome</td>
+                                                    <td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                                    <td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+
+                                    @Html.PagedListPager(Model, page => Url.Action("Listar", new { page, }))
+
+                                    @*<ul class="pagination pull-right">
+                                            <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                                            <li class="active"><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                                        </ul>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @Html.Action("Cadastrar","Servico")
+
+                    @* MUDAR PARA PARTIAL VIEWS *@
+                    @*                     
+                        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title custom_align" id="Heading">Deletar Serviço</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span>Voce deseja deletar este serviço?</div>
+
+                                    </div>
+                                    <div class="modal-footer ">
+                                        <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
+                                        <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-remove"></span> Não</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>*@
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br /><br />

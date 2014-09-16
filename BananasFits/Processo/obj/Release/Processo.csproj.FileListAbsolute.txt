@@ -1,0 +1,17 @@
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\Processo.dll.config
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\Processo.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\Processo.pdb
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\EntityFramework.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\MySql.Data.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\MySql.Data.Entity.EF6.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\zxing.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\zxing.presentation.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\EntityFramework.xml
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\zxing.pdb
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\zxing.xml
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\zxing.presentation.pdb
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Release\zxing.presentation.xml
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\obj\Release\Processo.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\obj\Release\Processo.pdb

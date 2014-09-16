@@ -1,0 +1,36 @@
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\Processo.dll.config
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\Processo.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\Processo.pdb
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\EntityFramework.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\MySql.Data.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\MySql.Data.Entity.EF6.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.presentation.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\EntityFramework.xml
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.pdb
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.xml
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.presentation.pdb
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.presentation.xml
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\obj\Debug\Processo.dll
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\obj\Debug\Processo.pdb
+C:\Users\Raphael Marques\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\obj\Debug\Processo.csprojResolveAssemblyReference.cache
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\Processo.dll.config
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\Processo.dll
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\Processo.pdb
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\EntityFramework.dll
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\MySql.Data.dll
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\MySql.Data.Entity.EF6.dll
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.dll
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.presentation.dll
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\EntityFramework.xml
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.pdb
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.xml
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.presentation.pdb
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\bin\Debug\zxing.presentation.xml
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\obj\Debug\Processo.csprojResolveAssemblyReference.cache
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\obj\Debug\Processo.dll
+C:\Users\Vinicius\Documents\GitHub\bananasfit\BananaFitsWSWeb\BananasFits\Processo\obj\Debug\Processo.pdb
