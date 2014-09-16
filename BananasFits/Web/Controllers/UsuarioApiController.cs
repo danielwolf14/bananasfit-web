@@ -63,64 +63,6 @@ namespace Web.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
-       
-        #region Testes
-        //Testes
-
-        [HttpGet]
-        [Route("api/usuario/CPessoaFisica")]
-        public HttpResponseMessage CPessoaFisica(PessoaFisica model)
-        {
-            //TODO: Retornar mensagem de sucesso com usuário cadastrado com sucesso
-            HttpResponseMessage response;
-            if (model != null)
-            {
-                var usuario = Mapper.DynamicMap<PessoaFisica>(model);
-                unityOfWork.PessoaFisicaNegocio.Cadastrar(usuario);
-                unityOfWork.Commit();
-
-                response = Request.CreateResponse(HttpStatusCode.OK, usuario);
-                //TODO:Retornar mensagem de sucesso ou negócio exception
-            }
-            else
-            {
-                //TODO:Retornar mensagem de erro de model invalido
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-            return response;
-        }
-
-        [HttpGet]
-        [Route("api/usuario/login/{email}/{senha}")]
-        public HttpResponseMessage Login(string email, string senha)
-        {
-            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(senha))
-            {
-                Usuario usuario = unityOfWork.PessoaFisicaNegocio.BuscarUsuarioPorEmail(email);
-                usuario = usuario != null ? usuario :
-                    unityOfWork.PessoaJuridicaNegocio.BuscarUsuarioPorEmail(email);
-
-                if (usuario != null && (usuario.Password == senha))
-                {
-                    var usuarioLogado = Mapper.DynamicMap<UsuarioLogadoModel>(usuario);
-                    usuarioLogado.IsPessoaFisica = usuario is PessoaFisica;
-
-                    return Request.CreateResponse(HttpStatusCode.OK, usuarioLogado);
-                }
-                else
-                {
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
-                }
-            }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
-        }
-
-        public HttpResponseMessage Get()
-        {
-
-            return Request.CreateResponse(HttpStatusCode.OK, new PessoaFisica { Celular = "teste" });
-        }
-
-        #endregion
+               
     }
 }

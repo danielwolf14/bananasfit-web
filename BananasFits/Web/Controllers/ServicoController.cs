@@ -94,9 +94,11 @@ namespace Web.Controllers
                 servico.IsHabilitado = false;
                 unityOfWork.ServicoNegocio.Atualizar(servico);
                 unityOfWork.Commit();
-                return RedirectToAction("ListarServicos", "Servico");
+                ExibirMensagemSucesso("Serviço deletado com sucesso.");
+                return RedirectToAction("Listar", "Servico");
             }
             else
+                ExibirMensagemErro("Erro ao deletar serviço.");
                 return RedirectToAction("Index", "Home");
         }
 

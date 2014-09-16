@@ -30,9 +30,45 @@ namespace Web.Controllers
             };
         }
 
+        [HttpGet]
+        [Route("api/testeapi/getmessage")]
+        public HttpResponseMessage GetMessage()
+        {
+            var teste = new PessoaFisica
+            {
+                CPF = "teste",
+                Endereco = new Endereco { CEP = "teste", Cidade = "teste" },
+                IsAdministrador = true,
+                Nome = "teste",
+                QuantidadeMoedas = 100,
+                Telefone = "Teste",
+                Email = "Teste@teste.com"
+            };
+            return Request.CreateResponse(HttpStatusCode.OK, teste);
+        }
+
+        [HttpPost]
         public HttpResponseMessage Post([FromBody]PessoaFisica teste)
         {
             return Request.CreateResponse(HttpStatusCode.OK, teste);
         }
+
+        [HttpPost]
+        [Route("api/testeapi/semparametros")]
+        public HttpResponseMessage PostSemParametros()
+        {
+            var teste = new PessoaFisica
+            {
+                CPF = "teste",
+                Endereco = new Endereco{CEP = "teste", Cidade = "teste"},
+                IsAdministrador = true,
+                Nome = "teste",
+                QuantidadeMoedas = 100,
+                Telefone = "Teste",
+                Email = "Teste@teste.com"
+            };
+            return Request.CreateResponse(HttpStatusCode.OK, teste);
+        }
+
     }
 }
