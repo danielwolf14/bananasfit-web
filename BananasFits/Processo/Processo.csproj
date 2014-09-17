@@ -61,17 +61,20 @@
   <ItemGroup>
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Database\Interfaces\IDatabaseContext.cs" />
+    <Compile Include="Database\Interfaces\IAvaliacaoRepositorio.cs" />
     <Compile Include="Database\Interfaces\IServicoRepositorio.cs" />
     <Compile Include="Database\Interfaces\IPessoaFisicaRepositorio.cs" />
     <Compile Include="Database\Interfaces\IPessoaJuridicaRepositorio.cs" />
     <Compile Include="Database\Interfaces\IEnderecoRepositorio.cs" />
     <Compile Include="Database\Interfaces\IUsuarioRepositorio.cs" />
+    <Compile Include="Database\Mapeamento\AvaliacaoMap.cs" />
     <Compile Include="Database\Mapeamento\ServicoMap.cs" />
     <Compile Include="Database\Mapeamento\EntidadeBaseMap.cs" />
     <Compile Include="Database\Mapeamento\EnderecoMap.cs" />
     <Compile Include="Database\Mapeamento\PessoaFisicaMap.cs" />
     <Compile Include="Database\Mapeamento\PessoaJuridicaMap.cs" />
     <Compile Include="Database\Mapeamento\UsuarioMap.cs" />
+    <Compile Include="Database\Repositorios\AvaliacaoRepositorio.cs" />
     <Compile Include="Database\Repositorios\ServicoRepositorio.cs" />
     <Compile Include="Database\Repositorios\RepositorioBase.cs" />
     <Compile Include="Database\Repositorios\EnderecoRepositorio.cs" />
@@ -89,10 +92,12 @@
     <Compile Include="Negocio\Interfaces\INegocioBase.cs" />
     <Compile Include="Negocio\Interfaces\IPessoaJuridicaNegocio.cs" />
     <Compile Include="Negocio\Interfaces\IPessoaFisicaNegocio.cs" />
+    <Compile Include="Negocio\Interfaces\IAvaliacaoNegocio.cs" />
     <Compile Include="Negocio\Interfaces\IServicoNegocio.cs" />
     <Compile Include="Negocio\Interfaces\IUsuarioNegocio.cs" />
     <Compile Include="Negocio\NegocioBase.cs" />
     <Compile Include="Negocio\NegocioException.cs" />
+    <Compile Include="Negocio\AvaliacaoNegocio.cs" />
     <Compile Include="Negocio\ServicoNegocio.cs" />
     <Compile Include="Negocio\PessoaJuridicaNegocio.cs" />
     <Compile Include="Negocio\PessoaFisicaNegocio.cs" />
