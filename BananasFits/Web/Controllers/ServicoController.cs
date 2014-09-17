@@ -53,7 +53,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(CadastroServicoViewModel model)
+        public ActionResult Cadastrar(CadastroServicoViewModel model, HttpPostedFileBase img)
         {
             if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
             {
@@ -64,6 +64,9 @@ namespace Web.Controllers
                     try
                     {
                         unityOfWork.ServicoNegocio.Cadastrar(servico);
+                        unityOfWork.Commit();
+                        servico.Imagem = SalvarImagem(img, servico.Chave, servico.Nome);
+                        unityOfWork.ServicoNegocio.Atualizar(servico);
                         unityOfWork.Commit();
                         ExibirMensagemSucesso("Serviço cadastrado com sucesso.");
                         return RedirectToAction("Listar");
@@ -114,12 +117,12 @@ namespace Web.Controllers
             servicoParaAtualizar.Imagem = servicoAtualizado.Imagem;
         }
 
-        public string SalvarImagem(HttpPostedFileBase imagem, int idPessoaJuridica, string nomePessoaJuridica)
+        public string SalvarImagem(HttpPostedFileBase imagem, int idServico, string nomeServico)
         {
             string[] strName = imagem.FileName.Split('.');
             string extensao = strName[strName.Count() - 1];
-            string caminhoSalvo = String.Format("{0}{1}.{2}", Server.MapPath("~/images/ImagemPessoaJuridica/"), nomePessoaJuridica + idPessoaJuridica, extensao);
-            string caminhoFinal = String.Format("/images/ImagemPessoaJuridica/{0}.{1}", nomePessoaJuridica + idPessoaJuridica, extensao);
+            string caminhoSalvo = String.Format("{0}{1}.{2}", Server.MapPath("~/images/ImagemServico/"), nomeServico + idServico, extensao);
+            string caminhoFinal = String.Format("/images/ImagemServico/{0}.{1}", nomeServico + idServico, extensao);
             imagem.SaveAs(caminhoSalvo);
             return caminhoFinal;
         }

@@ -154,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\ImagemServico\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
@@ -208,6 +209,7 @@
     <Content Include="images\buscar.png" />
     <Content Include="images\comprar.png" />
     <Content Include="images\ico.png" />
+    <Content Include="images\ImagemPessoaJuridica\kj9.jpg" />
     <Content Include="images\logo.png" />
     <Content Include="images\logo1.png" />
     <Content Include="images\moove.png" />
