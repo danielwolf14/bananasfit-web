@@ -7,63 +7,67 @@
     </div>
 
     <div class="row clearfix">
-        <div class="col-md-6 column">
-            @*@using (Html.BeginForm())*@
-            @using (Html.BeginForm("Contato", "Contato", FormMethod.Post))
-            {
-
-                <br />
-                @Html.TextBoxFor(e => e.De, new { @class = "form-control", placeholder = "Nome", type = "email" })
-             @Html.ValidationMessageFor(e => e.De)<br />
-               
-                @Html.TextBoxFor(e => e.Assunto, new { @class = "form-control", placeholder = "Assunto" })
-            @Html.ValidationMessageFor(e => e.Assunto)<br />
-                
-                @Html.TextAreaFor(e => e.Mensagem, new { @class = "form-control", placeholder = "Mensagem" })
-            @Html.ValidationMessageFor(e => e.Mensagem)<br />
-                
-
-
-                <input type="submit" value="Enviar" class="btn btn-success " style="display: block; clear: both;">
-            }
-        </div>
         <br />
-        <div class="col-md-6 column">
-            <div class="panel panel-info">
+        <div class="col-md-6 ">
+            <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Moove Brasil</h3>
+                    <h3 class="panel-title">Fale Conosco</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="row">
-                        <div>
-                            <div>
-                                <img src="~/images/moove.png" class="img-responsive img-center" style="max-width:270px; margin:15px auto; margin-top:-10px" />
+
+                    @using (Html.BeginForm("Contato", "Contato", FormMethod.Post))
+                    {
+
+                        @Html.TextBoxFor(e => e.De, new { @class = "form-control", placeholder = "Nome", type = "email" })
+                        @Html.ValidationMessageFor(e => e.De)<br />
+
+                        @Html.TextBoxFor(e => e.Assunto, new { @class = "form-control", placeholder = "Assunto" })
+                        @Html.ValidationMessageFor(e => e.Assunto)<br />
+
+                        @Html.TextAreaFor(e => e.Mensagem, new { @class = "form-control", placeholder = "Mensagem" })
+                        @Html.ValidationMessageFor(e => e.Mensagem)<br />
+
+                        <input type="submit" value="Enviar" class="btn-sm  btn-success pull-right">
+                    }
+                </div>
+                </div>
+            </div>
+                <div class="col-md-6 ">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Moove Brasil</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div>
+                                    <div>
+                                        <img src="~/images/moove.png" class="img-responsive img-center" style="max-width:270px; margin:15px auto; margin-top:-10px" />
+                                    </div>
+                                    <table class="table table-user-information">
+                                        <tbody>
+
+                                            <tr>
+                                                <td>Endereço</td>
+                                                <td>Av. Mascarenhas de Moraes</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email</td>
+                                                <td><a href="mailto:bananasfit@gmail.com">bananasfit@gmail.com</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Telefone</td>
+                                                <td>
+                                                    (081) 8888.8888
+                                                </td>
+                                            </tr>
+                                        
+                                        </tbody>
+                                    </table>
+
+                                </div>
                             </div>
-                            <table class="table table-user-information">
-                                <tbody>
-
-                                    <tr>
-                                        <td>Endereço</td>
-                                        <td>Av. Mascarenhas de Moraes</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-                                        <td><a href="mailto:bananasfit@gmail.com">bananasfit@gmail.com</a></td>
-                                    </tr>
-                                <td>Telefone</td>
-                                <td>
-                                    (081) 8888.8888
-                                </td>
-
-                                </tr>
-
-                                </tbody>
-                            </table>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>

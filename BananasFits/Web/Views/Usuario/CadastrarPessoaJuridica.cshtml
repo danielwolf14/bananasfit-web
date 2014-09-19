@@ -7,6 +7,7 @@
                 <div class="panel-heading" style="text-align:center;">
                     <h3 class="panel-title">Cadastre-se</h3>
                 </div>
+                <br />                
                 @using (Html.BeginForm("CadastrarPessoaJuridica", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <div class="col-md-6">
@@ -52,7 +53,7 @@
                         </div><br />
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                            @Html.TextAreaFor(e => e.Descricao, new { @class = "", placeholder = "Descrição", style="min-width:205px; max-width:205px; max-height:300px" })
+                            @Html.TextAreaFor(e => e.Descricao, new { @class = "", placeholder = "Descrição", style="min-width:180px; max-width:205px;" })
                             @Html.ValidationMessageFor(e => e.Descricao)
                         </div><br />
                         <div>
@@ -116,8 +117,7 @@
 
                     <input type="submit" value="Registrar" class="btn btn-success" style="display: block; clear: both;width: 95%; margin: 0 2.5%;">
                 }
-                <br /><br /><br /><br />
-
+<br />
             </div>
         </div>
     </div>
