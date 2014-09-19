@@ -269,6 +269,10 @@
     <Content Include="Views\Servico\Associar.cshtml" />
     <Content Include="Views\Servico\Cadastrar.cshtml" />
     <Content Include="Views\Servico\Atualizar.cshtml" />
+    <Content Include="Views\Usuario\ListarPJuridica.cshtml" />
+    <Content Include="Views\Usuario\ListarPFisica.cshtml" />
+    <Content Include="Views\Usuario\CadastrarPFisicaAdmin.cshtml" />
+    <Content Include="Views\Usuario\CadastrarPJuridicaAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Processo\Processo.csproj">

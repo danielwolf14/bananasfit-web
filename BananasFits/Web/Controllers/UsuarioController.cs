@@ -4,6 +4,7 @@ using Processo;
 using Processo.Database;
 using Processo.Entidades;
 using Processo.Negocio;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,81 @@ namespace Web.Controllers
 {
     public class UsuarioController : BaseController
     {
+
+        public ActionResult CadastrarPFisicaAdmin()
+        {
+            ViewBag.Estado = MontarViewBagEstado();
+            return PartialView();
+        }
+
+        public ActionResult CadastrarPJuridicaAdmin()
+        {
+            ViewBag.Estado = MontarViewBagEstado();
+            return PartialView();
+        }
+
+        public ActionResult ListarPFisica(string currentFilter, string searchString, int? page)
+        {
+            if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+            {
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+
+                ViewBag.CurrentFilter = searchString;
+
+                var usuarios = unityOfWork.PessoaFisicaNegocio.Consultar(e => e.IsHabilitado);
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    usuarios = usuarios.Where(s => s.Nome.ToUpper().Contains(searchString.ToUpper()));
+                }
+
+                usuarios = usuarios.OrderBy(e => e.Nome);
+
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(usuarios.ToPagedList(pageNumber, pageSize));
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        public ActionResult ListarPJuridica(string currentFilter, string searchString, int? page)
+        {
+            if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+            {
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+
+                ViewBag.CurrentFilter = searchString;
+
+                var usuarios = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    usuarios = usuarios.Where(s => s.Nome.ToUpper().Contains(searchString.ToUpper()));
+                }
+
+                usuarios = usuarios.OrderBy(e => e.Nome);
+
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(usuarios.ToPagedList(pageNumber, pageSize));
+            }
+            return RedirectToAction("Index", "Home");
+        }
 
         #region Login
         public ActionResult Login()
@@ -102,7 +178,14 @@ namespace Web.Controllers
                     unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
                     unityOfWork.Commit();
                     ExibirMensagemSucesso("Usuário cadastrado com sucesso.");
-                    return RedirectToAction("Login");
+                    if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                    {
+                        return RedirectToAction("ListarPJuridica", "Usuario");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login");
+                    }
                 }
                 catch (NegocioException ex)
                 {
@@ -137,7 +220,16 @@ namespace Web.Controllers
                     unityOfWork.PessoaFisicaNegocio.Cadastrar(usuario);
                     unityOfWork.Commit();
                     ExibirMensagemSucesso("Usuário cadastrado com sucesso.");
-                    return RedirectToAction("Login");
+                    if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                    {
+                        return RedirectToAction("ListarPFisica" , "Usuario");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login");
+                    }
+
+                    
                 }
                 catch (NegocioException ex)
                 {

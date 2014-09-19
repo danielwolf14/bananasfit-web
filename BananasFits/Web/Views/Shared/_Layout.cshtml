@@ -81,8 +81,8 @@
                             @if(((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
                             {
                             <li>@Html.ActionLink("Listar Serviços", "Listar", "Servico")</li>
-                            <li class="disabled">@Html.ActionLink("Listar Pessoas Jurídicas", "CadastrarPessoaJuridica", "Usuario")</li>
-                            <li class="disabled">@Html.ActionLink("Listar Pessoas Físicas", "CadastrarPessoaJuridica", "Usuario")</li>
+                            <li>@Html.ActionLink("Listar Pessoas Jurídicas", "ListarPJuridica", "Usuario")</li>
+                            <li>@Html.ActionLink("Listar Pessoas Físicas", "ListarPFisica", "Usuario")</li>
                             }
                         
                         </ul>
