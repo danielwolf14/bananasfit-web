@@ -195,3 +195,7 @@ a.list-group-item.active small {
 span.label a:hover{
     color:#fec222 !important;
 }
+
+.dropdown-menu{background-color: whitesmoke !important;}
+
+.dropdown-menu a:hover{background-color: #fec222 !important;}
