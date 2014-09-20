@@ -21,7 +21,7 @@ namespace Web.ViewModels
         [Required]
         [MaxLength(15)]
         public virtual string Nome { get; set; }
-        public virtual HttpPostedFileBase Imagem { get; set; }
+        //public virtual HttpPostedFileBase Imagem { get; set; }
         public virtual bool IsHabilitado { get; set; }
     }
 }

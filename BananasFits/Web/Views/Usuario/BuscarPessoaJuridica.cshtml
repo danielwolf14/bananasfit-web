@@ -1,142 +1,44 @@
-﻿@model Web.ViewModels.BuscarPessoaJuridicaViewModel
+﻿@model PagedList.IPagedList<Processo.Entidades.PessoaJuridica>
+@using PagedList.Mvc;
 
 
 <div class="container vertical-offset-100">
 
     <div class=" col-md-9 pull-right">
-          
+
         <div class="alert alert-info alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <strong>OK!</strong> Este e o resultado da sua pesquisa
         </div>
         <div class="list-group ">
-            <a href="#" class="list-group-item">
-                <div class="media col-md-3">
-                    <figure class="pull-left">
-                        <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250">
-                    </figure>
-                </div>
-                <div class="col-md-6">
-                    <h4 class="list-group-item-heading"> List group heading </h4>
-                    <p class="list-group-item-text">
-                        Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum.
-                        Vel et nonumy gubergren, ad has tota facilis probatus. Ea legere legimus tibique cum, sale tantas vim ea, eu vivendo expetendis vim. Voluptua vituperatoribus et mel, ius no elitr deserunt mediocrem. Mea facilisi torquatos ad.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <h2> 1 <small> fits </small></h2>
-                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="javascript:window.location=('@Url.Action("DetalhesPessoaJuridica", "Usuario")')">Ver!</button>
-                    <div class="stars">
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="list-group-item">
-                <div class="media col-md-3">
-                    <figure class="pull-left">
-                        <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250">
-                    </figure>
-                </div>
-                <div class="col-md-6">
-                    <h4 class="list-group-item-heading"> List group heading </h4>
-                    <p class="list-group-item-text">
-                        Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum.
-                        Vel et nonumy gubergren, ad has tota facilis probatus. Ea legere legimus tibique cum, sale tantas vim ea, eu vivendo expetendis vim. Voluptua vituperatoribus et mel, ius no elitr deserunt mediocrem. Mea facilisi torquatos ad.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <h2> 2 <small> fits </small></h2>
-                    <button type="button" class="btn btn-primary btn-lg btn-block"> Ver! </button>
-                    <div class="stars">
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="list-group-item">
-                <div class="media col-md-3">
-                    <figure class="pull-left">
-                        <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250">
-                    </figure>
-                </div>
-                <div class="col-md-6">
-                    <h4 class="list-group-item-heading"> List group heading </h4>
-                    <p class="list-group-item-text">
-                        Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum.
-                        Vel et nonumy gubergren, ad has tota facilis probatus. Ea legere legimus tibique cum, sale tantas vim ea, eu vivendo expetendis vim. Voluptua vituperatoribus et mel, ius no elitr deserunt mediocrem. Mea facilisi torquatos ad.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <h2> 3 <small> fits </small></h2>
-                    <button type="button" class="btn btn-primary btn-lg btn-block"> Ver! </button>
-                    <div class="stars">
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="list-group-item">
-                <div class="media col-md-3">
-                    <figure class="pull-left">
-                        <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250">
-                    </figure>
-                </div>
-                <div class="col-md-6">
-                    <h4 class="list-group-item-heading"> List group heading </h4>
-                    <p class="list-group-item-text">
-                        Eu eum corpora torquatos, ne postea constituto mea, quo tale lorem facer no. Ut sed odio appetere partiendo, quo meliore salutandi ex. Vix an sanctus vivendo, sed vocibus accumsan petentium ea.
-                        Sed integre saperet at, no nec debet erant, quo dico incorrupte comprehensam ut. Et minimum consulatu ius, an dolores iracundia est, oportere vituperata interpretaris sea an. Sed id error quando indoctum, mel suas saperet at.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <h2> 4 <small> fits </small></h2>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Ver!</button>
-                    <div class="stars">
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="list-group-item">
-                <div class="media col-md-3">
-                    <figure class="pull-left">
-                        <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250">
-                    </figure>
-                </div>
-                <div class="col-md-6">
-                    <h4 class="list-group-item-heading"> List group heading </h4>
-                    <p class="list-group-item-text">
-                        Ut mea viris eripuit theophrastus, cu ponderum accusata consequuntur cum. Suas quaestio cotidieque pro ea. Nam nihil persecuti philosophia id, nam quot populo ea.
-                        Falli urbanitas ei pri, eu est enim volumus, mei no volutpat periculis. Est errem iudicabit cu. At usu vocibus officiis, ad ius eros tibique appellantur.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <h2> 5 <small> fits </small></h2>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Ver!</button>
-                    <div class="stars">
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                    </div>
-                </div>
-            </a>
+            @foreach (var item in Model)
+            {
+                <a href="#" class="list-group-item">
+                    <div class="media col-md-3">
+                        <figure class="pull-left">
 
-
+                            <img class="media-object img-rounded img-responsive" src="@item.Imagem" alt="placehold.it/350x250">
+                        </figure>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="list-group-item-heading"> @item.Nome</h4>
+                        <p class="list-group-item-text">
+                            @item.Descricao
+                        </p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        @*<h2> 1 <small> fits </small></h2>*@
+                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="javascript:window.location=('@Url.Action("DetalhesPessoaJuridica", "Usuario")')">Ver!</button>
+                        <div class="stars">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                        </div>
+                    </div>
+                </a>
+            }
             <br>
         </div>
     </div>
@@ -264,120 +166,5 @@
 
 
 </div>
-<div style="text-align: center;">
-    <ul class="pagination pagination-large">
-        <li><a href="">«</a></li>
-        <li><a href="">1</a></li>
-        <li class="active"><span>2</span></li>
-        <li class="disabled"><span>»</span></li>
-    </ul>
-</div>
+@Html.PagedListPager(Model, page => Url.Action("Listar", new { page, }))
 <br><br>
-<!--<div class="container">
-    <div class="row clearfix panel"><br>
-        <div class="col-md-12 column">
-            <img src="http://lorempixel.com/140/140/" class="thumbnail img-responsive"  alt="imagem academia" style="max-width: 1500px; max-height: 400px;" />
-            <h2>
-                Academia tal
-            </h2>
-            <div class="row clearfix" >
-                <div class="col-md-10 column">
-                    <p>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                    </p>
-                </div>
-
-
-                <div class="col-md-2 column" style="text-align: center;">
-                    <h3>
-                        RANKING
-                        <div class="stars">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                        </div>
-                    </h3>
-                </div>
-            </div>
-            <br><br>
-            <div class="row clearfix">
-
-                <div class="col-md-12 col-sm-2 column">
-                    <div class="row clearfix col-md-6">
-                        <div class="col-md-2  column">
-                            <span class="glyphicon glyphicon-earphone" style="font-size: 70px;"></span>
-                        </div>
-                        <div class="col-md-10 column" style="margin-top: -20px;">
-                            <h3 style="text-align: center;">Contato</h3>
-                            Telefone: (21) 4063-4442
-                            Celular: (21) 89888-8888
-
-                        </div>
-                    </div>
-                    <div class="row clearfix col-md-6">
-                        <div class="col-md-2 column">
-                            <span class="glyphicon glyphicon-map-marker" style="font-size: 70px;"></span>
-                        </div>
-                        <div class="col-md-10 column" style="margin-top: -20px;">
-                            <h3 style="text-align: center;">Localização</h3>
-                            Endereço
-                            Rua Francisco Portela, 15 - Paraíso, São Gonçalo, Rio de Janeiro
-
-                        </div>
-                    </div>
-
-                </div>
-            </div><br>
-            <div class="row clearfix" style="text-align: center;">
-                <div class="col-md-12 column">
-                    <h1>
-                        Serviços
-                    </h1>
-                </div>
-            </div><br>
-            <div class="row clearfix" style="text-align: center;">
-                <div class="col-md-4 column">
-                    <h3>
-                        s1
-                    </h3>
-                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="thumbnail img-responsive" />
-                    <h3>
-                        1fits
-                    </h3>
-                </div>
-                <div class="col-md-4 column">
-                    <h3>
-                        s2
-                    </h3>
-                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="thumbnail img-responsive" />
-                    <h3>
-                        2fits
-                    </h3>
-                </div>
-                <div class="col-md-4 column">
-                    <h3>
-                        s3
-                    </h3>
-                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="thumbnail img-responsive" />
-                    <h3>
-                        3fits
-                    </h3>
-                </div>
-            </div><br>
-            <div class="row" >
-
-                <div class="col-lg-12 column" style="text-align: center; margin-left: 0px;">
-                    <a href="" class="btn btn-success btn-lg btn-block" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Compre seus FITS Agora!</a>
-                </div>
-
-            </div>
-            <br><br><br><br><br>
-        </div>
-    </div>
-</div>-->

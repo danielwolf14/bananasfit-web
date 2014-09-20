@@ -15,20 +15,8 @@ namespace Web.Controllers
 {
     public class UsuarioController : BaseController
     {
-
-        public ActionResult CadastrarPFisicaAdmin()
-        {
-            ViewBag.Estado = MontarViewBagEstado();
-            return PartialView();
-        }
-
-        public ActionResult CadastrarPJuridicaAdmin()
-        {
-            ViewBag.Estado = MontarViewBagEstado();
-            return PartialView();
-        }
-
-        public ActionResult ListarPFisica(string currentFilter, string searchString, int? page)
+        #region Listar
+        public ActionResult ListarPessoaFisica(string currentFilter, string searchString, int? page)
         {
             if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
             {
@@ -59,8 +47,7 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-        public ActionResult ListarPJuridica(string currentFilter, string searchString, int? page)
+        public ActionResult ListarPessoaJuridica(string currentFilter, string searchString, int? page)
         {
             if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
             {
@@ -91,6 +78,8 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        #endregion
+        
         #region Login
         public ActionResult Login()
         {
@@ -104,10 +93,33 @@ namespace Web.Controllers
             return View();
         }
 
-        public ActionResult BuscarPessoaJuridica()
+        public ActionResult BuscarPessoaJuridica(string currentFilter, string searchString, int? page)
         {
-            return View();
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var usuarios = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                usuarios = usuarios.Where(s => s.Nome.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            usuarios = usuarios.OrderBy(e => e.Nome);
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(usuarios.ToPagedList(pageNumber, pageSize));
         }
+
 
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
@@ -145,7 +157,7 @@ namespace Web.Controllers
 
         public ActionResult CadastrarPessoaJuridica()
         {
-            if (Session["usuario"] != null)
+            if (Session["usuario"] != null && !((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
                 return RedirectToAction("Index", "Home");
 
             ViewBag.Estado = MontarViewBagEstado();
@@ -154,7 +166,7 @@ namespace Web.Controllers
 
         public ActionResult CadastrarPessoaFisica()
         {
-            if (Session["usuario"] != null)
+            if (Session["usuario"] != null && !((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
                 return RedirectToAction("Index", "Home");
 
             ViewBag.Estado = MontarViewBagEstado();
@@ -180,7 +192,7 @@ namespace Web.Controllers
                     ExibirMensagemSucesso("Usuário cadastrado com sucesso.");
                     if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
                     {
-                        return RedirectToAction("ListarPJuridica", "Usuario");
+                        return RedirectToAction("ListarPessoaJuridica", "Usuario");
                     }
                     else
                     {
@@ -222,14 +234,14 @@ namespace Web.Controllers
                     ExibirMensagemSucesso("Usuário cadastrado com sucesso.");
                     if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
                     {
-                        return RedirectToAction("ListarPFisica" , "Usuario");
+                        return RedirectToAction("ListarPessoaFisica", "Usuario");
                     }
                     else
                     {
                         return RedirectToAction("Login");
                     }
 
-                    
+
                 }
                 catch (NegocioException ex)
                 {
@@ -241,7 +253,7 @@ namespace Web.Controllers
         }
         #endregion
 
-        #region Detalhar e Atualizar Pessoa física e juridica
+        #region Detalhar, Atualizar e Inativar Pessoa física e juridica
         public ActionResult MinhaConta()
         {
             var usuarioLogado = (UsuarioLogadoModel)Session["usuario"];
@@ -330,10 +342,10 @@ namespace Web.Controllers
 
                     unityOfWork.Commit();
                     ExibirMensagemSucesso("Usuário atualizado com sucesso.");
-                    
+
                     return View(model);
                 }
-                catch(NegocioException ex)
+                catch (NegocioException ex)
                 {
                     TratarMensagemException(ex);
                 }
@@ -344,23 +356,46 @@ namespace Web.Controllers
 
         public ActionResult Inativar(int chave)
         {
-            if ((UsuarioLogadoModel)Session["usuario"] != null
-                && ((UsuarioLogadoModel)Session["usuario"]).Chave == chave)
+            if ((UsuarioLogadoModel)Session["usuario"] != null)
+                if (((UsuarioLogadoModel)Session["usuario"]).IsAdministrador
+                || ((UsuarioLogadoModel)Session["usuario"]).Chave == chave)
+                {
+                    if (((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica && !((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                    {
+                        var usuario = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(chave);
+                        usuario.IsHabilitado = false;
+                        unityOfWork.PessoaFisicaNegocio.Atualizar(usuario);
+                        unityOfWork.Commit();
+                    }
+                    if (!((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica && !((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                    {
+                        var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
+                        usuario.IsHabilitado = false;
+                        unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
+                        unityOfWork.Commit();
+                    }
+                    if (!(((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica) && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                    {
+                        var usuario = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(chave);
+                        usuario.IsHabilitado = false;
+                        unityOfWork.PessoaFisicaNegocio.Atualizar(usuario);
+                        unityOfWork.Commit();
+                    }
+                    else if (((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                    {
+                        var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
+                        usuario.IsHabilitado = false;
+                        unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
+                        unityOfWork.Commit();
+                    }
+
+                }
+            if (((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
             {
-                if (((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
-                {
-                    var usuario = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(chave);
-                    usuario.IsHabilitado = false;
-                    unityOfWork.PessoaFisicaNegocio.Atualizar(usuario);
-                    unityOfWork.Commit();
-                }
+                if (((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica && !((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                    return RedirectToAction("ListarPessoaFisica");
                 else
-                {
-                    var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
-                    usuario.IsHabilitado = false;
-                    unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
-                    unityOfWork.Commit();
-                }
+                    return RedirectToAction("ListarPessoaJuridica");
             }
             Session.Abandon();
             return RedirectToAction("Index", "Home");

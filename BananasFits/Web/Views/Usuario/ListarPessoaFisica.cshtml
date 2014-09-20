@@ -1,0 +1,52 @@
+﻿@model PagedList.IPagedList<Processo.Entidades.PessoaFisica>
+@using PagedList.Mvc;
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1 toppad">
+            <div class="panel panel-">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        <span style="font-size:25px; font-weight:bold;">Lista de Pessoas Físicas</span>
+                    </h1>
+                </div>
+                <div class="panel-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table id="mytable" class="table table-bordred table-striped" style="max-width:885px;">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>ID</th>
+                                                <th>Nome</th>
+                                                <th>CPF</th>
+                                                <th>Inativar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td><input type="checkbox" class="checkthis" /></td>
+                                                    <td>@item.Chave</td>
+                                                    <td>@item.Nome</td>
+                                                    <td>@item.CPF</td>
+                                                    <td><p><a href="@Url.Action("Inativar","Usuario", new {chave = item.Chave})" class="btn btn-danger btn-xs" data-title="Delete" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></a></p></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+
+                                    @Html.PagedListPager(Model, page => Url.Action("ListarPessoaFisica", new { page, }))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br /><br />

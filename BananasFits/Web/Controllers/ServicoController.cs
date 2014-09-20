@@ -39,7 +39,7 @@ namespace Web.Controllers
 
                 servicos = servicos.OrderBy(e => e.Nome);
 
-                int pageSize = 10;
+                int pageSize = 5;
                 int pageNumber = (page ?? 1);
 
                 return View(servicos.ToPagedList(pageNumber, pageSize));
@@ -90,7 +90,6 @@ namespace Web.Controllers
 
         public ActionResult Inativar(int chave)
         {
-
             if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
             {
                 var servico = unityOfWork.ServicoNegocio.BuscarPorChave(chave);
@@ -105,18 +104,29 @@ namespace Web.Controllers
                 return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Atualizar()
+        public ActionResult Atualizar(int chave)
         {
+            var servico = unityOfWork.ServicoNegocio.BuscarPorChave(chave);
+            var model = Map.Mapper.DynamicMap<AtualizarServicoViewModel>(servico);
 
-            return View();
+            return PartialView(model);
         }
-
-        private void Atualizar(Servico servicoParaAtualizar, Servico servicoAtualizado)
+        [HttpPost]
+        public ActionResult Atualizar(AtualizarServicoViewModel model, HttpPostedFileBase imagem)
         {
-            servicoParaAtualizar.Nome = servicoAtualizado.Nome;
-            servicoParaAtualizar.Imagem = servicoAtualizado.Imagem;
+            if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+            {
+                var servico = unityOfWork.ServicoNegocio.BuscarPorChave(model.Chave);
+                servico.Nome = model.Nome;
+                unityOfWork.ServicoNegocio.Atualizar(servico);
+                //salvar imagem
+                unityOfWork.Commit();
+                return RedirectToAction("Listar", "Servico");
+            }
+            ExibirMensagemErro("Erro ao atualizar serviço.");
+            return RedirectToAction("Listar", "Servico");
         }
-
+        
         public string SalvarImagem(HttpPostedFileBase imagem, int idServico, string nomeServico)
         {
             string[] strName = imagem.FileName.Split('.');

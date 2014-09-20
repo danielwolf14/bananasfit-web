@@ -48,6 +48,6 @@ C:\BananasFit\Projeto WSWEB\BananasFits\Processo\bin\Debug\zxing.pdb
 C:\BananasFit\Projeto WSWEB\BananasFits\Processo\bin\Debug\zxing.xml
 C:\BananasFit\Projeto WSWEB\BananasFits\Processo\bin\Debug\zxing.presentation.pdb
 C:\BananasFit\Projeto WSWEB\BananasFits\Processo\bin\Debug\zxing.presentation.xml
+C:\BananasFit\Projeto WSWEB\BananasFits\Processo\obj\Debug\Processo.csprojResolveAssemblyReference.cache
 C:\BananasFit\Projeto WSWEB\BananasFits\Processo\obj\Debug\Processo.dll
 C:\BananasFit\Projeto WSWEB\BananasFits\Processo\obj\Debug\Processo.pdb
-C:\BananasFit\Projeto WSWEB\BananasFits\Processo\obj\Debug\Processo.csprojResolveAssemblyReference.cache
