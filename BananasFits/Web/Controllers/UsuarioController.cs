@@ -412,6 +412,7 @@ namespace Web.Controllers
             usuarioParaAtualizar.RazaoSocial = usuarioAtualizado.RazaoSocial;
             usuarioParaAtualizar.Telefone = usuarioAtualizado.Telefone;
             usuarioParaAtualizar.Nome = usuarioAtualizado.Nome;
+            usuarioParaAtualizar.Imagem = usuarioAtualizado.Imagem;
 
         }
 
