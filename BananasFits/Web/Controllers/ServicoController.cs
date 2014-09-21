@@ -118,8 +118,8 @@ namespace Web.Controllers
             {
                 var servico = unityOfWork.ServicoNegocio.BuscarPorChave(model.Chave);
                 servico.Nome = model.Nome;
+                servico.Imagem = SalvarImagem(imagem, servico.Chave, servico.Nome);
                 unityOfWork.ServicoNegocio.Atualizar(servico);
-                //salvar imagem
                 unityOfWork.Commit();
                 return RedirectToAction("Listar", "Servico");
             }

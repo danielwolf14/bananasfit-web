@@ -271,7 +271,6 @@
     <Content Include="Views\Servico\Atualizar.cshtml" />
     <Content Include="Views\Usuario\ListarPessoaJuridica.cshtml" />
     <Content Include="Views\Usuario\ListarPessoaFisica.cshtml" />
-    <Content Include="Views\Servico\Qrcode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Processo\Processo.csproj">
