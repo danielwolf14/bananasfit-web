@@ -40,6 +40,8 @@
                 </a>
             }
             <br>
+            @Html.PagedListPager(Model, page => Url.Action("Listar", new { page, }))
+
         </div>
     </div>
 
@@ -166,5 +168,4 @@
 
 
 </div>
-@Html.PagedListPager(Model, page => Url.Action("Listar", new { page, }))
 <br><br>
