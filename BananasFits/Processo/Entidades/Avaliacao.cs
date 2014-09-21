@@ -9,7 +9,7 @@ namespace Processo.Entidades
    public class Avaliacao : EntidadeBase
     {
         public virtual int avaliacao { get; set; }
-        public virtual PessoaFisica pessoaFisica { get; set; }
-        public virtual PessoaJuridica pessoaJuridica { get; set; }
+        public PessoaFisica pessoaFisica { get; set; }
+        public PessoaJuridica pessoaJuridica { get; set; }
     }
 }

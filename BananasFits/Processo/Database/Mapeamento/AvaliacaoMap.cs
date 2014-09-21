@@ -17,12 +17,16 @@ namespace Processo.Database.Mapeamento
             Property(e => e.Chave)
                 .HasColumnName("idAvaliacao")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
             Property(e => e.avaliacao).HasColumnName("avaliacao");
-            Property(e => e.pessoaJuridica.Chave).HasColumnName("idP_Juridica");
-            Property(e => e.pessoaFisica.Chave).HasColumnName("idP_Fisica");
-
-              
+           
+            HasRequired(e => e.pessoaJuridica)
+                .WithMany()
+                .Map(e => e.MapKey("idP_Juridica"));
+            
+            HasRequired(e => e.pessoaFisica)
+                .WithMany()
+                .Map(e => e.MapKey("idP_Fisica"));
+        
         }
 
     }
