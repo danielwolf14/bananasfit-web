@@ -41,15 +41,15 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("api/usuario/efetuarlogin")]
-        public HttpResponseMessage EfetuarLogin([FromBody]string email, [FromBody]string senha)
+        public HttpResponseMessage EfetuarLogin(PessoaFisica model)
         {
-            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(senha))
+            if (!string.IsNullOrEmpty(model.Email) && !string.IsNullOrEmpty(model.Password))
             {
-                Usuario usuario = unityOfWork.PessoaFisicaNegocio.BuscarUsuarioPorEmail(email);
+                Usuario usuario = unityOfWork.PessoaFisicaNegocio.BuscarUsuarioPorEmail(model.Email);
                 usuario = usuario != null ? usuario :
-                    unityOfWork.PessoaJuridicaNegocio.BuscarUsuarioPorEmail(email);
+                    unityOfWork.PessoaJuridicaNegocio.BuscarUsuarioPorEmail(model.Email);
 
-                if (usuario != null && (usuario.Password == senha))
+                if (usuario != null && (usuario.Password == model.Password))
                 {
                     var usuarioLogado = Mapper.DynamicMap<UsuarioLogadoModel>(usuario);
                     usuarioLogado.IsPessoaFisica = usuario is PessoaFisica;
@@ -63,6 +63,66 @@ namespace Web.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
+
+        [Route("api/usuario/testeget")]
+        public PessoaFisica getPessoaFisica()
+        {
+
+            return new PessoaFisica
+            {
+                Nome = "teste",
+                Celular = "teste",
+                Chave = 2,
+                CPF = "1232",
+                Email = "asda@asda.com",
+                Endereco = new Endereco { Bairro = "asd", CEP = "adasd", Chave = 2, Cidade = "recife", Complemento = "asdas", Estado = EstadoEnum.PE, Numero = "asda", Rua = "aad" },
+                IsAdministrador = true,
+                IsHabilitado = true,
+                Password = "sadsas",
+                QuantidadeMoedas = 34,
+                Telefone = "adasd"
+            };
+
+        }
+
+        [HttpPost]
+        [Route("api/usuario/testeefetuarlogin")]
+        public HttpResponseMessage TestandoLogin([FromBody]PessoaFisica model)
+        {
+            if (!string.IsNullOrEmpty(model.Password) && !string.IsNullOrEmpty(model.Email))
+            {
+                //Usuario usuario = unityOfWork.PessoaFisicaNegocio.BuscarUsuarioPorEmail(email);
+                //usuario = usuario != null ? usuario :
+                //    unityOfWork.PessoaJuridicaNegocio.BuscarUsuarioPorEmail(email);
+
+                //if (usuario != null && (usuario.Password == senha))
+                //{
+                //    var usuarioLogado = Mapper.DynamicMap<UsuarioLogadoModel>(usuario);
+                //    usuarioLogado.IsPessoaFisica = usuario is PessoaFisica;
+                PessoaFisica p = new PessoaFisica
+                {
+                    Nome = "teste",
+                    Celular = "teste",
+                    Chave = 2,
+                    CPF = "1232",
+                    Email = model.Email,
+                    Endereco = new Endereco { Bairro = "asd", CEP = "adasd", Chave = 2, Cidade = "recife", Complemento = "asdas", Estado = EstadoEnum.PE, Numero = "asda", Rua = "aad" },
+                    IsAdministrador = true,
+                    IsHabilitado = true,
+                    Password = model.Password,
+                    QuantidadeMoedas = 34,
+                    Telefone = "adasd"
+                };
+
+
+                return Request.CreateResponse(HttpStatusCode.OK, p);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
                
     }
 }
