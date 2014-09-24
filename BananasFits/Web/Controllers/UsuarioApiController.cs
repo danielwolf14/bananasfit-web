@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿﻿using AutoMapper;
 using Web.ViewModels;
 using Processo.Entidades;
 using System;
@@ -41,7 +41,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("api/usuario/efetuarlogin")]
-        public HttpResponseMessage EfetuarLogin(PessoaFisica model)
+        public HttpResponseMessage EfetuarLogin([FromBody]PessoaFisica model)
         {
             if (!string.IsNullOrEmpty(model.Email) && !string.IsNullOrEmpty(model.Password))
             {
@@ -123,6 +123,6 @@ namespace Web.Controllers
             }
         }
 
-               
+
     }
 }

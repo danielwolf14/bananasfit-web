@@ -79,7 +79,7 @@ namespace Web.Controllers
         }
 
         #endregion
-        
+
         #region Login
         public ActionResult Login()
         {
@@ -354,48 +354,49 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Inativar(int chave)
+        public ActionResult InativarPessoaFisica(int chave)
         {
             if ((UsuarioLogadoModel)Session["usuario"] != null)
+            {
                 if (((UsuarioLogadoModel)Session["usuario"]).IsAdministrador
                 || ((UsuarioLogadoModel)Session["usuario"]).Chave == chave)
                 {
-                    if (((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica && !((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
-                    {
-                        var usuario = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(chave);
-                        usuario.IsHabilitado = false;
-                        unityOfWork.PessoaFisicaNegocio.Atualizar(usuario);
-                        unityOfWork.Commit();
-                    }
-                    if (!((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica && !((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
-                    {
-                        var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
-                        usuario.IsHabilitado = false;
-                        unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
-                        unityOfWork.Commit();
-                    }
-                    if (!(((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica) && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
-                    {
-                        var usuario = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(chave);
-                        usuario.IsHabilitado = false;
-                        unityOfWork.PessoaFisicaNegocio.Atualizar(usuario);
-                        unityOfWork.Commit();
-                    }
-                    else if (((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
-                    {
-                        var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
-                        usuario.IsHabilitado = false;
-                        unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
-                        unityOfWork.Commit();
-                    }
+                    var usuario = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(chave);
+                    usuario.IsHabilitado = false;
+                    unityOfWork.PessoaFisicaNegocio.Atualizar(usuario);
+                    unityOfWork.Commit();
 
+                    ExibirMensagemSucesso("Usuário deletado com sucesso.");
+
+                    if (((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                    {
+                        return RedirectToAction("ListarPessoaFisica");
+                    }
                 }
-            if (((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+            }
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult InativarPessoaJuridica(int chave)
+        {
+            if ((UsuarioLogadoModel)Session["usuario"] != null)
             {
-                if (((UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica && !((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
-                    return RedirectToAction("ListarPessoaFisica");
-                else
-                    return RedirectToAction("ListarPessoaJuridica");
+                if (((UsuarioLogadoModel)Session["usuario"]).IsAdministrador
+                || ((UsuarioLogadoModel)Session["usuario"]).Chave == chave)
+                {
+                    var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
+                    usuario.IsHabilitado = false;
+                    unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
+                    unityOfWork.Commit();
+
+                    ExibirMensagemSucesso("Usuário deletado com sucesso.");
+
+                    if (((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                    {
+                        return RedirectToAction("ListarPessoaJuridica");
+                    }
+                }
             }
             Session.Abandon();
             return RedirectToAction("Index", "Home");

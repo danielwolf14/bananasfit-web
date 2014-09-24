@@ -22,6 +22,10 @@ namespace Processo
 
         public virtual AvaliacaoNegocio AvaliacaoNegocio { get; private set; }
 
+        public virtual ServicoPessoaJuridicaNegocio ServicoPessoaJuridicaNegocio { get; private set; }
+
+
+
 
 
         public void Commit()
@@ -41,6 +45,8 @@ namespace Processo
             PessoaJuridicaNegocio = new PessoaJuridicaNegocio(new PessoaJuridicaRepositorio(contexto));
             ServicoNegocio = new ServicoNegocio(new ServicoRepositorio(contexto));
             AvaliacaoNegocio = new AvaliacaoNegocio(new AvaliacaoRepositorio(contexto));
+            ServicoPessoaJuridicaNegocio = new ServicoPessoaJuridicaNegocio(new ServicoPessoaJuridicaRepositorio(contexto));
+
 
 
         }

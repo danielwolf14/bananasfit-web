@@ -65,11 +65,11 @@
                                 </div>
                                 <br />
 
-                                <div class="input-group ">
+                                @*<div class="input-group ">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-th-list"></i></span>
                                     <span id="inputform">Serviços</span>
                                     <input disabled="disabled" type="text" name="servicos" id="servicos" class="form-control input-sm" placeholder="Serviços">
-                                </div>
+                                </div>*@
                                 <br />
                             </div>
                             <div class="col-md-6 column">
@@ -119,11 +119,11 @@
                                 </div>
                                 <br />
 
-                                <div class="input-group">
+                                @*<div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-qrcode"></i></span>
                                     <span id="inputform">Quantidade de Moedas</span>
                                     @Html.TextBoxFor(e => e.QuantidadeMoedas, new { @class = "form-control input-sm", placeholder = "Moedas", disabled = "disabled" })
-                                </div>
+                                </div>*@
                                 <br />
                             </div>
 
@@ -142,7 +142,7 @@
                         <br />
                         <div class="pull-right" style="margin-top:-6px;">
                             <a href="#" id="submit" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a href="@Url.Action("Inativar", "Usuario", new { chave = Model.Chave})  " data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a href="@Url.Action("InativarPessoaJuridica", "Usuario", new { chave = Model.Chave})  " data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                             <a href="@Url.Action("Associar", "Servico")  " data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-plus"></i>Inserir Serviços</a>
                         </div>
                     }

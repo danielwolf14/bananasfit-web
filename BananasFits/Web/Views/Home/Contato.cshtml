@@ -18,7 +18,7 @@
                     @using (Html.BeginForm("Contato", "Contato", FormMethod.Post))
                     {
 
-                        @Html.TextBoxFor(e => e.De, new { @class = "form-control", placeholder = "Nome", type = "email" })
+                        @Html.TextBoxFor(e => e.De, new { @class = "form-control", placeholder = "Email", type = "email" })
                         @Html.ValidationMessageFor(e => e.De)<br />
 
                         @Html.TextBoxFor(e => e.Assunto, new { @class = "form-control", placeholder = "Assunto" })

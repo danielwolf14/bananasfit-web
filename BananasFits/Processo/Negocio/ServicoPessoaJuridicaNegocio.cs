@@ -11,18 +11,20 @@ using Processo.Negocio.Interfaces;
 
 namespace Processo.Negocio
 {
-    public class ServicoNegocio : NegocioBase<Servico>, IServicoNegocio
+    public class ServicoPessoaJuridicaNegocio : NegocioBase<ServicoPessoaJuridica>, IServicoPessoaJuridicaNegocio
     {
-        internal ServicoNegocio(IServicoRepositorio repositorio)
+        internal ServicoPessoaJuridicaNegocio(IServicoPessoaJuridicaRepositorio repositorio)
             : base(repositorio)
         {
         }
 
-        public void Cadastrar(Servico servico)
+        public void Cadastrar(ServicoPessoaJuridica servicoPessoaJuridica)
         {
             var mensagens = new List<string>();
             VerificarNegocioException(mensagens);
-            base.Inserir(servico);
-        }      
+            base.Inserir(servicoPessoaJuridica);
+        }
+
+      
     }
 }

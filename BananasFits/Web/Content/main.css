@@ -21,8 +21,11 @@ body{
 
 /* styles for validation helpers */
 .field-validation-error {
-    color: #b94a48;
-    font-size: 11px;
+    /*color: #b94a48;*/
+    font-size: 10px;
+    background-color:indianred;
+    color:white;
+    display:block;
 }
 
 .field-validation-valid {

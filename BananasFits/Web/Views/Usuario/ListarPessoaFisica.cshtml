@@ -33,7 +33,7 @@
                                                     <td>@item.Chave</td>
                                                     <td>@item.Nome</td>
                                                     <td>@item.CPF</td>
-                                                    <td><p><a href="@Url.Action("Inativar","Usuario", new {chave = item.Chave})" class="btn btn-danger btn-xs" data-title="Delete" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></a></p></td>
+                                                    <td><p><a href="@Url.Action("InativarPessoaFisica","Usuario", new {chave = item.Chave})" class="btn btn-danger btn-xs" data-title="Delete" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></a></p></td>
                                                 </tr>
                                             }
                                         </tbody>
