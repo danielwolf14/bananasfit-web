@@ -1,0 +1,23 @@
+﻿@model PagedList.IPagedList<Processo.Entidades.Servico>
+@using PagedList.Mvc;
+@using Web.Extensions
+
+
+<div class="container" style="text-align:center;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-offset-0 col-sm-offset-0 col-md-offset-4 col-lg-offset-4 toppad">
+            <div class="panel panel-">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        <span style="font-size:25px; font-weight:bold;">QRCode do Serviço Escolhido</span>
+                    </h1>
+                </div>
+                <div class="panel-body">
+
+                    @Html.GenerateRelayQrCode((string)ViewBag.Codigo)
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br /><br />
