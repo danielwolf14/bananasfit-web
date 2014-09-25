@@ -13,6 +13,7 @@ namespace Processo.Negocio
 {
     public class PessoaJuridicaNegocio : UsuarioNegocio<PessoaJuridica>, IPessoaJuridicaNegocio
     {
+
         internal PessoaJuridicaNegocio(IPessoaJuridicaRepositorio repositorio)
             : base(repositorio)
         {
@@ -36,6 +37,11 @@ namespace Processo.Negocio
             if (string.IsNullOrEmpty(usuario.RazaoSocial))
                 mensagens.Add("A razão social da empresa é um campo obrigatório.");
             base.ValidarCamposObrigatorios(usuario, mensagens);
+        }
+
+        public IEnumerable<PessoaJuridica> ListarTodos()
+        {
+            return base.Consultar(e => e.IsHabilitado);
         }
     }
 }

@@ -18,13 +18,21 @@ namespace Processo.Negocio
         {
         }
 
-        public void Cadastrar(Avaliacao avaliacao)
+        public Avaliacao Avaliar(Avaliacao avaliacao)
         {
-            var mensagens = new List<string>();
-            VerificarNegocioException(mensagens);
-            base.Inserir(avaliacao);
+            var avaliacaoExistente = Consultar(e => e.PessoaFisica.Chave == avaliacao.PessoaFisica.Chave
+                && e.PessoaJuridica.Chave == avaliacao.PessoaJuridica.Chave).SingleOrDefault();
+
+            if (avaliacaoExistente != null)
+            {
+                base.Inserir(avaliacao);
+            }
+            else
+            {
+                avaliacaoExistente.Pontuacao = avaliacao.Pontuacao;
+                base.Atualizar(avaliacaoExistente);
+            }
+            return avaliacaoExistente;
         }
-
-
     }
 }

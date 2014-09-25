@@ -9,5 +9,6 @@ namespace Processo.Negocio.Interfaces
 {
     public interface IPessoaJuridicaNegocio : IUsuarioNegocio<PessoaJuridica>
     {
+        IEnumerable<PessoaJuridica> ListarTodos();
     }
 }

@@ -24,10 +24,6 @@ namespace Processo
 
         public virtual ServicoPessoaJuridicaNegocio ServicoPessoaJuridicaNegocio { get; private set; }
 
-
-
-
-
         public void Commit()
         {
             contexto.Commit();

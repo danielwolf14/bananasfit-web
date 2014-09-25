@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using System.Web.Http;
+using Processo.Negocio;
 
 namespace Web.Controllers
 {
@@ -18,29 +19,32 @@ namespace Web.Controllers
         //TODO: Como testar post?
 
         [HttpPost]
-        [Route("api/usuario/CadastrarPessoaFisica")]
+        [Route("api/usuarioapi/CadastrarPessoaFisica")]
         public HttpResponseMessage CadastrarPessoaFisica([FromBody]PessoaFisica model)
         {
             //TODO: Retornar mensagem de sucesso com usuário cadastrado com sucesso
-            HttpResponseMessage response;
             if (model != null)
             {
-                var usuario = Mapper.DynamicMap<PessoaFisica>(model);
-                unityOfWork.PessoaFisicaNegocio.Cadastrar(usuario);
-                unityOfWork.Commit();
-                response = Request.CreateResponse(HttpStatusCode.OK, usuario);
-                //TODO:Retornar mensagem de sucesso ou negócio exception
+                try
+                {
+                    var usuario = Mapper.DynamicMap<PessoaFisica>(model);
+                    unityOfWork.PessoaFisicaNegocio.Cadastrar(usuario);
+                    unityOfWork.Commit();
+                    return Request.CreateResponse(HttpStatusCode.OK, usuario);
+                }
+                catch (NegocioException ex)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, ex.Mensagens);
+                }
             }
             else
             {
-                //TODO:Retornar mensagem de erro de model invalido
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Parâmetro inválido.");
             }
-            return response;
         }
 
         [HttpPost]
-        [Route("api/usuario/efetuarlogin")]
+        [Route("api/usuarioapi/efetuarlogin")]
         public HttpResponseMessage EfetuarLogin([FromBody]PessoaFisica model)
         {
             if (!string.IsNullOrEmpty(model.Email) && !string.IsNullOrEmpty(model.Password))
@@ -64,65 +68,26 @@ namespace Web.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
-        [Route("api/usuario/testeget")]
-        public PessoaFisica getPessoaFisica()
+        [HttpGet]
+        [Route("api/usuarioapi/listarpessoajuridica")]
+        public HttpResponseMessage ListarPessoaJuridica(int top = 0)
         {
+            var lista = unityOfWork.PessoaJuridicaNegocio.ListarTodos();
+            if (top != 0)
+                lista = lista.Take(top);
 
-            return new PessoaFisica
-            {
-                Nome = "teste",
-                Celular = "teste",
-                Chave = 2,
-                CPF = "1232",
-                Email = "asda@asda.com",
-                Endereco = new Endereco { Bairro = "asd", CEP = "adasd", Chave = 2, Cidade = "recife", Complemento = "asdas", Estado = EstadoEnum.PE, Numero = "asda", Rua = "aad" },
-                IsAdministrador = true,
-                IsHabilitado = true,
-                Password = "sadsas",
-                QuantidadeMoedas = 34,
-                Telefone = "adasd"
-            };
-
+            return Request.CreateResponse(HttpStatusCode.OK, lista.ToList());
         }
 
-        [HttpPost]
-        [Route("api/usuario/testeefetuarlogin")]
-        public HttpResponseMessage TestandoLogin([FromBody]PessoaFisica model)
+        [HttpGet]
+        [Route("api/usuarioapi/detalharpessoajuridica")]
+        public HttpResponseMessage DetalharPessoaJuridica(int chave)
         {
-            if (!string.IsNullOrEmpty(model.Password) && !string.IsNullOrEmpty(model.Email))
-            {
-                //Usuario usuario = unityOfWork.PessoaFisicaNegocio.BuscarUsuarioPorEmail(email);
-                //usuario = usuario != null ? usuario :
-                //    unityOfWork.PessoaJuridicaNegocio.BuscarUsuarioPorEmail(email);
-
-                //if (usuario != null && (usuario.Password == senha))
-                //{
-                //    var usuarioLogado = Mapper.DynamicMap<UsuarioLogadoModel>(usuario);
-                //    usuarioLogado.IsPessoaFisica = usuario is PessoaFisica;
-                PessoaFisica p = new PessoaFisica
-                {
-                    Nome = "teste",
-                    Celular = "teste",
-                    Chave = 2,
-                    CPF = "1232",
-                    Email = model.Email,
-                    Endereco = new Endereco { Bairro = "asd", CEP = "adasd", Chave = 2, Cidade = "recife", Complemento = "asdas", Estado = EstadoEnum.PE, Numero = "asda", Rua = "aad" },
-                    IsAdministrador = true,
-                    IsHabilitado = true,
-                    Password = model.Password,
-                    QuantidadeMoedas = 34,
-                    Telefone = "adasd"
-                };
-
-
-                return Request.CreateResponse(HttpStatusCode.OK, p);
-            }
+            var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
+            if (usuario.IsHabilitado)
+                return Request.CreateResponse(HttpStatusCode.OK, usuario);
             else
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
+                return Request.CreateResponse(HttpStatusCode.NotFound);
         }
-
-
     }
 }

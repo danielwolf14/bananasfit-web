@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Processo.Negocio.Interfaces
 {
-    public interface IAvaliacaoNegocio : INegocioBase<Avaliacao>
-       
+    public interface IAvaliacaoNegocio : INegocioBase<Avaliacao>       
     {
+        Avaliacao Avaliar(Avaliacao avaliacao);
     }
 }
