@@ -11,13 +11,12 @@ using System.Text;
 using System.Web;
 using System.Web.Http;
 using Processo.Negocio;
+using Web.ApiModel;
 
 namespace Web.Controllers
 {
     public class UsuarioApiController : BaseApiController
     {
-        //TODO: Como testar post?
-
         [HttpPost]
         [Route("api/usuarioapi/CadastrarPessoaFisica")]
         public HttpResponseMessage CadastrarPessoaFisica([FromBody]PessoaFisica model)
@@ -45,7 +44,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("api/usuarioapi/efetuarlogin")]
-        public HttpResponseMessage EfetuarLogin([FromBody]PessoaFisica model)
+        public HttpResponseMessage EfetuarLogin([FromBody]EfetuarLoginApiModel model)
         {
             if (!string.IsNullOrEmpty(model.Email) && !string.IsNullOrEmpty(model.Password))
             {
