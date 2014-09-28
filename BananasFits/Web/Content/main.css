@@ -2,8 +2,8 @@
 /*body background*/
 body{
     /*background: url(../images/azul.jpg);*/
-    background: #333;
-
+    /*background: #333;*/
+    background-image:url("../images/bg.png");
 }
 
 #inputform{
