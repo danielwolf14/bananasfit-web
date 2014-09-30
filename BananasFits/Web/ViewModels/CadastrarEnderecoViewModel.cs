@@ -15,10 +15,8 @@ namespace Web.ViewModels
         [Required]
         [MaxLength(50)]
         public virtual string Rua { get; set; }
-        [Required]
         [MaxLength(50)]
         public virtual string Numero { get; set; }
-        [Required]
         [MaxLength(50)]
         public virtual string Complemento { get; set; }
         [Required]

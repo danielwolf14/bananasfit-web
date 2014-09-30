@@ -6,10 +6,10 @@
 
     <div class=" col-md-9 pull-right">
 
-        @*<div class="alert alert-info alert-dismissible" role="alert">
+        <div class="alert alert-info alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <strong>OK!</strong> Este e o resultado da sua pesquisa
-        </div>*@
+        </div>
         <div class="list-group ">
             @foreach (var item in Model)
             {
@@ -30,14 +30,15 @@
                         </p>
                     </div>
                     <div class="col-md-3 text-center">
-                        @*<h2> 1 <small> fits </small></h2>*@
-                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="javascript:window.location=('@Url.Action("DetalhesPessoaJuridica", "Usuario")')">Ver!</button>
+                        <h2> 1 <small> fits </small></h2>
+                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="javascript:window.location=('@Url.Action("DetalharPessoaJuridica", "Usuario", new { chave = item.Chave })')">Ver!</button>
                         <div class="stars">
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star-empty"></span>
                             <span class="glyphicon glyphicon-star-empty"></span>
                             <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span><br />
+                            <span class="glyphicon glyphicon-user"></span>@ViewBag.Pontuacao total
                         </div>
                     </div>
                 </a>
@@ -167,3 +168,5 @@
 
 </div>
 <br><br>
+
+

@@ -33,4 +33,9 @@ namespace Web.ViewModels
         public virtual string Descricao { get; set; }
         public virtual string RazaoSocial { get; set; }
     }
+    public class DetalharBuscaPessoaJuridicaViewModel : DetalharPessoaJuridicaViewModel
+    {
+        public virtual int Avaliacao { get; set; }
+        public virtual int QuantidadeAvaliacao { get; set; }
+    }
 }

@@ -1,0 +1,159 @@
+﻿@model Web.ViewModels.DetalharBuscaPessoaJuridicaViewModel
+
+
+<div class="container">
+    <div class="row clearfix panel">
+        <br>
+        <div class="col-md-12 column">
+            <div class="col-md-6">
+                <img src="@Model.Imagem" class=" img-responsive" alt="imagem academia" style="max-width: 1500px; max-height: 400px;" />
+            </div>
+            <div class="col-md-6 column">
+                <h2>
+                    @Model.Nome
+                </h2>
+                <p>
+                    @Model.Descricao
+                </p>
+            </div>
+
+
+            <br><br>
+            <div class="col-md-12" style="margin-top:50px; padding-bottom:50px;text-align:center;">
+                <div class="row clearfix col-md-3">
+                    <div class="col-md-2  column">
+                        <span class="glyphicon glyphicon-earphone" style="font-size: 60px; margin-left:-20px;"></span>
+                    </div>
+                    <div class="col-md-10 column" style="margin-top: -20px;">
+                        <h3>Contato</h3>
+                        Telefone: @Model.Telefone<br />
+                        Celular: @Model.Celular
+
+                    </div>
+                    <br><br>
+                </div>
+                <div class="row clearfix col-md-4 col-md-offset-1">
+                    <div class="col-md-2 column">
+                        <span class="glyphicon glyphicon-map-marker" style="font-size: 60px; margin-left: -20px;"></span>
+                    </div>
+                    <div class="col-md-10 column " style="margin-top: -20px;">
+                        <h3>Localização</h3>
+                        Endereço
+                        @Model.Endereco.Rua @Model.Endereco.Numero @Model.Endereco.Complemento - @Model.Endereco.Bairro - @Model.Endereco.Cidade - @Model.Endereco.Estado
+
+                    </div>
+                    <br><br>
+                </div>
+                <div class="row clearfix col-md-3 col-md-offset-1">
+                    <div class="col-md-2 column">
+                        <span class="glyphicon glyphicon-stats" accesskey="" style="font-size: 60px; margin-left: -20px;"></span>
+                    </div>
+                    <div class="col-md-10 column " style="margin-top: -20px;">
+                        @if(Session["usuario"] != null && ((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
+                        {
+                            <h3>RANKING </h3>
+                            <div style="font-size:25px;">
+                                <input type="hidden" value="@Model.Avaliacao" id="avaliacao" />
+                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 1, chavePessoaJuridica = @Model.Chave })" id ="avaliar1"class="glyphicon glyphicon-star-empty"></a>
+                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 2, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
+                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 3, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
+                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 4, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
+                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 5, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
+                                <style>
+                                    .glyphicon glyphicon-star-empty:hover {
+                                        color: yellow;
+                                    }
+                                </style>
+                                <script>
+                                    if ($("#avaliacao").val() == 1)
+                                        $("#avaliacao").addClass("star tal e pa bra e rowsen roshens fly");
+                                </script>
+                                
+                                <label style="font-size:15px"><span class="glyphicon glyphicon-user"></span>@Model.QuantidadeAvaliacao total</label>
+                            </div>
+                        }
+                        </div>
+                    </div>
+                </div>
+                            <div class="row clearfix" style="text-align: center;">
+                                <div class="col-md-12 column">
+                                    <h2>
+                                        Serviços disponíveis
+                                    </h2>
+                                </div>
+                            </div><br>
+                            <div class="col-lg-12 col-md-12" style="text-align: center;">
+                                <div class="col-md-2 column ">
+                                    <h3>
+                                        s1
+                                    </h3>
+                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
+                                    <h3>
+                                        1fits
+                                    </h3>
+                                </div>
+                                <div class="col-md-2 column">
+                                    <h3>
+                                        s2
+                                    </h3>
+                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
+                                    <h3>
+                                        2fits
+                                    </h3>
+                                </div>
+                                <div class="col-md-2 column">
+                                    <h3>
+                                        s3
+                                    </h3>
+                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
+                                    <h3>
+                                        3fits
+                                    </h3>
+                                </div>
+                                <div class="col-md-2 column">
+                                    <h3>
+                                        s4
+                                    </h3>
+                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
+                                    <h3>
+                                        4fits
+                                    </h3>
+                                </div>
+                                <div class="col-md-2 column">
+                                    <h3>
+                                        s4
+                                    </h3>
+                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
+                                    <h3>
+                                        4fits
+                                    </h3>
+                                </div>
+                                <div class="col-md-2 column">
+                                    <h3>
+                                        s4
+                                    </h3>
+                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
+                                    <h3>
+                                        4fits
+                                    </h3>
+                                </div>
+                                @*<div class="col-md-2 column">
+                                        <h3>
+                                            s4
+                                        </h3>
+                                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
+                                        <h3>
+                                            4fits
+                                        </h3>
+                                    </div>*@
+                            </div><br>
+                            <div class="row">
+                                <div class="col-lg-12 column" style="text-align: center; margin-left: 0px;">
+                                    <a href="" class="btn btn-success btn-lg btn-block" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Compre seus FITS Agora!</a>
+                                </div>
+                            </div>
+                            <br><br><br>
+                        </div>
+                    </div>
+                </div>
+

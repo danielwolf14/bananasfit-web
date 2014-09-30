@@ -9,12 +9,26 @@
             <div class="panel panel-">
                 <div class="panel-heading">
                     <h1 class="panel-title">
-                        <span style="font-size:25px; font-weight:bold;">QRCode do Serviço Escolhido</span>
+                        <span style="font-size:25px; font-weight:bold;"></span>
                     </h1>
                 </div>
                 <div class="panel-body">
 
                     @Html.GenerateRelayQrCode((string)ViewBag.Codigo)
+
+
+                    <script>
+                        function DoPrinting() {
+                            window.print()
+                        }
+                    </script>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <form>
+                        <input type="button" class="btn btn-lg btn-info" value="Clique para imprimir o QRCode" onclick="javascript:DoPrinting()">
+                    </form>
 
                 </div>
             </div>

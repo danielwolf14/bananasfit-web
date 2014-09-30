@@ -199,6 +199,34 @@ span.label a:hover{
     color:#fec222 !important;
 }
 
+#btnLogin:hover{
+    background-color:#a78118 !important;
+    color:white;
+}
+
 .dropdown-menu{background-color: whitesmoke !important;}
 
 .dropdown-menu a:hover{background-color: #fec222 !important;}
+
+
+
+
+.destacados{
+    padding: 20px 0;
+	text-align: center;
+}
+.destacados > div > div{
+	padding: 10px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	transition: 0.2s;
+     background-color: white;
+}
+.destacados > div:hover > div{
+	margin-top: -10px;
+	border: 1px solid rgb(200, 200, 200);
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 2px;
+	/*background: rgba(200, 200, 200, 0.1);*/
+    background-color: #fec222;
+	transition: 0.5s;
+}

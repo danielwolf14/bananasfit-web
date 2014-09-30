@@ -23,7 +23,7 @@ namespace Processo.Negocio
             var avaliacaoExistente = Consultar(e => e.PessoaFisica.Chave == avaliacao.PessoaFisica.Chave
                 && e.PessoaJuridica.Chave == avaliacao.PessoaJuridica.Chave).SingleOrDefault();
 
-            if (avaliacaoExistente != null)
+            if (avaliacaoExistente == null)
             {
                 base.Inserir(avaliacao);
             }

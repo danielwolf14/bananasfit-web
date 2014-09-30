@@ -1,1 +1,58 @@
-﻿
+﻿<div class="container">
+    <div class="row destacados">
+        <div class="col-md-4">
+            <div>
+                <img src="http://lorempixel.com/200/200/abstract/1/" alt="Texto Alternativo" class="img-circle img-thumbnail">
+                <h2>1 FIT</h2>
+                <p>Ambiente  de Testes PagSeguro</p>
+                @*<a href="#" class="btn btn-primary" title="Enlace">Leer más »</a>*@
+                <form method="post" target="pagseguro" action="https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html" onsubmit="PagSeguroLightbox(this); return false;">
+                    <!-- Nessa parte, é importante notar que o link começa com SANDBOX. -->
+                    <!-- Campos obrigatórios -->
+                    <input name="receiverEmail" type="hidden" value="raphael.marques.info@gmail.com">
+                    <!-- E-mail da SandBox -->        
+                    <input name="currency" type="hidden" value="BRL">
+                    <!-- Itens do pagamento (ao menos um item é obrigatório) -->
+                    <input name="itemId1" type="hidden" value="vz:1fit,10">
+                    <!-- ID do item -->
+                    <input name="itemDescription1" type="hidden" value="1 FITS">
+                    <!-- Descrição do item -->
+                    <input name="itemAmount1" type="hidden" value="10.00">
+                    <!-- Preço -->
+                    <input name="itemQuantity1" type="hidden" value="1">
+                    <!-- Quantidade -->
+                    <input name="itemWeight1" type="hidden" value="0">
+                    <!-- Peso -->
+                    <!-- submit do form (obrigatório) -->
+                    <input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/205x30-comprar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />                </form>
+                <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div>
+                <img src="http://lorempixel.com/200/200/abstract/2/" alt="Texto Alternativo" class="img-circle img-thumbnail">
+                <h2>1 FIT</h2>
+                <p>Ambiente de Produção PagSeguro</p>
+                @*<a href="#" class="btn btn-primary" title="Enlace">Leer más »</a>*@
+                <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+                <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;">
+                    <!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+                    <input type="hidden" name="code" value="A3F3EFB39F9FE9D334E57F879B101ED7" />
+                    <input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/205x30-comprar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+                </form>
+                <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+                <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div>
+                <img src="http://lorempixel.com/200/200/abstract/3/" alt="Texto Alternativo" class="img-circle img-thumbnail">
+                <h2>Alojamiento Web</h2>
+                <p>TESTE </p>
+                <a href="#" class="btn btn-primary" title="Enlace">Leer más »</a>
+            </div>
+        </div>
+    </div>
+</div>

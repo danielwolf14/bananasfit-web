@@ -95,37 +95,7 @@ namespace Web.Controllers
             return View();
         }
 
-        public ActionResult DetalhesPessoaJuridica()
-        {
-            return View();
-        }
 
-        public ActionResult BuscarPessoaJuridica(string currentFilter, string searchString, int? page)
-        {
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var usuarios = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                usuarios = usuarios.Where(s => s.Nome.ToUpper().Contains(searchString.ToUpper()));
-            }
-
-            usuarios = usuarios.OrderBy(e => e.Nome);
-
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            return View(usuarios.ToPagedList(pageNumber, pageSize));
-        }
 
 
         [HttpPost]
@@ -219,8 +189,8 @@ namespace Web.Controllers
         {
             string[] strName = imagem.FileName.Split('.');
             string extensao = strName[strName.Count() - 1];
-            string caminhoSalvo = String.Format("{0}{1}.{2}", Server.MapPath("~/images/ImagemPessoaJuridica/"), nomePessoaJuridica + idPessoaJuridica, extensao);
-            string caminhoFinal = String.Format("/images/ImagemPessoaJuridica/{0}.{1}", nomePessoaJuridica + idPessoaJuridica, extensao);
+            string caminhoSalvo = String.Format("{0}{1}.{2}", Server.MapPath("~/images/ImagemPessoaJuridica/"), nomePessoaJuridica.Trim() + idPessoaJuridica, extensao);
+            string caminhoFinal = String.Format("/images/ImagemPessoaJuridica/{0}.{1}", nomePessoaJuridica.Trim() + idPessoaJuridica, extensao);
             imagem.SaveAs(caminhoSalvo);
             return caminhoFinal;
         }
@@ -261,6 +231,47 @@ namespace Web.Controllers
         #endregion
 
         #region Detalhar, Atualizar e Inativar Pessoa física e juridica
+        public ActionResult DetalharPessoaJuridica(int chave)
+        {
+            var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
+            var model = Map.Mapper.DynamicMap<DetalharBuscaPessoaJuridicaViewModel>(usuario);
+            model.QuantidadeAvaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaJuridica.Chave == chave).Count();
+            if (Session["usuario"] != null)
+            {
+                var avaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.Chave == ((UsuarioLogadoModel)Session["usuario"]).Chave).SingleOrDefault();
+                model.Avaliacao = avaliacao == null ? 0 : avaliacao.Pontuacao;
+            }
+            return View(model);
+        }
+
+        public ActionResult BuscarPessoaJuridica(string currentFilter, string searchString, int? page)
+        {
+            ViewBag.Pontuacao = 0;
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var usuarios = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                usuarios = usuarios.Where(s => s.Nome.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            usuarios = usuarios.OrderBy(e => e.Nome);
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(usuarios.ToPagedList(pageNumber, pageSize));
+        }
+
         public ActionResult MinhaConta()
         {
             var usuarioLogado = (UsuarioLogadoModel)Session["usuario"];
@@ -308,7 +319,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult MinhaContaPessoaJuridica(DetalharPessoaJuridicaViewModel model)
+        public ActionResult MinhaContaPessoaJuridica(DetalharPessoaJuridicaViewModel model, HttpPostedFileBase img)
         {
             ViewBag.Estado = MontarViewBagEstado();
             if (ModelState.IsValid && (UsuarioLogadoModel)Session["usuario"] != null
@@ -318,11 +329,15 @@ namespace Web.Controllers
                 var usuarioParaAtualizar = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(usuarioAtualizado.Chave);
                 try
                 {
+                    if (img != null)
+                        usuarioParaAtualizar.Imagem = SalvarImagem(img, usuarioParaAtualizar.Chave, usuarioParaAtualizar.Nome);
+
                     AtualizarPessoaJuridica(usuarioParaAtualizar, usuarioAtualizado);
                     unityOfWork.PessoaJuridicaNegocio.Atualizar(usuarioParaAtualizar);
-
                     unityOfWork.Commit();
+
                     ExibirMensagemSucesso("Usuário atualizado com sucesso.");
+                    model = Map.Mapper.DynamicMap<DetalharPessoaJuridicaViewModel>(usuarioParaAtualizar);
                     return View(model);
                 }
                 catch (NegocioException ex)
@@ -420,8 +435,15 @@ namespace Web.Controllers
             usuarioParaAtualizar.RazaoSocial = usuarioAtualizado.RazaoSocial;
             usuarioParaAtualizar.Telefone = usuarioAtualizado.Telefone;
             usuarioParaAtualizar.Nome = usuarioAtualizado.Nome;
-            usuarioParaAtualizar.Imagem = usuarioAtualizado.Imagem;
+            //usuarioParaAtualizar.Imagem = usuarioAtualizado.Imagem;
 
+            //var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(usuarioParaAtualizar.Chave);
+            //usuario.Nome = usuarioParaAtualizar.Nome;
+            //if (imagem != null)
+            //    usuarioParaAtualizar.Imagem = SalvarImagem(imagem, usuarioParaAtualizar.Chave, usuarioParaAtualizar.Nome);
+            //    unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
+            //    unityOfWork.Commit();
+            //ExibirMensagemErro("Erro ao atualizar a academia");
         }
 
         private void AtualizarPessoaFisica(PessoaFisica usuarioParaAtualizar, PessoaFisica usuarioAtualizado)
