@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Processo.Entidades;
 
 namespace Web.ViewModels
 {
@@ -32,10 +33,12 @@ namespace Web.ViewModels
         public virtual string Imagem { get; set; }
         public virtual string Descricao { get; set; }
         public virtual string RazaoSocial { get; set; }
+        public virtual IList<ServicoPessoaJuridica> Servicos { get; set; }
     }
     public class DetalharBuscaPessoaJuridicaViewModel : DetalharPessoaJuridicaViewModel
     {
         public virtual int Avaliacao { get; set; }
         public virtual int QuantidadeAvaliacao { get; set; }
     }
+
 }

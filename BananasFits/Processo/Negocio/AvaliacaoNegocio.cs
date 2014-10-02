@@ -13,9 +13,10 @@ namespace Processo.Negocio
 {
     public class AvaliacaoNegocio : NegocioBase<Avaliacao>, IAvaliacaoNegocio
     {
-        internal AvaliacaoNegocio(IAvaliacaoRepositorio repositorio)
-            : base(repositorio)
+        internal AvaliacaoNegocio(DatabaseContext contexto)
+            : base(contexto)
         {
+            this.repositorio = new AvaliacaoRepositorio(contexto);
         }
 
         public Avaliacao Avaliar(Avaliacao avaliacao)

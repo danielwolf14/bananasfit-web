@@ -12,6 +12,7 @@ namespace Processo
     public class UnityOfWork
     {
         private static UnityOfWork instancia;
+
         private DatabaseContext contexto;
 
         public virtual PessoaFisicaNegocio PessoaFisicaNegocio { get; private set; }
@@ -37,16 +38,13 @@ namespace Processo
         private UnityOfWork(DatabaseContext contexto)
         {
             this.contexto = contexto;
-            PessoaFisicaNegocio = new PessoaFisicaNegocio(new PessoaFisicaRepositorio(contexto));
-            PessoaJuridicaNegocio = new PessoaJuridicaNegocio(new PessoaJuridicaRepositorio(contexto));
-            ServicoNegocio = new ServicoNegocio(new ServicoRepositorio(contexto));
-            AvaliacaoNegocio = new AvaliacaoNegocio(new AvaliacaoRepositorio(contexto));
-            ServicoPessoaJuridicaNegocio = new ServicoPessoaJuridicaNegocio(new ServicoPessoaJuridicaRepositorio(contexto));
-
-
-
+            PessoaFisicaNegocio = new PessoaFisicaNegocio(contexto);
+            PessoaJuridicaNegocio = new PessoaJuridicaNegocio(contexto);
+            ServicoNegocio = new ServicoNegocio(contexto);
+            AvaliacaoNegocio = new AvaliacaoNegocio(contexto);
+            ServicoPessoaJuridicaNegocio = new ServicoPessoaJuridicaNegocio(contexto);
         }
-
+        
         public static UnityOfWork GetInstancia()
         {
             if (instancia == null)

@@ -13,11 +13,13 @@ namespace Processo.Negocio
     public abstract class NegocioBase<TEntidade> : INegocioBase<TEntidade>
         where TEntidade : EntidadeBase
     {
-        private IRepositorioBase<TEntidade> repositorio;
+        private DatabaseContext Contexto { get; set; }
 
-        internal NegocioBase(IRepositorioBase<TEntidade> repositorio)
+        protected IRepositorioBase<TEntidade> repositorio;
+
+        internal NegocioBase(DatabaseContext contexto)
         {
-            this.repositorio = repositorio;
+            this.Contexto = contexto;
         }
 
         public TEntidade BuscarPorChave(long chave)

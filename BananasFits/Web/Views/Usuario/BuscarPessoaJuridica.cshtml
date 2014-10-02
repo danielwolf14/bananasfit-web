@@ -44,7 +44,7 @@
                 </a>
             }
             <br>
-            @Html.PagedListPager(Model, page => Url.Action("Listar", new { page, }))
+            @Html.PagedListPager(Model, page => Url.Action("BuscarPessoaJuridica", new { page, }))
 
         </div>
     </div>
@@ -57,22 +57,22 @@
                     <fieldset>
                         <div class="input-group">
                             <span class="input-group-addon ">NOME &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <input type="text" class="form-control" placeholder="Nome">
+                            <input type="text" class="form-control" placeholder="Nome" name="nome">
                         </div>
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon">BAIRRO &nbsp;&nbsp;</span>
-                            <input type="text" class="form-control" placeholder="Bairro">
+                            <input type="text" class="form-control" placeholder="Bairro" name="bairro">
                         </div>
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon">VALOR &nbsp;&nbsp;&nbsp;</span>
-                            <input type="text" class="form-control" placeholder="FITS">
+                            <input type="text" class="form-control" placeholder="FITS" name="valor">
                         </div>
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon">RANKING</span>
-                            <select class="form-control" placeholder="Maior ranking">
+                            <select class="form-control" placeholder="Maior ranking" name="pontuacao">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -83,7 +83,7 @@
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon">SERVIÇO</span>
-                            <select class="form-control" placeholder="Serviço">
+                            <select class="form-control" placeholder="Serviço" name="servico">
                                 <option value="AC">Boxe</option>
                                 <option value="AL">Ioga</option>
                                 <option value="AM">Musculação</option>

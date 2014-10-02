@@ -14,9 +14,13 @@ namespace Processo.Negocio
 {
     public class PessoaFisicaNegocio : UsuarioNegocio<PessoaFisica>, IPessoaFisicaNegocio
     {
-        internal PessoaFisicaNegocio(IPessoaFisicaRepositorio repositorio)
-            : base(repositorio)
+        private IPessoaJuridicaNegocio pessoaJuridicaNegocio;
+
+        internal PessoaFisicaNegocio(DatabaseContext contexto)
+            : base(contexto)
         {
+            this.repositorio = new PessoaFisicaRepositorio(contexto);
+            this.pessoaJuridicaNegocio = new PessoaJuridicaNegocio(contexto);
         }
 
         public override void Cadastrar(PessoaFisica usuario)
@@ -24,8 +28,17 @@ namespace Processo.Negocio
             var mensagens = new List<string>();
             ValidarEmail(usuario, mensagens);
             ValidarCamposObrigatorios(usuario, mensagens);
+            VerificarEmailExistente(usuario.Email, mensagens);
             VerificarNegocioException(mensagens);
             base.Inserir(usuario);
+        }
+
+        public void VerificarEmailExistente(string email, List<string> mensagens)
+        {
+            if(this.pessoaJuridicaNegocio.Consultar(e => e.Email == email).Any())
+            {
+                mensagens.Add("E-mail já cadastrado.");
+            }
         }
     }
 }

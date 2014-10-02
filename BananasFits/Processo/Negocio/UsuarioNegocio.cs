@@ -15,8 +15,8 @@ namespace Processo.Negocio
     public abstract class UsuarioNegocio<TEntidade> : NegocioBase<TEntidade>, IUsuarioNegocio<TEntidade>
         where TEntidade : Usuario
     {
-        internal UsuarioNegocio(IRepositorioBase<TEntidade> repositorio)
-            : base(repositorio)
+        internal UsuarioNegocio(DatabaseContext contexto)
+            : base(contexto)
         {
         }
 

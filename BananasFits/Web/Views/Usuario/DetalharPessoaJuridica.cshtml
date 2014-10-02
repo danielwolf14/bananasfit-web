@@ -40,7 +40,7 @@
                         <h3>Localização</h3>
                         Endereço
                         @Model.Endereco.Rua @Model.Endereco.Numero @Model.Endereco.Complemento - @Model.Endereco.Bairro - @Model.Endereco.Cidade - @Model.Endereco.Estado
-
+                        <a href="https://www.google.com.br/maps/place/@Model.Endereco.Rua,@Model.Endereco.Numero @Model.Endereco.Cidade - @Model.Endereco.Estado" target="_blank">Ver no mapa!</a>
                     </div>
                     <br><br>
                 </div>
@@ -49,111 +49,57 @@
                         <span class="glyphicon glyphicon-stats" accesskey="" style="font-size: 60px; margin-left: -20px;"></span>
                     </div>
                     <div class="col-md-10 column " style="margin-top: -20px;">
-                        @if(Session["usuario"] != null && ((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
-                        {
-                            <h3>RANKING </h3>
-                            <div style="font-size:25px;">
+
+                        <h3>RANKING </h3>
+                        <div style="font-size:25px;">
+                            @if (Session["usuario"] != null && ((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
+                            {
                                 <input type="hidden" value="@Model.Avaliacao" id="avaliacao" />
-                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 1, chavePessoaJuridica = @Model.Chave })" id ="avaliar1"class="glyphicon glyphicon-star-empty"></a>
+                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 1, chavePessoaJuridica = @Model.Chave })" id="avaliar1" class="glyphicon glyphicon-star-empty"></a>
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 2, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 3, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 4, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 5, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
-                                <style>
-                                    .glyphicon glyphicon-star-empty:hover {
-                                        color: yellow;
-                                    }
-                                </style>
-                                <script>
-                                    if ($("#avaliacao").val() == 1)
-                                        $("#avaliacao").addClass("star tal e pa bra e rowsen roshens fly");
-                                </script>
-                                
-                                <label style="font-size:15px"><span class="glyphicon glyphicon-user"></span>@Model.QuantidadeAvaliacao total</label>
-                            </div>
-                        }
-                        </div>
-                    </div>
-                </div>
-                            <div class="row clearfix" style="text-align: center;">
-                                <div class="col-md-12 column">
-                                    <h2>
-                                        Serviços disponíveis
-                                    </h2>
-                                </div>
-                            </div><br>
-                            <div class="col-lg-12 col-md-12" style="text-align: center;">
-                                <div class="col-md-2 column ">
-                                    <h3>
-                                        s1
-                                    </h3>
-                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
-                                    <h3>
-                                        1fits
-                                    </h3>
-                                </div>
-                                <div class="col-md-2 column">
-                                    <h3>
-                                        s2
-                                    </h3>
-                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
-                                    <h3>
-                                        2fits
-                                    </h3>
-                                </div>
-                                <div class="col-md-2 column">
-                                    <h3>
-                                        s3
-                                    </h3>
-                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
-                                    <h3>
-                                        3fits
-                                    </h3>
-                                </div>
-                                <div class="col-md-2 column">
-                                    <h3>
-                                        s4
-                                    </h3>
-                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
-                                    <h3>
-                                        4fits
-                                    </h3>
-                                </div>
-                                <div class="col-md-2 column">
-                                    <h3>
-                                        s4
-                                    </h3>
-                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
-                                    <h3>
-                                        4fits
-                                    </h3>
-                                </div>
-                                <div class="col-md-2 column">
-                                    <h3>
-                                        s4
-                                    </h3>
-                                    <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
-                                    <h3>
-                                        4fits
-                                    </h3>
-                                </div>
-                                @*<div class="col-md-2 column">
-                                        <h3>
-                                            s4
-                                        </h3>
-                                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-rounded" />
-                                        <h3>
-                                            4fits
-                                        </h3>
-                                    </div>*@
-                            </div><br>
-                            <div class="row">
-                                <div class="col-lg-12 column" style="text-align: center; margin-left: 0px;">
-                                    <a href="" class="btn btn-success btn-lg btn-block" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Compre seus FITS Agora!</a>
-                                </div>
-                            </div>
-                            <br><br><br>
-                        </div>
-                    </div>
-                </div>
+                            }
 
+                            <script>
+                                if ($("#avaliacao").val() == 1)
+                                    $("#avaliacao").addClass("star tal e pa bra e rowsen roshens fly");
+                            </script>
+
+                            <label style="font-size:15px"><span class="glyphicon glyphicon-user"></span>@Model.QuantidadeAvaliacao total</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix" style="text-align: center;">
+                <div class="col-md-12 column">
+                    <h2>
+                        Serviços disponíveis
+                    </h2>
+                </div>
+            </div><br>
+            <div class="col-lg-12 col-md-12" style="text-align: center;">
+                @foreach (var item in Model.Servicos)
+                {
+                    <div class="col-md-2 column ">
+                        <h3>
+                            @item.Servico.Nome
+                        </h3>
+                        <img alt="140x140" src="@item.Servico.Imagem" class="img-rounded" />
+                        <h3>
+                            @item.Valor Fits
+                        </h3>
+                    </div>
+                }
+
+            </div><br>
+            <div class="row">
+                <div class="col-lg-12 column" style="text-align: center; margin-left: 0px;">
+                    <a href="" class="btn btn-success btn-lg btn-block" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Compre seus FITS Agora!</a>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </div>
+</div>

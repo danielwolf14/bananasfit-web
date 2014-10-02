@@ -14,9 +14,10 @@ namespace Processo.Negocio
     public class PessoaJuridicaNegocio : UsuarioNegocio<PessoaJuridica>, IPessoaJuridicaNegocio
     {
 
-        internal PessoaJuridicaNegocio(IPessoaJuridicaRepositorio repositorio)
-            : base(repositorio)
+        internal PessoaJuridicaNegocio(DatabaseContext contexto)
+            : base(contexto)
         {
+            this.repositorio = new PessoaJuridicaRepositorio(contexto);
         }
 
         public override void Cadastrar(PessoaJuridica usuario)

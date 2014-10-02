@@ -13,9 +13,10 @@ namespace Processo.Negocio
 {
     public class ServicoPessoaJuridicaNegocio : NegocioBase<ServicoPessoaJuridica>, IServicoPessoaJuridicaNegocio
     {
-        internal ServicoPessoaJuridicaNegocio(IServicoPessoaJuridicaRepositorio repositorio)
-            : base(repositorio)
+        internal ServicoPessoaJuridicaNegocio(DatabaseContext contexto)
+            : base(contexto)
         {
+            this.repositorio = new ServicoPessoaJuridicaRepositorio(contexto);
         }
 
         public void Cadastrar(ServicoPessoaJuridica servicoPessoaJuridica)

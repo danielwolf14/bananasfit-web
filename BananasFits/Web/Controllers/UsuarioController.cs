@@ -163,10 +163,17 @@ namespace Web.Controllers
                 {
                     unityOfWork.PessoaJuridicaNegocio.Cadastrar(usuario);
                     unityOfWork.Commit();
-                    usuario.Imagem = SalvarImagem(img, usuario.Chave, usuario.Nome);
-                    unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
-                    unityOfWork.Commit();
-                    ExibirMensagemSucesso("Usuário cadastrado com sucesso.");
+                    if (img.ContentLength > 100)
+                    {
+                        ExibirMensagemErro("imagem muito grande");
+                    }
+                    else
+                    {
+                        usuario.Imagem = SalvarImagem(img, usuario.Chave, usuario.Nome);
+                        unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
+                        unityOfWork.Commit();
+                        ExibirMensagemSucesso("Usuário cadastrado com sucesso.");
+                    }
                     if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
                     {
                         return RedirectToAction("ListarPessoaJuridica", "Usuario");
@@ -236,40 +243,52 @@ namespace Web.Controllers
             var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
             var model = Map.Mapper.DynamicMap<DetalharBuscaPessoaJuridicaViewModel>(usuario);
             model.QuantidadeAvaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaJuridica.Chave == chave).Count();
+            model.Servicos = unityOfWork.ServicoPessoaJuridicaNegocio.Consultar(e => e.PessoaJuridica.Chave == chave).ToList();
             if (Session["usuario"] != null)
             {
-                var avaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.Chave == ((UsuarioLogadoModel)Session["usuario"]).Chave).SingleOrDefault();
+                var chaveUsuarioLogado = ((UsuarioLogadoModel)Session["usuario"]).Chave;
+                var avaliacao = unityOfWork.AvaliacaoNegocio
+                    .Consultar(e => e.PessoaFisica.Chave == chaveUsuarioLogado
+                    && e.PessoaJuridica.Chave == chave).FirstOrDefault();
                 model.Avaliacao = avaliacao == null ? 0 : avaliacao.Pontuacao;
             }
             return View(model);
         }
 
-        public ActionResult BuscarPessoaJuridica(string currentFilter, string searchString, int? page)
+        public ActionResult BuscarPessoaJuridica(string nome, string bairro, int? valor,
+            int? page, int? pontuacao, string servico, int? estado)
         {
-            ViewBag.Pontuacao = 0;
-            if (searchString != null)
+            var pessoasJuridicas = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
+            var servicosPessoaJuridica = unityOfWork.ServicoPessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
+            if (valor != null)
             {
-                page = 1;
+
             }
-            else
+            if (pontuacao != null)
             {
-                searchString = currentFilter;
+
             }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var usuarios = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
-
-            if (!String.IsNullOrEmpty(searchString))
+            if (servico != null)
             {
-                usuarios = usuarios.Where(s => s.Nome.ToUpper().Contains(searchString.ToUpper()));
+            }
+            if (string.IsNullOrEmpty(nome))
+            {
+                pessoasJuridicas = pessoasJuridicas.Where(s => s.Nome.ToUpper().Contains(nome.ToString().ToUpper()));
+            }
+            if (string.IsNullOrEmpty(bairro))
+            {
+                pessoasJuridicas = pessoasJuridicas.Where(e => e.Endereco.Bairro.ToUpper().Contains(bairro.ToString().ToUpper()));
+            }
+            if (estado != null)
+            {
+                pessoasJuridicas = pessoasJuridicas.Where(e => e.Endereco.Estado == ((EstadoEnum)estado));
             }
 
-            usuarios = usuarios.OrderBy(e => e.Nome);
+            pessoasJuridicas = pessoasJuridicas.OrderBy(e => e.Nome);
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
-            return View(usuarios.ToPagedList(pageNumber, pageSize));
+            return View(pessoasJuridicas.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult MinhaConta()
@@ -430,20 +449,11 @@ namespace Web.Controllers
             usuarioParaAtualizar.CNPJ = usuarioAtualizado.CNPJ;
             usuarioParaAtualizar.Descricao = usuarioAtualizado.Descricao;
             usuarioParaAtualizar.Email = usuarioAtualizado.Email;
-            usuarioParaAtualizar.Endereco = usuarioAtualizado.Endereco;
             usuarioParaAtualizar.Password = usuarioAtualizado.Password;
             usuarioParaAtualizar.RazaoSocial = usuarioAtualizado.RazaoSocial;
             usuarioParaAtualizar.Telefone = usuarioAtualizado.Telefone;
             usuarioParaAtualizar.Nome = usuarioAtualizado.Nome;
-            //usuarioParaAtualizar.Imagem = usuarioAtualizado.Imagem;
-
-            //var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(usuarioParaAtualizar.Chave);
-            //usuario.Nome = usuarioParaAtualizar.Nome;
-            //if (imagem != null)
-            //    usuarioParaAtualizar.Imagem = SalvarImagem(imagem, usuarioParaAtualizar.Chave, usuarioParaAtualizar.Nome);
-            //    unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
-            //    unityOfWork.Commit();
-            //ExibirMensagemErro("Erro ao atualizar a academia");
+            AtualizarEndereco(usuarioParaAtualizar.Endereco, usuarioAtualizado.Endereco);
         }
 
         private void AtualizarPessoaFisica(PessoaFisica usuarioParaAtualizar, PessoaFisica usuarioAtualizado)
@@ -451,10 +461,22 @@ namespace Web.Controllers
             usuarioParaAtualizar.Celular = usuarioAtualizado.Celular;
             usuarioParaAtualizar.CPF = usuarioAtualizado.CPF;
             usuarioParaAtualizar.Email = usuarioAtualizado.Email;
-            usuarioParaAtualizar.Endereco = usuarioAtualizado.Endereco;
             usuarioParaAtualizar.Password = usuarioAtualizado.Password;
             usuarioParaAtualizar.Telefone = usuarioAtualizado.Telefone;
             usuarioParaAtualizar.Nome = usuarioAtualizado.Nome;
+            AtualizarEndereco(usuarioParaAtualizar.Endereco, usuarioAtualizado.Endereco);
+        }
+
+        private void AtualizarEndereco(Endereco enderecoParaAtualizar, Endereco novoEndereco)
+        {
+            enderecoParaAtualizar.Rua = novoEndereco.Rua;
+            enderecoParaAtualizar.Numero = novoEndereco.Numero;
+            enderecoParaAtualizar.Complemento = novoEndereco.Complemento;
+            enderecoParaAtualizar.Cidade = novoEndereco.Cidade;
+            enderecoParaAtualizar.Bairro = novoEndereco.Bairro;
+            enderecoParaAtualizar.CEP = novoEndereco.CEP;
+            enderecoParaAtualizar.Estado = novoEndereco.Estado;
+       
         }
         #endregion
 

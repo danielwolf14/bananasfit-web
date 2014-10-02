@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Processo.Repositorio
 {
-    internal interface IRepositorioBase<TEntidade> where TEntidade : EntidadeBase
+    public interface IRepositorioBase<TEntidade> where TEntidade : EntidadeBase
     {
         TEntidade BuscarPorChave(long chave);
 
