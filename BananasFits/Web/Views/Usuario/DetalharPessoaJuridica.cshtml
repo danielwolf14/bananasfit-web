@@ -38,8 +38,7 @@
                     </div>
                     <div class="col-md-10 column " style="margin-top: -20px;">
                         <h3>Localização</h3>
-                        Endereço
-                        @Model.Endereco.Rua @Model.Endereco.Numero @Model.Endereco.Complemento - @Model.Endereco.Bairro - @Model.Endereco.Cidade - @Model.Endereco.Estado <br /><br />
+                        @Model.Endereco.Rua @Model.Endereco.Numero @Model.Endereco.Complemento <br /> @Model.Endereco.Bairro - @Model.Endereco.Cidade - @Model.Endereco.Estado <br /><br />
                         <a class="label-info" style="padding:10px;" href="https://www.google.com.br/maps/place/@Model.Endereco.Rua,@Model.Endereco.Numero @Model.Endereco.Cidade - @Model.Endereco.Estado" target="_blank">Ver no mapa!</a>
                     </div>
                     <br><br>
@@ -60,6 +59,10 @@
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 3, chavePessoaJuridica = @Model.Chave })" id="avaliar3" class="glyphicon glyphicon-star-empty"></a>
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 4, chavePessoaJuridica = @Model.Chave })" id="avaliar4" class="glyphicon glyphicon-star-empty"></a>
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 5, chavePessoaJuridica = @Model.Chave })" id="avaliar5" class="glyphicon glyphicon-star-empty"></a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Login", "Usuario")" class="label-info" style="font-size:12px; padding:10px;">Faça o login para avaliar!</a>
                             }
 
                             <script>
@@ -107,7 +110,7 @@
 
                             </script>
 
-                            <label style="font-size:15px"><span class="glyphicon glyphicon-user"></span>@Model.QuantidadeAvaliacao total</label>
+                            <label style="font-size:15px"><span class="glyphicon glyphicon-user"></span>  @Model.QuantidadeAvaliacao  total</label>
                         </div>
                     </div>
                 </div>
@@ -131,6 +134,7 @@
                             @item.Valor Fits
                         </h3>
                     </div>
+
                 }
 
             </div><br>

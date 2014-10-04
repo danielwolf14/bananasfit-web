@@ -258,6 +258,13 @@ namespace Web.Controllers
         public ActionResult BuscarPessoaJuridica(string nome, string bairro, int? valor,
             int? page, int? pontuacao, string servico, int? estado)
         {
+
+            //var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(1012);
+            //var model = Map.Mapper.DynamicMap<DetalharBuscaPessoaJuridicaViewModel>(usuario);
+            //model.QuantidadeAvaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaJuridica.Chave == 1012).Count();
+            
+            //ViewBag.Pontuacao = model.QuantidadeAvaliacao;
+
             var pessoasJuridicas = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
             var servicosPessoaJuridica = unityOfWork.ServicoPessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
             if (valor != null)
