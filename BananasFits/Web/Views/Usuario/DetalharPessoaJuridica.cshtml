@@ -39,8 +39,8 @@
                     <div class="col-md-10 column " style="margin-top: -20px;">
                         <h3>Localização</h3>
                         Endereço
-                        @Model.Endereco.Rua @Model.Endereco.Numero @Model.Endereco.Complemento - @Model.Endereco.Bairro - @Model.Endereco.Cidade - @Model.Endereco.Estado
-                        <a href="https://www.google.com.br/maps/place/@Model.Endereco.Rua,@Model.Endereco.Numero @Model.Endereco.Cidade - @Model.Endereco.Estado" target="_blank">Ver no mapa!</a>
+                        @Model.Endereco.Rua @Model.Endereco.Numero @Model.Endereco.Complemento - @Model.Endereco.Bairro - @Model.Endereco.Cidade - @Model.Endereco.Estado <br /><br />
+                        <a class="label-info" style="padding:10px;" href="https://www.google.com.br/maps/place/@Model.Endereco.Rua,@Model.Endereco.Numero @Model.Endereco.Cidade - @Model.Endereco.Estado" target="_blank">Ver no mapa!</a>
                     </div>
                     <br><br>
                 </div>
@@ -56,15 +56,55 @@
                             {
                                 <input type="hidden" value="@Model.Avaliacao" id="avaliacao" />
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 1, chavePessoaJuridica = @Model.Chave })" id="avaliar1" class="glyphicon glyphicon-star-empty"></a>
-                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 2, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
-                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 3, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
-                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 4, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
-                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 5, chavePessoaJuridica = @Model.Chave })" class="glyphicon glyphicon-star-empty"></a>
+                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 2, chavePessoaJuridica = @Model.Chave })" id="avaliar2" class="glyphicon glyphicon-star-empty"></a>
+                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 3, chavePessoaJuridica = @Model.Chave })" id="avaliar3" class="glyphicon glyphicon-star-empty"></a>
+                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 4, chavePessoaJuridica = @Model.Chave })" id="avaliar4" class="glyphicon glyphicon-star-empty"></a>
+                                <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 5, chavePessoaJuridica = @Model.Chave })" id="avaliar5" class="glyphicon glyphicon-star-empty"></a>
                             }
 
                             <script>
-                                if ($("#avaliacao").val() == 1)
-                                    $("#avaliacao").addClass("star tal e pa bra e rowsen roshens fly");
+                                if ($("#avaliacao").val() == 1) {
+                                    $("#avaliar1").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar1").addClass("glyphicon glyphicon-star");
+                                }
+                                if ($("#avaliacao").val() == 2) {
+                                    $("#avaliar1").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar2").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar1").addClass("glyphicon glyphicon-star");
+                                    $("#avaliar2").addClass("glyphicon glyphicon-star");
+
+                                }
+                                if ($("#avaliacao").val() == 3) {
+                                    $("#avaliar1").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar2").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar3").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar1").addClass("glyphicon glyphicon-star");
+                                    $("#avaliar2").addClass("glyphicon glyphicon-star");
+                                    $("#avaliar3").addClass("glyphicon glyphicon-star");
+                                }
+                                if ($("#avaliacao").val() == 4) {
+                                    $("#avaliar1").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar2").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar3").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar4").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar1").addClass("glyphicon glyphicon-star");
+                                    $("#avaliar2").addClass("glyphicon glyphicon-star");
+                                    $("#avaliar3").addClass("glyphicon glyphicon-star");
+                                    $("#avaliar4").addClass("glyphicon glyphicon-star");
+                                }
+                                if ($("#avaliacao").val() == 5) {
+                                    $("#avaliar1").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar2").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar3").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar4").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar5").removeClass("glyphicon glyphicon-star-empty");
+                                    $("#avaliar1").addClass("glyphicon glyphicon-star");
+                                    $("#avaliar2").addClass("glyphicon glyphicon-star");
+                                    $("#avaliar3").addClass("glyphicon glyphicon-star");
+                                    $("#avaliar4").addClass("glyphicon glyphicon-star");
+                                    $("#avaliar5").addClass("glyphicon glyphicon-star");
+                                }
+
                             </script>
 
                             <label style="font-size:15px"><span class="glyphicon glyphicon-user"></span>@Model.QuantidadeAvaliacao total</label>

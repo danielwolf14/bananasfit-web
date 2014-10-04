@@ -271,11 +271,13 @@ namespace Web.Controllers
             if (servico != null)
             {
             }
-            if (string.IsNullOrEmpty(nome))
+            if (nome != null)
             {
                 pessoasJuridicas = pessoasJuridicas.Where(s => s.Nome.ToUpper().Contains(nome.ToString().ToUpper()));
             }
-            if (string.IsNullOrEmpty(bairro))
+            if (bairro != null)
+            //if (bairro != null && bairro != "")
+            //if (string.IsNullOrEmpty(bairro))
             {
                 pessoasJuridicas = pessoasJuridicas.Where(e => e.Endereco.Bairro.ToUpper().Contains(bairro.ToString().ToUpper()));
             }
