@@ -92,16 +92,28 @@
 
 
                             <br />
+                            <script type="text/javascript" src="http://cidades-estados-js.googlecode.com/files/cidades-estados-v0.2.js"></script>
+                            <script type="text/javascript">
+                                window.onload = function () {
+                                    new dgCidadesEstados(
+                                        document.getElementById('estado'),
+                                        document.getElementById('cidade'),
+                                        true
+                                    );
+                                }
+                            </script>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                @Html.TextBoxFor(e => e.Endereco.Cidade, new { @class = "form-control input-sm", placeholder = "Cidade" })
-                                @Html.ValidationMessageFor(e => e.Endereco.Cidade)
+                               @* @Html.TextBoxFor(e => e.Endereco.Cidade, new { @class = "form-control input-sm", placeholder = "Cidade",id="cidade" })*@
+                               @* @Html.ValidationMessageFor(e => e.Endereco.Cidade)*@
+                                <select id="cidade" name="cidade" class="form-control input-sm"></select> 
                             </div>
                             <br />
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                @Html.DropDownListFor(e => e.Endereco.Estado, ViewBag.Estado as IEnumerable<SelectListItem>, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(e => e.Endereco.Estado)
+                                @*@Html.DropDownListFor(e => e.Endereco.Estado, ViewBag.Estado as IEnumerable<SelectListItem>, new { @class = "form-control" ,id="estado"})*@
+                                @*@Html.ValidationMessageFor(e => e.Endereco.Estado)*@
+                                <select id="estado" name="estado" class="form-control input-sm"></select> 
                             </div>
                             <br />
                         </div>
