@@ -73,13 +73,11 @@ namespace Web.Controllers
         {
             if (string.IsNullOrEmpty(servico))
             {
-                //TODO:Validar Serviço
                 ExibirMensagemErro("Serviço é um campo obrigatório.");
                 return RedirectToAction("Associar");
             }
             if (string.IsNullOrEmpty(valor))
             {
-                //TODO: Validar Valor
                 ExibirMensagemErro("Valor é um campo obrigatório.");
                 return RedirectToAction("Associar");
             }

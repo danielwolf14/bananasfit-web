@@ -19,13 +19,11 @@ namespace Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/main.js",
-                      "~/Scripts/facebook.js"));
+                      "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/main.css"));
+                      "~/Content/Site.css"));
         }
     }
 }

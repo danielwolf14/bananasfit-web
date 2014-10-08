@@ -22,7 +22,7 @@ namespace Web.Controllers
         }
         #endregion
 
-        #region Listar
+        #region Listar e buscar
         public ActionResult ListarPessoaFisica(string currentFilter, string searchString, int? page)
         {
             if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
@@ -85,6 +85,69 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult BuscarPessoaJuridica(string nome, string bairro, int? valor,
+            int? page, int? pontuacao, string servico, int? estado)
+        {
+
+            //var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(1012);
+            //var model = Map.Mapper.DynamicMap<DetalharBuscaPessoaJuridicaViewModel>(usuario);
+            //model.QuantidadeAvaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaJuridica.Chave == 1012).Count();
+
+            //ViewBag.Pontuacao = model.QuantidadeAvaliacao;
+
+            var pessoasJuridicas = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
+            var servicosPessoaJuridica = unityOfWork.ServicoPessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
+
+            //Func<PessoaJuridica, Servico, IEnumerable<PessoaJuridica>> x = (e,y) => 
+            if (valor != null)
+            {
+
+            }
+            if (pontuacao != null)
+            {
+
+            }
+            if (servico != null)
+            {
+            }
+            if (!string.IsNullOrEmpty(nome))
+            {
+                pessoasJuridicas = pessoasJuridicas.Where(s => s.Nome.ToUpper().Contains(nome.ToString().ToUpper()));
+            }
+            if (!string.IsNullOrEmpty(bairro))
+            {
+                pessoasJuridicas = pessoasJuridicas.Where(e => e.Endereco.Bairro.ToUpper().Contains(bairro.ToString().ToUpper()));
+            }
+            if (estado != null)
+            {
+                //pessoasJuridicas = pessoasJuridicas.Where(e => e.Endereco.Estado == ((EstadoEnum)estado));
+            }
+
+            pessoasJuridicas = pessoasJuridicas.OrderBy(e => e.Nome);
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(pessoasJuridicas.ToPagedList(pageNumber, pageSize));
+        }
+        #endregion
+
+        #region Detalhar Busca
+        public ActionResult DetalharPessoaJuridica(int chave)
+        {
+            var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
+            var model = Map.Mapper.DynamicMap<DetalharBuscaPessoaJuridicaViewModel>(usuario);
+            model.QuantidadeAvaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaJuridica.Chave == chave).Count();
+            model.Servicos = unityOfWork.ServicoPessoaJuridicaNegocio.Consultar(e => e.PessoaJuridica.Chave == chave).ToList();
+            if (Session["usuario"] != null)
+            {
+                var chaveUsuarioLogado = ((UsuarioLogadoModel)Session["usuario"]).Chave;
+                var avaliacao = unityOfWork.AvaliacaoNegocio
+                    .Consultar(e => e.PessoaFisica.Chave == chaveUsuarioLogado
+                    && e.PessoaJuridica.Chave == chave).FirstOrDefault();
+                model.Avaliacao = avaliacao == null ? 0 : avaliacao.Pontuacao;
+            }
+            return View(model);
+        }
         #endregion
 
         #region Login
@@ -94,9 +157,6 @@ namespace Web.Controllers
                 return RedirectToAction("Index", "Home");
             return View();
         }
-
-
-
 
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
@@ -130,14 +190,13 @@ namespace Web.Controllers
         }
         #endregion
 
-        #region Cadastrar Pessoa Fisica e Juridica
+        #region Cadastrar Usuário
 
         public ActionResult CadastrarPessoaJuridica()
         {
             if (Session["usuario"] != null && !((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
                 return RedirectToAction("Index", "Home");
 
-            ViewBag.Estado = MontarViewBagEstado();
             return View();
         }
 
@@ -146,41 +205,38 @@ namespace Web.Controllers
             if (Session["usuario"] != null && !((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
                 return RedirectToAction("Index", "Home");
 
-            ViewBag.Estado = MontarViewBagEstado();
             return View();
         }
 
         [HttpPost]
         public ActionResult CadastrarPessoaJuridica(CadastroPessoaJuridicaViewModel model, HttpPostedFileBase img)
         {
-            ViewBag.Estado = MontarViewBagEstado();
             if (ModelState.IsValid)
             {
                 var endereco = Map.Mapper.DynamicMap<Endereco>(model.Endereco);
                 var usuario = Map.Mapper.DynamicMap<PessoaJuridica>(model);
-                usuario.IsHabilitado = true;
                 try
                 {
-                    unityOfWork.PessoaJuridicaNegocio.Cadastrar(usuario);
-                    unityOfWork.Commit();
-                    if (img.ContentLength > 100)
+                    if (img.ContentLength > 5000)
                     {
-                        ExibirMensagemErro("imagem muito grande");
+                        ExibirMensagemErro("Imagem maior que o permitido 500KB");
                     }
                     else
                     {
+                        unityOfWork.PessoaJuridicaNegocio.Cadastrar(usuario);
+                        unityOfWork.Commit();
                         usuario.Imagem = SalvarImagem(img, usuario.Chave, usuario.Nome);
                         unityOfWork.PessoaJuridicaNegocio.Atualizar(usuario);
                         unityOfWork.Commit();
                         ExibirMensagemSucesso("Usuário cadastrado com sucesso.");
-                    }
-                    if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
-                    {
-                        return RedirectToAction("ListarPessoaJuridica", "Usuario");
-                    }
-                    else
-                    {
-                        return RedirectToAction("Login");
+                        if (Session["usuario"] != null && ((UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                        {
+                            return RedirectToAction("ListarPessoaJuridica", "Usuario");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Login");
+                        }
                     }
                 }
                 catch (NegocioException ex)
@@ -188,7 +244,6 @@ namespace Web.Controllers
                     TratarMensagemException(ex);
                 }
             }
-
             return View(model);
         }
 
@@ -205,12 +260,10 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult CadastrarPessoaFisica(CadastroPessoaFisicaViewModel model)
         {
-            ViewBag.Estado = MontarViewBagEstado();
             if (ModelState.IsValid)
             {
                 var endereco = Map.Mapper.DynamicMap<Endereco>(model.Endereco);
                 var usuario = Map.Mapper.DynamicMap<PessoaFisica>(model);
-                usuario.IsHabilitado = true;
                 try
                 {
                     unityOfWork.PessoaFisicaNegocio.Cadastrar(usuario);
@@ -224,8 +277,6 @@ namespace Web.Controllers
                     {
                         return RedirectToAction("Login");
                     }
-
-
                 }
                 catch (NegocioException ex)
                 {
@@ -237,68 +288,8 @@ namespace Web.Controllers
         }
         #endregion
 
-        #region Detalhar, Atualizar e Inativar Pessoa física e juridica
-        public ActionResult DetalharPessoaJuridica(int chave)
-        {
-            var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
-            var model = Map.Mapper.DynamicMap<DetalharBuscaPessoaJuridicaViewModel>(usuario);
-            model.QuantidadeAvaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaJuridica.Chave == chave).Count();
-            model.Servicos = unityOfWork.ServicoPessoaJuridicaNegocio.Consultar(e => e.PessoaJuridica.Chave == chave).ToList();
-            if (Session["usuario"] != null)
-            {
-                var chaveUsuarioLogado = ((UsuarioLogadoModel)Session["usuario"]).Chave;
-                var avaliacao = unityOfWork.AvaliacaoNegocio
-                    .Consultar(e => e.PessoaFisica.Chave == chaveUsuarioLogado
-                    && e.PessoaJuridica.Chave == chave).FirstOrDefault();
-                model.Avaliacao = avaliacao == null ? 0 : avaliacao.Pontuacao;
-            }
-            return View(model);
-        }
 
-        public ActionResult BuscarPessoaJuridica(string nome, string bairro, int? valor,
-            int? page, int? pontuacao, string servico, int? estado)
-        {
-
-            //var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(1012);
-            //var model = Map.Mapper.DynamicMap<DetalharBuscaPessoaJuridicaViewModel>(usuario);
-            //model.QuantidadeAvaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaJuridica.Chave == 1012).Count();
-            
-            //ViewBag.Pontuacao = model.QuantidadeAvaliacao;
-
-            var pessoasJuridicas = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
-            var servicosPessoaJuridica = unityOfWork.ServicoPessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
-            if (valor != null)
-            {
-
-            }
-            if (pontuacao != null)
-            {
-
-            }
-            if (servico != null)
-            {
-            }
-            if (nome != null)
-            {
-                pessoasJuridicas = pessoasJuridicas.Where(s => s.Nome.ToUpper().Contains(nome.ToString().ToUpper()));
-            }
-            if (bairro != null)
-            //if (bairro != null && bairro != "")
-            //if (string.IsNullOrEmpty(bairro))
-            {
-                pessoasJuridicas = pessoasJuridicas.Where(e => e.Endereco.Bairro.ToUpper().Contains(bairro.ToString().ToUpper()));
-            }
-            if (estado != null)
-            {
-                pessoasJuridicas = pessoasJuridicas.Where(e => e.Endereco.Estado == ((EstadoEnum)estado));
-            }
-
-            pessoasJuridicas = pessoasJuridicas.OrderBy(e => e.Nome);
-
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            return View(pessoasJuridicas.ToPagedList(pageNumber, pageSize));
-        }
+        #region Minha Conta, Atualizar e Inativar usuário       
 
         public ActionResult MinhaConta()
         {
@@ -314,15 +305,11 @@ namespace Web.Controllers
 
         public ActionResult MinhaContaPessoaJuridica()
         {
-            var estados = MontarViewBagEstado();
             var usuarioLogado = (UsuarioLogadoModel)Session["usuario"];
             if (usuarioLogado != null && !usuarioLogado.IsPessoaFisica)
             {
                 var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(usuarioLogado.Chave);
                 var model = Map.Mapper.DynamicMap<DetalharPessoaJuridicaViewModel>(usuario);
-
-                estados.FirstOrDefault(e => e.Text == model.Endereco.Estado).Selected = true;
-                ViewBag.Estado = estados;
 
                 return View(model);
             }
@@ -332,14 +319,11 @@ namespace Web.Controllers
 
         public ActionResult MinhaContaPessoaFisica()
         {
-            var estados = MontarViewBagEstado();
             var usuarioLogado = (UsuarioLogadoModel)Session["usuario"];
             if (usuarioLogado != null && usuarioLogado.IsPessoaFisica)
             {
                 var usuario = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(usuarioLogado.Chave);
                 var model = Map.Mapper.DynamicMap<DetalharPessoaFisicaViewModel>(usuario);
-                estados.FirstOrDefault(e => e.Text == model.Endereco.Estado).Selected = true;
-                ViewBag.Estado = estados;
 
                 return View(model);
             }
@@ -349,7 +333,6 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult MinhaContaPessoaJuridica(DetalharPessoaJuridicaViewModel model, HttpPostedFileBase img)
         {
-            ViewBag.Estado = MontarViewBagEstado();
             if (ModelState.IsValid && (UsuarioLogadoModel)Session["usuario"] != null
                 && ((UsuarioLogadoModel)Session["usuario"]).Chave == model.Chave)
             {
@@ -361,7 +344,7 @@ namespace Web.Controllers
                         usuarioParaAtualizar.Imagem = SalvarImagem(img, usuarioParaAtualizar.Chave, usuarioParaAtualizar.Nome);
 
                     AtualizarPessoaJuridica(usuarioParaAtualizar, usuarioAtualizado);
-                    unityOfWork.PessoaJuridicaNegocio.Atualizar(usuarioParaAtualizar);
+                    unityOfWork.PessoaJuridicaNegocio.AtualizarConta(usuarioParaAtualizar);
                     unityOfWork.Commit();
 
                     ExibirMensagemSucesso("Usuário atualizado com sucesso.");
@@ -379,7 +362,6 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult MinhaContaPessoaFisica(DetalharPessoaFisicaViewModel model)
         {
-            ViewBag.Estado = MontarViewBagEstado();
             if (ModelState.IsValid && (UsuarioLogadoModel)Session["usuario"] != null
                 && ((UsuarioLogadoModel)Session["usuario"]).Chave == model.Chave)
             {
@@ -388,7 +370,7 @@ namespace Web.Controllers
                 try
                 {
                     AtualizarPessoaFisica(usuarioParaAtualizar, usuarioAtualizado);
-                    unityOfWork.PessoaFisicaNegocio.Atualizar(usuarioParaAtualizar);
+                    unityOfWork.PessoaFisicaNegocio.AtualizarConta(usuarioParaAtualizar);
 
                     unityOfWork.Commit();
                     ExibirMensagemSucesso("Usuário atualizado com sucesso.");
@@ -485,43 +467,7 @@ namespace Web.Controllers
             enderecoParaAtualizar.Bairro = novoEndereco.Bairro;
             enderecoParaAtualizar.CEP = novoEndereco.CEP;
             enderecoParaAtualizar.Estado = novoEndereco.Estado;
-       
-        }
-        #endregion
 
-        #region Util
-        public List<SelectListItem> MontarViewBagEstado()
-        {
-            return new List<SelectListItem> 
-            {
-               new SelectListItem{ Text=EstadoEnum.TO.ToString(), Value = ((int)EstadoEnum.TO).ToString()},
-                new SelectListItem{ Text=EstadoEnum.SE.ToString(), Value = ((int)EstadoEnum.SE).ToString()},
-                new SelectListItem{ Text=EstadoEnum.SP.ToString(), Value = ((int)EstadoEnum.SP).ToString()},
-                new SelectListItem{ Text=EstadoEnum.SC.ToString(), Value = ((int)EstadoEnum.SC).ToString()},
-                new SelectListItem{ Text=EstadoEnum.RS.ToString(), Value = ((int)EstadoEnum.RS).ToString()},
-                new SelectListItem{ Text=EstadoEnum.RN.ToString(), Value = ((int)EstadoEnum.RN).ToString()},
-                new SelectListItem{ Text=EstadoEnum.RJ.ToString(), Value = ((int)EstadoEnum.RJ).ToString()},
-                new SelectListItem{ Text=EstadoEnum.RO.ToString(), Value = ((int)EstadoEnum.RO).ToString()},
-                new SelectListItem{ Text=EstadoEnum.RR.ToString(), Value = ((int)EstadoEnum.RR).ToString()},
-                new SelectListItem{ Text=EstadoEnum.PI.ToString(), Value = ((int)EstadoEnum.PI).ToString()},
-                new SelectListItem{ Text=EstadoEnum.PE.ToString(), Value = ((int)EstadoEnum.PE).ToString()},
-                new SelectListItem{ Text=EstadoEnum.PR.ToString(), Value = ((int)EstadoEnum.PR).ToString()},
-                new SelectListItem{ Text=EstadoEnum.PB.ToString(), Value = ((int)EstadoEnum.PB).ToString()},
-                new SelectListItem{ Text=EstadoEnum.PA.ToString(), Value = ((int)EstadoEnum.PA).ToString()},
-                new SelectListItem{ Text=EstadoEnum.MG.ToString(), Value = ((int)EstadoEnum.MG).ToString()},
-                new SelectListItem{ Text=EstadoEnum.MS.ToString(), Value = ((int)EstadoEnum.MS).ToString()},
-                new SelectListItem{ Text=EstadoEnum.MT.ToString(), Value = ((int)EstadoEnum.MT).ToString()},
-                new SelectListItem{ Text=EstadoEnum.MA.ToString(), Value = ((int)EstadoEnum.MA).ToString()},
-                new SelectListItem{ Text=EstadoEnum.GO.ToString(), Value = ((int)EstadoEnum.GO).ToString()},
-                new SelectListItem{ Text=EstadoEnum.ES.ToString(), Value = ((int)EstadoEnum.ES).ToString()},
-                new SelectListItem{ Text=EstadoEnum.DF.ToString(), Value = ((int)EstadoEnum.DF).ToString()},
-                new SelectListItem{ Text=EstadoEnum.CE.ToString(), Value = ((int)EstadoEnum.CE).ToString()},
-                new SelectListItem{ Text=EstadoEnum.BA.ToString(), Value = ((int)EstadoEnum.BA).ToString()},
-                new SelectListItem{ Text=EstadoEnum.AM.ToString(), Value = ((int)EstadoEnum.AM).ToString()},
-                new SelectListItem{ Text=EstadoEnum.AP.ToString(), Value = ((int)EstadoEnum.AP).ToString()},
-                new SelectListItem{ Text=EstadoEnum.AL.ToString(), Value = ((int)EstadoEnum.AL).ToString()},
-                new SelectListItem{ Text=EstadoEnum.AC.ToString(), Value = ((int)EstadoEnum.AC).ToString()}
-            };
         }
         #endregion
     }

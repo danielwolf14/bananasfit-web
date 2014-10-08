@@ -6,13 +6,16 @@ using System.Web;
 
 namespace Web.ViewModels
 {
-    public class LoginViewModel
+    #region Contato
+    public class ContatoViewModel
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        public virtual string Email { get; set; }
+        public string De { get; set; }
         [Required]
-        [DataType(DataType.Password)]
-        public virtual string Password { get; set; }
+        public string Assunto { get; set; }
+        [Required]
+        public string Mensagem { get; set; }
     }
+    #endregion
 }

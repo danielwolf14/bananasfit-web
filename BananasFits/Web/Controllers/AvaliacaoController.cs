@@ -11,8 +11,6 @@ namespace Web.Controllers
 {
     public class AvaliacaoController : BaseController
     {
-        //
-        // GET: /Avaliacao/
         public ActionResult Avaliar(int pontuacao, int chavePessoaJuridica)
         {
             var chaveUsuario = ((UsuarioLogadoModel)Session["usuario"]).Chave;
@@ -35,7 +33,6 @@ namespace Web.Controllers
 
             return RedirectToAction("DetalharPessoaJuridica", "Usuario", new { chave = chavePessoaJuridica });
         }
-
 
         public ActionResult Index()
         {

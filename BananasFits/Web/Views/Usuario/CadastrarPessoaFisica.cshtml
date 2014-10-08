@@ -9,7 +9,6 @@
                 <div class="panel-body">
                     @using (Html.BeginForm("CadastrarPessoaFisica", "Usuario", FormMethod.Post))
                     {
-                        @*@Html.ValidationSummary(false)*@
                         <div class="col-md-6 column">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -89,8 +88,6 @@
                                 @Html.TextBoxFor(e => e.Endereco.Bairro, new { @class = "form-control input-sm", placeholder = "Bairro" })
                                 @Html.ValidationMessageFor(e => e.Endereco.Bairro)
                             </div>
-
-
                             <br />
                             <script type="text/javascript" src="http://cidades-estados-js.googlecode.com/files/cidades-estados-v0.2.js"></script>
                             <script type="text/javascript">
@@ -104,31 +101,23 @@
                             </script>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                               @* @Html.TextBoxFor(e => e.Endereco.Cidade, new { @class = "form-control input-sm", placeholder = "Cidade",id="cidade" })*@
-                               @* @Html.ValidationMessageFor(e => e.Endereco.Cidade)*@
-                                <select id="cidade" name="cidade" class="form-control input-sm"></select> 
+                                @Html.DropDownListFor(e => e.Endereco.Estado, new List<SelectListItem>(), new { @class = "form-control input-sm", id = "estado" })
+                                @Html.ValidationMessageFor(e => e.Endereco.Estado)
                             </div>
                             <br />
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                @*@Html.DropDownListFor(e => e.Endereco.Estado, ViewBag.Estado as IEnumerable<SelectListItem>, new { @class = "form-control" ,id="estado"})*@
-                                @*@Html.ValidationMessageFor(e => e.Endereco.Estado)*@
-                                <select id="estado" name="estado" class="form-control input-sm"></select> 
+                                @Html.DropDownListFor(e => e.Endereco.Cidade, new List<SelectListItem> { new SelectListItem { Text = "Selecione uma cidade" } }, new { @class = "form-control input-sm", id = "cidade" })
+                                @Html.ValidationMessageFor(e => e.Endereco.Cidade)
                             </div>
                             <br />
                         </div>
                         <br />
-
-                        @*<div style="text-align:center;">
-                                <input type="checkbox" /> Eu concordo com os termos
-                            </div><br />*@
-
-
                         <input type="submit" value="Registrar" class="btn btn-success " style="display: block; clear: both;width: 95%; margin: 0 2.5%;">
-
                     }
                 </div>
             </div>
         </div>
     </div>
+    <br /><br /><br /><br />
 </div>

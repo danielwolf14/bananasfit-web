@@ -23,6 +23,7 @@ namespace Processo.Negocio
         public override void Cadastrar(PessoaJuridica usuario)
         {
             var mensagens = new List<string>();
+            usuario.IsHabilitado = true;
             ValidarEmail(usuario, mensagens);
             ValidarCamposObrigatorios(usuario, mensagens);
             VerificarNegocioException(mensagens);
@@ -43,6 +44,15 @@ namespace Processo.Negocio
         public IEnumerable<PessoaJuridica> ListarTodos()
         {
             return base.Consultar(e => e.IsHabilitado);
+        }
+
+        public void AtualizarConta(PessoaJuridica usuario)
+        {
+            var mensagens = new List<string>();
+            ValidarEmail(usuario, mensagens);
+            ValidarCamposObrigatorios(usuario, mensagens);
+            VerificarNegocioException(mensagens);
+            base.Atualizar(usuario);
         }
     }
 }

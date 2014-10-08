@@ -25,6 +25,7 @@ namespace Processo.Negocio
 
         public override void Cadastrar(PessoaFisica usuario)
         {
+            usuario.IsHabilitado = true;
             var mensagens = new List<string>();
             ValidarEmail(usuario, mensagens);
             ValidarCamposObrigatorios(usuario, mensagens);
@@ -39,6 +40,16 @@ namespace Processo.Negocio
             {
                 mensagens.Add("E-mail já cadastrado.");
             }
+        }
+
+        public void AtualizarConta(PessoaFisica usuario)
+        {
+            var mensagens = new List<string>();
+            ValidarEmail(usuario, mensagens);
+            ValidarCamposObrigatorios(usuario, mensagens);
+            VerificarEmailExistente(usuario.Email, mensagens);
+            VerificarNegocioException(mensagens);
+            base.Atualizar(usuario);
         }
     }
 }

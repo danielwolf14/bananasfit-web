@@ -1,7 +1,4 @@
-﻿@*@using Web.Extensions
-
-@Html.GenerateRelayQrCode("teste")*@
-
+﻿<!--Section 1-->
 <div>
     <div id="carousel-example-generic" class="carousel slide " data-ride="carousel">
         <!-- Indicators -->
@@ -9,30 +6,23 @@
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
             <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
         </ol>
         <!-- Wrapper for slides -->
         <div class="carousel-inner" style="width: 100%;margin-top: -40px;">
             <div class="item active">
-                <img src="~/images/1.jpg" alt="..." style="height:400px;">
+                <img src="~/images/1.jpg" alt="..." style="height:450px;">
                 <div class="carousel-caption">
                     <h2>Musculação</h2>
                 </div>
             </div>
             <div class="item">
-                <img src="~/images/2.jpg" alt="..." style="height:400px;">
+                <img src="~/images/2.jpg" alt="..." style="height:450px;">
                 <div class="carousel-caption">
                     <h2>Artes Marciais</h2>
                 </div>
             </div>
             <div class="item">
-                <img src="~/images/3.jpg" alt="..." style="height:400px;">
-                <div class=" carousel-caption">
-                    <h2>Natação</h2>
-                </div>
-            </div>
-            <div class="item">
-                <img src="~/images/4.jpg" alt="..." style="height:400px;">
+                <img src="~/images/4.jpg" alt="..." style="height:450px;">
                 <div class=" carousel-caption">
                     <h2>Pilates</h2>
                 </div>
@@ -49,13 +39,14 @@
     </div>
 </div>
 <br><br><br>
-<div class="container" style="color:white;">
+<!--Section 2-->
+<div class="container" style="background-color:white; margin-top:-60px;">
     <div class="row form-group">
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div class="product-chooser-item selected">
-                <img src="~/images/buscar.png" class="img-rounded col-xs-4 col-sm-4 col-md-12 col-lg-12" alt="Mobile and Desktop">
+                <img src="~/images/buscar.png" style="max-width:300px;" class="img-rounded col-xs-4 col-sm-4 col-md-12 col-lg-12 col-lg-offset-1" alt="Mobile and Desktop">
                 <div class="col-xs-8 col-sm-8 col-md-12 col-lg-12">
-                    <h3>BUSCAR</h3>
+                    <h2>BUSCAR</h2>
                     <span class="description">Encontre a atividade física que deseja fazer em nossos estabelecimentos credenciados através do preço e localização.</span>
                 </div>
                 <div class="clear"></div>
@@ -63,9 +54,9 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div class="product-chooser-item">
-                <img src="~/images/comprar.png" class="img-rounded col-xs-4 col-sm-4 col-md-12 col-lg-12" alt="Desktop">
+                <img src="~/images/comprar.png" style="max-width:300px;" class="img-rounded col-xs-4 col-sm-4 col-md-12 col-lg-12 col-lg-offset-2" alt="Desktop">
                 <div class="col-xs-8 col-sm-8 col-md-12 col-lg-12">
-                    <h3>COMPRAR</h3>
+                    <h2>COMPRAR</h2>
                     <span class="description">Compre quantos FITS voce desejar e utilize quando quiser sem matricula, sem mensalidade ou multa.</span>
                 </div>
                 <div class="clear"></div>
@@ -73,114 +64,149 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="margin-bottom:50px;">
             <div class="product-chooser-item">
-                <img src="~/images/usar.png" class="img-rounded col-xs-4 col-sm-4 col-md-12 col-lg-12" alt="Mobile">
+                <img src="~/images/usar.jpg" style="max-width:300px;" class="img-rounded col-xs-4 col-sm-4 col-md-12 col-lg-12 col-lg-offset-2" alt="Mobile">
                 <div class="col-xs-8 col-sm-8 col-md-12 col-lg-12">
-                    <h3>USAR</h3>
+                    <h2>USAR</h2>
                     <span class="description">Para usar seus FITS instale nosso APP Banana's FIT Mobile e através dele use em qualquer estabelecimento credenciado e faça a modalidade que desejar.</span>
                 </div>
                 <div class="clear"></div>
             </div>
         </div>
-
-
     </div>
-            <div class="panel-group" id="accordion" style="color:black;">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero"><strong>0. Porque Usar o Banana's FIT?</strong></a>
-                        </h4>
-                    </div>
-                    <div id="collapseZero" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <h4> Quais vantagens em usar o Banana's FIT?</h4>
-                            Sem multa ou matrícula<br />
-                            Pague somente quando usar<br />
-                            Modalidaes no mínimo 20% mais baratas que diretamente na academia<br />
-                            Uma única valor para milhares de academias<br />
-                            Malhe diferentes modalidades em múltiplos bairros e cidades<br />
-
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><strong>1. Comprando FITS</strong></a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <h4> Como faço para comprar FITS?</h4>
-                            Basta buscar uma academia por cidade, CEP, bairro, aulas ou modalidade.
-                            Depois de encontrar sua academia, você tem a opção de escolher quantos FITS deseja compra de acordo com a modalidade que voce quer usar.
-                            Clique no botão comprar e prossiga para o processo de pagamento.
-
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><strong>2. Na academia</strong></a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <h4>Problemas ao comprar o serviço na academia - o que devo fazer?</h4>
-                            Caso você tenha algum problema na sua ida a academia, entre em contato conosco imediatamente.
-                            Entraremos em contato com a academia para entender o que aconteceu e dar um retorno à você, para que tenha sempre a melhor experiência possível.
-                            <br /><br />
-                            <h4>Eu tenho que fazer uma avaliação física?</h4>
-                            Não é necessário fazer avaliação física se você tem mais de 15 e menos de 65 anos. Mas é necessário apresentar um atestado médico alegando que você pode realizar atividades físicas, ele tem validade de 6 meses após a emissão.
-                            Para modalidades que envolvem piscina, as academias em geral pedem um atestado de saúde declarando que você está apto a utilizar a piscina.
-                            Se houver alguma outra obrigatoriedade a academia avisará ao Banan´'s FIT, que deixará claro na página de informações da academia.
-                            <br /><br />
-                            <h4> O que eu preciso levar para a academia para que eles me deixem entrar?</h4>
-                            O seu celular com o App Banana' FIT instalado e com a quantidade de Fits necessária para realizar a modalidade que voce deseja na academia.
-                            Algumas academias podem exigir seu documento de identidade para verificar o seu nome no sistema.
-                            Na entrada da academia a recepção irá validar seu passe através do QR CODE específico para a modalidade desejada.
-
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><strong>3. Avaliando academia</strong></a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <h4>Como faço para deixar avaliações sobre a minha experiência na academia?</h4>
-                            Você pode avaliar as academias utilizadas diretamente na página delas no site do Banana´s FIT.
-                            <br /><br />
-                            <h4>Eu quero fazer uma reclamação sobre uma academia, como eu faço isso?</h4>
-                            Entre em contato com a equipe do GymPass relatando o ocorrido, de preferência com detalhes de quem o atendeu e sobre o que aconteceu.
-                            Nós entraremos em contato com a academia e resolver o problema da melhor maneira possível.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><strong>4. Gerenciando minha conta</strong></a>
-                        </h4>
-                    </div>
-                    <div id="collapseFour" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <h4>Posso resgatar o dinheiro que eu colocar na minha conta?</h4>
-                            Após comprar os FITS, você tem até 7 dias para solicitar o seu dinheiro de volta. Após este período o crédito tem validade de 6 meses para ser utilizado dentro do Banana's FIT.
-                            Em casos excepcionais, entre em contato diretamente com o Banana's FIT.
-                            <br /><br />    
-                            <h4>Eu posso ver a quantidade de FITS que possuo?</h4>
-                            Pode sim! Você tem o controle fazendo o login no site, acessando Minha conta.
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-
-
 </div>
-<br><br><br><br><br><br>
+<!--Section 3-->
+<div style="color:white; font-weight:bolder;">
+    <div class="col-lg-12" style="background-color: black; padding: 1px;">
+        <h2 style="padding-left:20px;" class="">Seja nosso parceiro!</h2>
+    </div>
+    <div class="col-md-6" style="background-color: black; padding-left:20px;">
+        <p>O maior consórcio de academias do Brasil:</p>
+        <ul>
+            <br />
+            <li>
+                <strong>APP Mobile Banana's FIT</strong>
+            </li>
+            <br />
+            <li>Servidores de alta tecnologia</li>
+            <br />
+            <li>Transações em um ambiente seguro</li>
+            <br />
+            <li>Suporte 24 Horas</li>
+            <br />
+            <li>Sem multa, sem mensalidade compre e use quando quiser.</li>
+            <br />
+        </ul>
+        <h4 style="text-align:center;">Uma única mensalidade para milhares de academias<br /><br />Malhe diferentes modalidades em múltiplos bairros e cidades</h4><br />
+        <br /><br />
+    </div>
+    <div class="col-md-6" style="background-color: black; padding: 0; margin-top: -65px; ">
+        <img class="img-responsive" src="~/images/5.jpg" />
+        <br /><br />
+    </div>
+</div>
+<!--Section 4-->
+<div>
+    <div class="col-lg-12" style="color: white; background-color: #fec222; padding:1px; margin-top:-40px;">
+        <h2 class="page-header" style="padding-left:20px;">FAQ</h2>
+    </div>
+    <div class="col-lg-12 col-md-12" style="background-color: #fec222;">
+        <br /><br />
+
+        <div class="" id="accordion" style="color:black;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero"><strong>0. Porque Usar o Banana's FIT?</strong></a>
+                    </h4>
+                </div>
+                <div id="collapseZero" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <h4> Quais vantagens em usar o Banana's FIT?</h4>
+                        Sem multa ou matrícula<br />
+                        Pague somente quando usar<br />
+                        Modalidaes no mínimo 20% mais baratas que diretamente na academia<br />
+                        Uma única valor para milhares de academias<br />
+                        Malhe diferentes modalidades em múltiplos bairros e cidades<br />
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><strong>1. Comprando FITS</strong></a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <h4> Como faço para comprar FITS?</h4>
+                        Basta buscar uma academia por cidade, CEP, bairro, aulas ou modalidade.
+                        Depois de encontrar sua academia, você tem a opção de escolher quantos FITS deseja compra de acordo com a modalidade que voce quer usar.
+                        Clique no botão comprar e prossiga para o processo de pagamento.
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><strong>2. Na academia</strong></a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <h4>Problemas ao comprar o serviço na academia - o que devo fazer?</h4>
+                        Caso você tenha algum problema na sua ida a academia, entre em contato conosco imediatamente.
+                        Entraremos em contato com a academia para entender o que aconteceu e dar um retorno à você, para que tenha sempre a melhor experiência possível.
+                        <br /><br />
+                        <h4>Eu tenho que fazer uma avaliação física?</h4>
+                        Não é necessário fazer avaliação física se você tem mais de 15 e menos de 65 anos. Mas é necessário apresentar um atestado médico alegando que você pode realizar atividades físicas, ele tem validade de 6 meses após a emissão.
+                        Para modalidades que envolvem piscina, as academias em geral pedem um atestado de saúde declarando que você está apto a utilizar a piscina.
+                        Se houver alguma outra obrigatoriedade a academia avisará ao Banan´'s FIT, que deixará claro na página de informações da academia.
+                        <br /><br />
+                        <h4> O que eu preciso levar para a academia para que eles me deixem entrar?</h4>
+                        O seu celular com o App Banana' FIT instalado e com a quantidade de Fits necessária para realizar a modalidade que voce deseja na academia.
+                        Algumas academias podem exigir seu documento de identidade para verificar o seu nome no sistema.
+                        Na entrada da academia a recepção irá validar seu passe através do QR CODE específico para a modalidade desejada.
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><strong>3. Avaliando academia</strong></a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <h4>Como faço para deixar avaliações sobre a minha experiência na academia?</h4>
+                        Você pode avaliar as academias utilizadas diretamente na página delas no site do Banana´s FIT.
+                        <br /><br />
+                        <h4>Eu quero fazer uma reclamação sobre uma academia, como eu faço isso?</h4>
+                        Entre em contato com a equipe do GymPass relatando o ocorrido, de preferência com detalhes de quem o atendeu e sobre o que aconteceu.
+                        Nós entraremos em contato com a academia e resolver o problema da melhor maneira possível.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><strong>4. Gerenciando minha conta</strong></a>
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <h4>Posso resgatar o dinheiro que eu colocar na minha conta?</h4>
+                        Após comprar os FITS, você tem até 7 dias para solicitar o seu dinheiro de volta. Após este período o crédito tem validade de 6 meses para ser utilizado dentro do Banana's FIT.
+                        Em casos excepcionais, entre em contato diretamente com o Banana's FIT.
+                        <br /><br />
+                        <h4>Eu posso ver a quantidade de FITS que possuo?</h4>
+                        Pode sim! Você tem o controle fazendo o login no site, acessando Minha conta.
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+</div>

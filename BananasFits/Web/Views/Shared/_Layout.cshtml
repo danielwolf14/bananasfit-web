@@ -32,29 +32,40 @@
             <img class="img-responsive " src="~/images/bananaBrand.png" style="width: 55px; height: 50px; ">
 
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="text-align:center;">
 
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("HOME", "Index", "Home")</li>
-                <li>@Html.ActionLink("BUSCAR ACADEMIAS", "BuscarPessoaJuridica","Usuario")</li>
+                <li>@Html.ActionLink("BUSCAR ACADEMIAS", "BuscarPessoaJuridica", "Usuario")</li>
                 <li>@Html.ActionLink("COMPRAR FITS", "ComprarFits", "Usuario")</li>
+
+
             </ul>
+            <b style=" margin-top: 5px; display: inline-block; font-size: 20px;">
+                <a href="https://www.facebook.com/bananasfitoficial" target="_blank"><i id="social" class="fa fa-facebook-square fa-2x" style="color:white"></i></a>
+                <a href="https://twitter.com/bananasfit" target="_blank"><i id="social" class="fa fa-twitter-square fa-2x" style="color:white"></i></a>
+                <a href="https://plus.google.com/u/0/106264638843983461810/about" target="_blank"><i id="social" class="fa fa-google-plus-square fa-2x" style="color:white"></i></a>
+            </b>
 
             <ul class="nav navbar-nav navbar-right">
-               
-                @*<li>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="input-group" style="max-width:190px;">
-                            <input type="text" class="form-control" placeholder="Insira um texto aqui">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                            </span>
-                        </div>
-                    </form>
-                </li>*@
 
+                @*<li>
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="input-group" style="max-width:190px;">
+                                <input type="text" class="form-control" placeholder="Insira um texto aqui">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </li>*@
+
+
+
+
+                <li>@Html.ActionLink("SOBRE", "Sobre", "Home")</li>
                 <li>@Html.ActionLink("CONTATO", "Contato", "Home")</li>
-                @if (Session["usuario"] == null 
+                @if (Session["usuario"] == null
                     || (Session["usuario"] != null && ((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsAdministrador))
                 {
                     <li class="dropdown">
@@ -72,6 +83,7 @@
                 else
                 {
                     <li>@Html.ActionLink("LOGOUT", "Logout", "Usuario")</li>
+
                 }
 
                 @if (Session["usuario"] != null)
@@ -80,13 +92,13 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAINEL <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Minha Conta", "MinhaConta", "Usuario")</li>
-                            @if(((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
+                            @if (((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
                             {
-                            <li>@Html.ActionLink("Listar Serviços", "Listar", "Servico")</li>
-                            <li>@Html.ActionLink("Listar Pessoas Jurídicas", "ListarPessoaJuridica", "Usuario")</li>
-                            <li>@Html.ActionLink("Listar Pessoas Físicas", "ListarPessoaFisica", "Usuario")</li>
+                                <li>@Html.ActionLink("Listar Serviços", "Listar", "Servico")</li>
+                                <li>@Html.ActionLink("Listar Pessoas Jurídicas", "ListarPessoaJuridica", "Usuario")</li>
+                                <li>@Html.ActionLink("Listar Pessoas Físicas", "ListarPessoaFisica", "Usuario")</li>
                             }
-                        
+
                         </ul>
                     </li>
                 }
@@ -126,20 +138,20 @@
         @RenderBody()
     </div>
     <!--FOOTER-->
-    <div class="fixed-bottom">
-        <div style="text-align: center">
-            <span>
-                <a href="https://www.facebook.com/bananasfit"><i id="social" class="fa fa-facebook-square fa-2x" style="color:#3C5A95"></i></a>
-                <a href="https://twitter.com/bananasfit"><i id="social" class="fa fa-twitter-square fa-2x" style="color:#3198CA"></i></a>
-                <a href="https://plus.google.com/bananasfit"><i id="social" class="fa fa-google-plus-square fa-2x" style="color:#DB3E33"></i></a>
-                <a href="mailto:bananasfit@gmail.com"><i id="social" class="fa fa-envelope-square fa-2x" style="color:#FEC80D"></i></a>
-            </span><br>
-            @*<span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Termos", "Termos", "Home")</span>
-    <span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Sobre", "Sobre", "Home")</span>
-    <span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Privacidade", "Privacidade", "Home")</span><br />*@
-            
-            <span class="label" style="cursor: pointer; margin-top: 7px; ">© Copyright 2014 - MOOVE BRASIL</span>
+  
 
+    <div class="fixed-bottom" style="float:right">
+        <div>
+            @*<span>
+                    <a href="https://www.facebook.com/bananasfit"><i id="social" class="fa fa-facebook-square fa-2x" style="color:#3C5A95"></i></a>
+                    <a href="https://twitter.com/bananasfit"><i id="social" class="fa fa-twitter-square fa-2x" style="color:#3198CA"></i></a>
+                    <a href="https://plus.google.com/bananasfit"><i id="social" class="fa fa-google-plus-square fa-2x" style="color:#DB3E33"></i></a>
+                    <a href="mailto:bananasfit@gmail.com"><i id="social" class="fa fa-envelope-square fa-2x" style="color:#FEC80D"></i></a>
+                </span><br>*@
+            @*<span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Termos", "Termos", "Home")</span>
+                        <span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Sobre", "Sobre", "Home")</span>
+                <span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Privacidade", "Privacidade", "Home")</span><br />*@
+            <span class="label" style="cursor: pointer; margin-top: 7px; ">© Copyright 2014 - MOOVE BRASIL</span>
         </div>
     </div>
 </body>
