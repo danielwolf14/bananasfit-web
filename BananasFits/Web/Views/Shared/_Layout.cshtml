@@ -8,7 +8,7 @@
     <meta name="description" content="Banana' FIT">
     <meta name="author" content="Moove">
     <meta name="keywords" content="Moove, Banana, FIT,Fits,Banana's Fit">
-    <link rel="shortcut icon" href="~/images/ico.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="~/images/imageHome/ico.png" type="image/x-icon" />
     <!--JS-->
     <!--CSS-->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 </head>
 <body>
     <!--MENU-->
-    <nav class="navbar navbar-default nav-pills" role="navigation" style="border-radius: 0px;border: 0px; background-color:#fec425;">
+    <nav class="navbar navbar-default nav-pills" role="navigation" style="border-radius: 0px;border: 0px; margin:0px;">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <img class="img-responsive " src="~/images/bananaBrand.png" style="width: 55px; height: 50px; ">
+            <img class="img-responsive " src="~/images/imageHome/bananaBrand.png" style="width: 55px; height: 50px; ">
 
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="text-align:center;">
@@ -42,9 +42,9 @@
 
             </ul>
             <b style=" margin-top: 5px; display: inline-block; font-size: 20px;">
-                <a href="https://www.facebook.com/bananasfitoficial" target="_blank"><i id="social" class="fa fa-facebook-square fa-2x" style="color:white"></i></a>
-                <a href="https://twitter.com/bananasfit" target="_blank"><i id="social" class="fa fa-twitter-square fa-2x" style="color:white"></i></a>
-                <a href="https://plus.google.com/u/0/106264638843983461810/about" target="_blank"><i id="social" class="fa fa-google-plus-square fa-2x" style="color:white"></i></a>
+                <a href="https://www.facebook.com/bananasfitoficial" target="_blank"><i id="social" class="fa fa-facebook-square fa-2x" style="color:#3C5A95"></i></a>
+                <a href="https://twitter.com/BananasFits" target="_blank"><i id="social" class="fa fa-twitter-square fa-2x" style="color:#3198CA"></i></a>
+                <a href="https://plus.google.com/u/0/106264638843983461810/about" target="_blank"><i id="social" class="fa fa-google-plus-square fa-2x" style="color:#DB3E33"></i></a>
             </b>
 
             <ul class="nav navbar-nav navbar-right">
@@ -63,8 +63,6 @@
 
 
 
-                <li>@Html.ActionLink("SOBRE", "Sobre", "Home")</li>
-                <li>@Html.ActionLink("CONTATO", "Contato", "Home")</li>
                 @if (Session["usuario"] == null
                     || (Session["usuario"] != null && ((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsAdministrador))
                 {
@@ -89,7 +87,7 @@
                 @if (Session["usuario"] != null)
                 {
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAINEL <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> PAINEL <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Minha Conta", "MinhaConta", "Usuario")</li>
                             @if (((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
@@ -105,7 +103,7 @@
 
             </ul>
         </div>
-    </nav><br />
+    </nav>
 
     <!--Mensagens de sucesso e erro-->
     <div class="container mensagens" style="width:100% !important;">
@@ -132,27 +130,33 @@
                 </div>
             </div>
         }
-    </div>
+    </div><br /><br />
     <!--CONTAINER PARA CARREGAMENTO DINAMICO-->
-    <div id="container" class="container-fluid">
+    <div id="container1" class="container-fluid">
         @RenderBody()
     </div>
     <!--FOOTER-->
-  
 
-    <div class="fixed-bottom" style="float:right">
-        <div>
-            @*<span>
-                    <a href="https://www.facebook.com/bananasfit"><i id="social" class="fa fa-facebook-square fa-2x" style="color:#3C5A95"></i></a>
-                    <a href="https://twitter.com/bananasfit"><i id="social" class="fa fa-twitter-square fa-2x" style="color:#3198CA"></i></a>
-                    <a href="https://plus.google.com/bananasfit"><i id="social" class="fa fa-google-plus-square fa-2x" style="color:#DB3E33"></i></a>
-                    <a href="mailto:bananasfit@gmail.com"><i id="social" class="fa fa-envelope-square fa-2x" style="color:#FEC80D"></i></a>
-                </span><br>*@
+
+    <div  id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style=" background-color:white;">
+        <div style="text-align:center">
+
+            <span class="label" style="cursor: pointer; margin-top: 7px; float: right;">@Html.ActionLink("Contato", "Contato", "Home")</span>
+            <span class="label" style="cursor: pointer; margin-top: 7px; float: right;">@Html.ActionLink("Sobre", "Sobre", "Home")</span>
             @*<span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Termos", "Termos", "Home")</span>
-                        <span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Sobre", "Sobre", "Home")</span>
-                <span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Privacidade", "Privacidade", "Home")</span><br />*@
-            <span class="label" style="cursor: pointer; margin-top: 7px; ">© Copyright 2014 - MOOVE BRASIL</span>
+            <span class="label" style="cursor: pointer; margin-top: 7px; ">@Html.ActionLink("Privacidade", "Privacidade", "Home")</span>*@
+            <span class="label" style="cursor: pointer; margin-top: 7px; float:left; color:black; padding:2px;font-size:9px; ">© Copyright 2014 - MOOVE BRASIL</span>
         </div>
     </div>
+
+    <script>
+        var alturaJanela = $(window).height();
+        var alturaHeader = $("nav").height();
+        var alturaFooter = $("#footer").height();
+
+
+        var altContent = alturaJanela - alturaHeader - alturaFooter;
+        $("#container1").css("min-height", altContent-40);
+    </script>
 </body>
 </html>

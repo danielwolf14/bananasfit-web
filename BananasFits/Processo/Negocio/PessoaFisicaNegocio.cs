@@ -29,25 +29,15 @@ namespace Processo.Negocio
             var mensagens = new List<string>();
             ValidarEmail(usuario, mensagens);
             ValidarCamposObrigatorios(usuario, mensagens);
-            VerificarEmailExistente(usuario.Email, mensagens);
             VerificarNegocioException(mensagens);
             base.Inserir(usuario);
-        }
-
-        public void VerificarEmailExistente(string email, List<string> mensagens)
-        {
-            if(this.pessoaJuridicaNegocio.Consultar(e => e.Email == email).Any())
-            {
-                mensagens.Add("E-mail já cadastrado.");
-            }
         }
 
         public void AtualizarConta(PessoaFisica usuario)
         {
             var mensagens = new List<string>();
-            ValidarEmail(usuario, mensagens);
+            //ValidarEmail(usuario, mensagens);
             ValidarCamposObrigatorios(usuario, mensagens);
-            VerificarEmailExistente(usuario.Email, mensagens);
             VerificarNegocioException(mensagens);
             base.Atualizar(usuario);
         }

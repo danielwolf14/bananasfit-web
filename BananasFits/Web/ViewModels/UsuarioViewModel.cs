@@ -24,7 +24,7 @@ namespace Web.ViewModels
         public virtual int Tipo { get; set; }
         [Required]
         [MaxLength(50)]
-        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõ]+", ErrorMessage = "Este campo aceita apenas letras")]
+        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõâêôûîÂÊÎÔÛ]+", ErrorMessage = "Este campo aceita apenas letras")]
         public virtual string Nome { get; set; }
     }
 
@@ -39,11 +39,11 @@ namespace Web.ViewModels
         public virtual HttpPostedFileBase Imagem { get; set; }
         [Required]
         [MaxLength(200)]
-        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõ]+", ErrorMessage = "Este campo aceita apenas letras")]
+        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõâêôûîÂÊÎÔÛ]+", ErrorMessage = "Este campo aceita apenas letras")]
         public virtual string Descricao { get; set; }
         [Required]
         [MaxLength(50)]
-        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõ0-9]+", ErrorMessage = "Este campo aceita apenas letras")]
+        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõâêôûîÂÊÎÔÛ0-9]+", ErrorMessage = "Este campo aceita apenas letras")]
         public virtual string RazaoSocial { get; set; }
     }
 
@@ -115,7 +115,7 @@ namespace Web.ViewModels
         public virtual string CEP { get; set; }
         [Required]
         [MaxLength(50)]
-        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõ]+", ErrorMessage = "Este campo aceita apenas letras")]
+        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõâêôûîÂÊÎÔÛ]+", ErrorMessage = "Este campo aceita apenas letras")]
         public virtual string Rua { get; set; }
         [MaxLength(50)]
         [RegularExpression("[0-9]+", ErrorMessage = "Este campo aceita apenas números")]
@@ -124,11 +124,11 @@ namespace Web.ViewModels
         public virtual string Complemento { get; set; }
         [Required]
         [MaxLength(50)]
-        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõ]+", ErrorMessage = "Este campo aceita apenas letras")]
+        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõâêôûîÂÊÎÔÛ]+", ErrorMessage = "Este campo aceita apenas letras")]
         public virtual string Bairro { get; set; }
         [Required]
         [MaxLength(50)]
-        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõ]+", ErrorMessage = "Este campo aceita apenas letras")]
+        [RegularExpression("[a-z A-ZáéíóúÁÉÍÓÚÇçÃÕãõâêôûîÂÊÎÔÛ]+", ErrorMessage = "Este campo aceita apenas letras")]
         public virtual string Cidade { get; set; }
         [Required]
         [MaxLength(50)]

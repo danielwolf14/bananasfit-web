@@ -5,42 +5,45 @@
 <div class="container">
         <div class="row vertical-offset">
 
-            <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-6  col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-body formlogin">
                         @using (Html.BeginForm("Login", "Usuario", FormMethod.Post))
                         {
                             <fieldset style="text-align:center;">
-                                
-                                    <img style="text-align:center;" class="img-rounded img-responsive" src="~/images/logo1.png"><br>
-                                                               
+                                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12">
+                                    <img style="text-align:center; margin-left:-10px;" class="img-rounded" src="~/images/imageHome/logo1.png">
+                                </div>
+                                <div class="col-md-7 col-lg-7 col-sm-7 col-xs-12" style="float:right;" >
+                                    <br /><br />
                                     <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                @Html.TextBoxFor(e => e.Email, htmlAttributes: new { @class = "form-control", id="email",placeholder = "E-mail" })
-                                </div>
-                                @Html.ValidationMessageFor(e => e.Email)
-<br />
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                @Html.TextBoxFor(e => e.Password, htmlAttributes: new { @class = "form-control",id="senha", placeholder = "Senha", type = "password" })
-                                </div>
-                                @Html.ValidationMessageFor(e => e.Password)
-<br />
-                                <input class="btn btn-lg  btn-block" type="submit" value="Login" id="btnLogin" style="background-color:#fec425;" />
-                                <div style="text-align: center; padding-top: 15px;">
-                                    Ainda não tem uma conta
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" style="height:20px; padding:0px 10px; z-index:9999;">
-                                            CADASTRE-SE <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu" style="z-index:99999999;">
-                                            <li>@Html.ActionLink("Pessoa Física", "CadastrarPessoaFisica", "Usuario")</li>
-                                            <li>@Html.ActionLink("Pessoa Jurídica", "CadastrarPessoaJuridica", "Usuario")</li>
-                                        </ul>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        @Html.TextBoxFor(e => e.Email, htmlAttributes: new { @class = "form-control", id = "email", placeholder = "E-mail" })
                                     </div>
-                                   
-                                </div>
-                            </fieldset>
+                                    @Html.ValidationMessageFor(e => e.Email)
+                                    <br />
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        @Html.TextBoxFor(e => e.Password, htmlAttributes: new { @class = "form-control", id = "senha", placeholder = "Senha", type = "password" })
+                                    </div>
+                                    @Html.ValidationMessageFor(e => e.Password)
+                                    <br />
+                                    <input class="btn btn-lg  btn-block" type="submit" value="Login" id="btnLogin" style="background-color:#fec425;" />
+                                    <div style="text-align: center; padding-top: 15px;">
+                                        Ainda não tem uma conta
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" style="height:20px; padding:0px 10px; z-index:9999;">
+                                                CADASTRE-SE <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu" style="z-index:99999999;">
+                                                <li>@Html.ActionLink("Pessoa Física", "CadastrarPessoaFisica", "Usuario")</li>
+                                                <li>@Html.ActionLink("Pessoa Jurídica", "CadastrarPessoaJuridica", "Usuario")</li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    </div>
+</fieldset>
                         }
                     </div>
                 </div>

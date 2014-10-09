@@ -34,8 +34,6 @@ namespace Processo.Negocio
         {
             if (string.IsNullOrEmpty(usuario.CNPJ))
                 mensagens.Add("CNPJ é um campo obrigatório.");
-            //if (string.IsNullOrEmpty(usuario.Descricao))
-            //    mensagens.Add("Descrição é um campo obrigatório");
             if (string.IsNullOrEmpty(usuario.RazaoSocial))
                 mensagens.Add("A razão social da empresa é um campo obrigatório.");
             base.ValidarCamposObrigatorios(usuario, mensagens);
@@ -49,7 +47,7 @@ namespace Processo.Negocio
         public void AtualizarConta(PessoaJuridica usuario)
         {
             var mensagens = new List<string>();
-            ValidarEmail(usuario, mensagens);
+            //ValidarEmail(usuario, mensagens);
             ValidarCamposObrigatorios(usuario, mensagens);
             VerificarNegocioException(mensagens);
             base.Atualizar(usuario);

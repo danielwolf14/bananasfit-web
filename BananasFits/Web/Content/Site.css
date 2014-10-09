@@ -54,7 +54,7 @@ input[type="checkbox"].input-validation-error {
 body{
     /*background: url(../images/azul.jpg);*/
     /*background: #333;*/
-    background-image:url("../images/bg.png");
+    background-image:url("../images/imageHome/bg.png");
 }
 
 #inputform{

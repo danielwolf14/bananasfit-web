@@ -217,9 +217,10 @@ namespace Web.Controllers
                 var usuario = Map.Mapper.DynamicMap<PessoaJuridica>(model);
                 try
                 {
-                    if (img.ContentLength > 5000)
+
+                    if (img.ContentLength > 100000)
                     {
-                        ExibirMensagemErro("Imagem maior que o permitido 500KB");
+                        ExibirMensagemErro("Imagem maior que o permitido 1Mb");
                     }
                     else
                     {
