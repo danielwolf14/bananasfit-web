@@ -32,5 +32,26 @@ namespace Web.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
+        [HttpGet]
+        [Route("api/avaliacaoapi/avaliacaopessoajuridica")]
+        public HttpResponseMessage AvaliacaoPessoaJuridica(int chavePessoaJuridica, int chavePessoaFisica)
+        {
+            var usuarioAvaliado = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaFisica.Chave == chavePessoaFisica && e.PessoaJuridica.Chave == chavePessoaJuridica).First().Pontuacao;
+            var totalAvaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaJuridica.Chave == chavePessoaJuridica).Count();
+            var mediaAvaliacao = totalAvaliacao / totalAvaliacao;
+           // var teste = unityOfWork.AvaliacaoNegocio.ConsultarTodos();
+            var json = new AvaliacaoApiModel { 
+            Pontuacao = usuarioAvaliado,
+            MediaDeAvaliacoes = mediaAvaliacao,
+            TotalDeAvaliacoes = totalAvaliacao
+            };
+
+            if (totalAvaliacao != 0)
+                return Request.CreateResponse(HttpStatusCode.OK, json);
+            else
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+
+        }
+
     }
 }

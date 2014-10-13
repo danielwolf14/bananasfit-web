@@ -19,5 +19,7 @@ namespace Processo.Repositorio
         void Inserir(TEntidade entidade);
 
         void Deletar(TEntidade entidade);
+
+        IEnumerable<TEntidade> ConsultarTodos();
     }
 }

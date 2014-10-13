@@ -54,6 +54,10 @@ namespace Processo.Database.Repositorios
             var entidade = DataSet.Find(chave);
             DataSet.Remove(entidade);
         }
+        public IEnumerable<TEntidade> ConsultarTodos()
+        {
+            return DataSet.ToList();
+        }
 
     }
 }

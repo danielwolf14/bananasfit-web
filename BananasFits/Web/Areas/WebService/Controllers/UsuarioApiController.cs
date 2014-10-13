@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Http;
 using Processo.Negocio;
 using Web.ApiModel;
+using Web.Areas.WebService.Models;
 
 namespace Web.Controllers
 {
@@ -33,7 +34,13 @@ namespace Web.Controllers
                 }
                 catch (NegocioException ex)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, ex.Mensagens);
+                    var erroMensagemApiModel = new ErroMessageApiModel
+                    {
+                        Mensagem = ex.Message,
+                        ListaMensagem = ex.Mensagens
+                    };
+
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, erroMensagemApiModel);
                 }
             }
             else
@@ -61,7 +68,11 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                    var erroMensagemApiModel = new ErroMessageApiModel
+                    {
+                        Mensagem = "Login ou senha incorretos."
+                    };
+                    return Request.CreateResponse(HttpStatusCode.NotFound, erroMensagemApiModel);
                 }
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);

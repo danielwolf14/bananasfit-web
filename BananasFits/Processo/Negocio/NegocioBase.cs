@@ -53,5 +53,9 @@ namespace Processo.Negocio
                 throw new NegocioException(mensagens);
         }
 
+        public IEnumerable<TEntidade> ConsultarTodos() {
+
+            return repositorio.ConsultarTodos();
+        }
     }
 }
