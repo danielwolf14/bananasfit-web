@@ -25,58 +25,73 @@ input[type="checkbox"].input-validation-error {
 }
 
 
+.alert {
+    padding:5px;
+    margin-top: 4px;
+    margin-bottom: -60px;
+    z-index:999;
+    border-radius:1px;
+    text-align:center;
 
+  /*width:100%;*/
+  /*margin-left:0;*/
 
+}
+
+.close{
+    position:initial !important;
+}
 
 
 /*MAIN*/
-.fixed-bottom{
-    background-color:black;
+.fixed-bottom {
+    background-color: black;
 }
 
-.panel-heading:hover{
-    background-color:#c3c3c3 !important;
-    color:white !important;
+.panel-heading:hover {
+    background-color: #c3c3c3 !important;
+    color: white !important;
 }
 
 
 
-.container{
-    width:100% !important;
+.container {
+    width: 100% !important;
 }
 
-.container-fluid{
-    padding-right:0px;
-    padding-left:0px;
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 /*body background*/
-body{
+body {
     /*background: url(../images/azul.jpg);*/
     /*background: #333;*/
-    background-image:url("../images/imageHome/bg.png");
+    background-image: url("../images/imageHome/bg.png");
 }
 
-#inputform{
-    background-color: rgb(75, 72, 72); 
-    padding: 2px; color: white;
-     font-weight: bold; 
+#inputform {
+    background-color: rgb(75, 72, 72);
+    padding: 2px;
+    color: white;
+    font-weight: bold;
     font-size: 9px;
-     display: block;
-     text-align: center;
+    display: block;
+    text-align: center;
 }
 
-.vertical-offset-100{
-    padding-top:100px;
+.vertical-offset-100 {
+    padding-top: 100px;
 }
 
 /* styles for validation helpers */
 .field-validation-error {
     /*color: #b94a48;*/
     font-size: 10px;
-    background-color:indianred;
-    color:white;
-    display:block;
+    background-color: indianred;
+    color: white;
+    display: block;
 }
 
 .field-validation-valid {
@@ -99,38 +114,42 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-a{
-    text-decoration:none !important;
-    color:black !important;
+a {
+    text-decoration: none !important;
+    color: black !important;
 }
 
 /*rodape*/
 #social:hover {
-    -webkit-transform:scale(1.1); 
-    -moz-transform:scale(1.1); 
-    -o-transform:scale(1.1); 
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
+
 #social {
-    -webkit-transform:scale(0.8);
+    -webkit-transform: scale(0.8);
     /* Browser Variations: */
-    -moz-transform:scale(0.8);
-    -o-transform:scale(0.8); 
-    -webkit-transition-duration: 0.5s; 
+    -moz-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    -webkit-transition-duration: 0.5s;
     -moz-transition-duration: 0.5s;
     -o-transition-duration: 0.5s;
-}           
+}
 /* 
     Only Needed in Multi-Coloured Variation 
 */
 .social-fb:hover {
     color: #3B5998;
 }
+
 .social-tw:hover {
     color: #4099FF;
 }
+
 .social-gp:hover {
     color: #d34836;
 }
+
 .social-em:hover {
     color: #f39c12;
 }
@@ -162,7 +181,7 @@ a{
     z-index: 10;
     color: #fff;
     text-align: left;
-    padding-left:50px;
+    padding-left: 50px;
 }
 
 .carousel-indicators {
@@ -185,14 +204,16 @@ a{
 
 
 a.list-group-item {
-    height:auto;
-    min-height:220px;
+    height: auto;
+    min-height: 185px;
 }
-a.list-group-item.active small {
-    color:#fff;
-}
+
+    a.list-group-item.active small {
+        color: #fff;
+    }
+
 .stars {
-    margin:20px auto 1px;    
+    margin: 20px auto 1px;
 }
 
 
@@ -200,82 +221,88 @@ a.list-group-item.active small {
 
 
 
-.mini-submenu{
-  display:none;  
-  background-color: rgba(0, 0, 0, 0);  
-  border: 1px solid rgba(0, 0, 0, 0.9);
-  border-radius: 4px;
-  padding: 9px;  
-  /*position: relative;*/
-  width: 42px;
-
+.mini-submenu {
+    display: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    border-radius: 4px;
+    padding: 9px;
+    /*position: relative;*/
+    width: 42px;
 }
 
-.mini-submenu:hover{
-  cursor: pointer;
+    .mini-submenu:hover {
+        cursor: pointer;
+    }
+
+    .mini-submenu .icon-bar {
+        border-radius: 1px;
+        display: block;
+        height: 2px;
+        width: 22px;
+        margin-top: 3px;
+    }
+
+    .mini-submenu .icon-bar {
+        background-color: #000;
+    }
+
+#slide-submenu {
+    background: rgba(0, 0, 0, 0.45);
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.mini-submenu .icon-bar {
-  border-radius: 1px;
-  display: block;
-  height: 2px;
-  width: 22px;
-  margin-top: 3px;
-}
-
-.mini-submenu .icon-bar {
-  background-color: #000;
-}
-
-#slide-submenu{
-  background: rgba(0, 0, 0, 0.45);
-  display: inline-block;
-  padding: 0 8px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.nav li:hover{
-    background-color:#fec222;
-    font-weight:bold;
-}
-
-.label:hover{
-    color:#fec222;
-}
-
-span.label a:hover{
-    color:#fec222 !important;
-}
-
-#btnLogin:hover{
-    background-color:#a78118 !important;
-    color:white;
-}
-
-.dropdown-menu{background-color: whitesmoke !important;}
-
-.dropdown-menu a:hover{background-color: #fec222 !important;}
 
 
-
-
-.destacados{
-    padding: 20px 0;
-	text-align: center;
-}
-.destacados > div > div{
-	padding: 10px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	transition: 0.2s;
-     background-color: white;
-}
-.destacados > div:hover > div{
-	margin-top: -10px;
-	border: 1px solid rgb(200, 200, 200);
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 2px;
-	/*background: rgba(200, 200, 200, 0.1);*/
+.nav li:hover {
     background-color: #fec222;
-	transition: 0.5s;
 }
+
+.label:hover {
+    color: #fec222;
+}
+
+span.label a:hover {
+    color: #fec222 !important;
+}
+
+#btnLogin:hover {
+    background-color: #a78118 !important;
+    color: white;
+}
+
+.dropdown-menu {
+    background-color: whitesmoke !important;
+}
+
+    .dropdown-menu a:hover {
+        background-color: #fec222 !important;
+    }
+
+
+
+
+.destacados {
+    padding: 20px 0;
+    text-align: center;
+}
+
+    .destacados > div > div {
+        padding: 10px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        transition: 0.2s;
+        background-color: white;
+    }
+
+    .destacados > div:hover > div {
+        margin-top: -10px;
+        border: 1px solid rgb(200, 200, 200);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 2px;
+        /*background: rgba(200, 200, 200, 0.1);*/
+        background-color: #fec222;
+        transition: 0.5s;
+    }

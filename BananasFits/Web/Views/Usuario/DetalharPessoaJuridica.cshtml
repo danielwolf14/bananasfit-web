@@ -2,14 +2,14 @@
 
 
 <div class="container">
-    <div class="row clearfix panel">
+    <div class="clearfix panel">
         <br>
-        <div class="col-md-12 column">
-            <div class="col-md-6">
-                <img src="@Model.Imagem" class=" img-responsive" alt="imagem academia" style="max-width: 1500px; max-height: 400px;" />
+        <div class="col-md-12">
+            <div class="col-md-6 col-sm-6 col-lg-6 ">
+                <img src="@Model.Imagem" class="img-responsive col-md-offset-3" alt="imagem academia" style="max-width: 300px; max-height: 300px;" />
             </div>
-            <div class="col-md-6 column">
-                <h2>
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                <h2 class="text-center">
                     @Model.Nome
                 </h2>
                 <p>
@@ -18,9 +18,9 @@
             </div>
 
 
-            <br><br>
-            <div class="col-md-12" style="margin-top:50px; padding-bottom:50px;text-align:center;">
-                <div class="row clearfix col-md-3">
+            <br /><br /><br />
+            <div class="col-md-12 col-sm-12 col-lg-12" style="margin-top:50px; padding-bottom:50px;text-align:center;">
+                <div class="row clearfix col-md-3 col-sm-3">
                     <div class="col-md-2  column">
                         <span class="glyphicon glyphicon-earphone" style="font-size: 60px; margin-left:-20px;"></span>
                     </div>
@@ -32,25 +32,25 @@
                     </div>
                     <br><br>
                 </div>
-                <div class="row clearfix col-md-4 col-md-offset-1">
+                <div class="row clearfix col-md-4 col-sm-4 col-sm-offset-1 col-md-offset-1">
                     <div class="col-md-2 column">
                         <span class="glyphicon glyphicon-map-marker" style="font-size: 60px; margin-left: -20px;"></span>
                     </div>
                     <div class="col-md-10 column " style="margin-top: -20px;">
                         <h3>Localização</h3>
                         @Model.Endereco.Rua @Model.Endereco.Numero @Model.Endereco.Complemento <br /> @Model.Endereco.Bairro - @Model.Endereco.Cidade - @Model.Endereco.Estado <br /><br />
-                        <a class="label-info" style="padding:10px;" href="https://www.google.com.br/maps/place/@Model.Endereco.Rua,@Model.Endereco.Numero @Model.Endereco.Cidade - @Model.Endereco.Estado" target="_blank">Ver no mapa!</a>
+                        <a class=" btn-block btn-info" style="padding:10px;" href="https://www.google.com.br/maps/place/@Model.Endereco.Rua,@Model.Endereco.Numero @Model.Endereco.Cidade - @Model.Endereco.Estado" target="_blank">Ver no mapa!</a>
                     </div>
                     <br><br>
                 </div>
-                <div class="row clearfix col-md-3 col-md-offset-1">
+                <div class="row clearfix col-md-3 col-sm-3 col-sm-offset-1 col-md-offset-1">
                     <div class="col-md-2 column">
                         <span class="glyphicon glyphicon-stats" accesskey="" style="font-size: 60px; margin-left: -20px;"></span>
                     </div>
                     <div class="col-md-10 column " style="margin-top: -20px;">
 
                         <h3>RANKING </h3>
-                        <div style="font-size:25px;">
+                        <div style="font-size:18px;">
                             @if (Session["usuario"] != null && ((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
                             {
                                 <input type="hidden" value="@Model.Avaliacao" id="avaliacao" />
@@ -59,10 +59,14 @@
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 3, chavePessoaJuridica = @Model.Chave })" id="avaliar3" class="glyphicon glyphicon-star-empty"></a>
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 4, chavePessoaJuridica = @Model.Chave })" id="avaliar4" class="glyphicon glyphicon-star-empty"></a>
                                 <a href="@Url.Action("Avaliar", "Avaliacao", new { pontuacao = 5, chavePessoaJuridica = @Model.Chave })" id="avaliar5" class="glyphicon glyphicon-star-empty"></a>
+                                <br />
+
                             }
+
                             else
                             {
-                                <a href="@Url.Action("Login", "Usuario")" class="label-info" style="font-size:12px; padding:10px;">Faça o login para avaliar!</a>
+                                <label style="font-size:15px"><span class="glyphicon glyphicon-user"></span>  @Model.QuantidadeAvaliacao  total</label><br /><br />
+                                <a href="@Url.Action("Login", "Usuario")" class="btn-block btn-info" style="font-size:12px; padding:10px;">Faça o login para avaliar!</a>
                             }
 
                             <script>
@@ -109,14 +113,12 @@
                                 }
 
                             </script>
-                            <br />
-                            <label style="font-size:15px"><span class="glyphicon glyphicon-user"></span>  @Model.QuantidadeAvaliacao  total</label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row clearfix" style="text-align: center;">
-                <div class="col-md-12 column">
+                <div class="col-md-12 col-sm-12 col-lg-12">
                     <h2>
                         Serviços disponíveis
                     </h2>
@@ -129,7 +131,7 @@
                         <h3>
                             @item.Servico.Nome
                         </h3>
-                        <img alt="140x140" src="@item.Servico.Imagem" class="img-rounded img-responsive" style="width:200px; height:200px;" />
+                        <img alt="140x140" src="@item.Servico.Imagem" class="img-rounded" style="width:150px; height:150px;" />
                         <h3>
                             @item.Valor Fits
                         </h3>
@@ -139,8 +141,8 @@
 
             </div><br>
             <div class="row">
-                <div class="col-lg-12 column" style="text-align: center; margin-left: 0px;">
-                    <a href="" class="btn btn-success btn-lg btn-block" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Compre seus FITS Agora!</a>
+                <div class="col-lg-12" style="text-align: center; margin-left: 0px;">
+                    <a href="" class="btn btn-success btn-lg " role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Comprar Fits!</a>
                 </div>
             </div>
             <br><br><br>

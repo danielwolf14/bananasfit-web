@@ -1,40 +1,96 @@
 ﻿@model PagedList.IPagedList<Processo.Entidades.PessoaJuridica>
 @using PagedList.Mvc;
 
+@{
+    var listaServico = ViewBag.ListaServico;
+    var ranking = ViewBag.Ranking;
+}
+
 
 <div class="container ">
 
-    <div class=" col-md-9 pull-right">
+    <div class=" col-md-9 col-sm-8 col-xs-12 pull-right">
 
         <div class="list-group ">
             @foreach (var item in Model)
             {
                 <a href="#" class="list-group-item">
-                    <div class="media col-md-3">
-                        <figure class="pull-left">
-
-                            <img class="media-object img-rounded img-responsive" style="width:200px; height:200px;" src="@item.Imagem" alt="placehold.it/250x250" >
-                        </figure>
+                    <div class=" col-lg-3  col-md-3 col-sm-3 col-xs-12" style="text-align:center;">
+                        <br />
+                        <img class="img-rounded" style="width:120px; height:120px; text-align:center;" src="@item.Imagem" alt="placehold.it/120x120">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
+                        <br />
                         <h4 class="list-group-item-heading"> @item.Nome</h4>
                         <p class="list-group-item-text">
                             Telefone: @item.Telefone <br />
                             @item.Endereco.Rua @item.Endereco.Numero @item.Endereco.Complemento <br /> @item.Endereco.Bairro @item.Endereco.Cidade - @item.Endereco.Estado<br />
-                            @item.Descricao <br />
+                            @*@item.Descricao*@
+                            <br /><br />
 
                         </p>
                     </div>
-                    <div class="col-md-3 text-center">
-                       @* <h2> 1 <small> fits </small></h2>*@
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                        <br />
                         <button type="button" class="btn btn-primary btn-lg btn-block" onclick="javascript:window.location=('@Url.Action("DetalharPessoaJuridica", "Usuario", new { chave = item.Chave })')">Ver!</button>
-                        <div class="stars">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span><br />
-                            <span class="glyphicon glyphicon-user"></span>@ViewBag.Pontuacao total
+                        <div class="stars" style="font-size:13px;">
+                            @*@Html.Hidden("pontuacao" + item.Nome, item.Avaliacoes.Count > 0 ? item.Avaliacoes.Average(e => e.Pontuacao) : 0)
+                                <h4>@(item.Avaliacoes.Count > 0 ? item.Avaliacoes.Average(e => e.Pontuacao) : 0)</h4>*@
+                            @if ((item.Avaliacoes.Count > 0 ? item.Avaliacoes.Average(e => e.Pontuacao) : 0) == 0)
+                            {
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            }
+
+                            @if ((item.Avaliacoes.Count > 0 ? item.Avaliacoes.Average(e => e.Pontuacao) : 0) == 1)
+                            {
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            }
+
+                            @if ((item.Avaliacoes.Count > 0 ? item.Avaliacoes.Average(e => e.Pontuacao) : 0) == 2)
+                            {
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            }
+
+                            @if ((item.Avaliacoes.Count > 0 ? item.Avaliacoes.Average(e => e.Pontuacao) : 0) == 3)
+                            {
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            }
+
+                            @if ((item.Avaliacoes.Count > 0 ? item.Avaliacoes.Average(e => e.Pontuacao) : 0) == 4)
+                            {
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            }
+
+                            @if ((item.Avaliacoes.Count > 0 ? item.Avaliacoes.Average(e => e.Pontuacao) : 0) == 5)
+                            {
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            }
+                            <br />
+                            <span class="glyphicon glyphicon-user"></span>  @item.Avaliacoes.Count   total
 
                         </div>
                     </div>
@@ -46,7 +102,7 @@
         </div>
     </div>
 
-    <div class="col-md-3 panel pull-left">
+    <div class="col-md-3 col-sm-4 col-xs-12 panel pull-left">
         <div style="margin-top: 15px;">
             <form accept-charset="UTF-8" role="form">
                 <li class="list-group-item disabled">
@@ -58,18 +114,14 @@
                         </div>
                         <br>
                         <div class="input-group">
-                            <span class="input-group-addon">BAIRRO &nbsp;&nbsp;</span>
-                            <input type="text" class="form-control" placeholder="Bairro" name="bairro">
-                        </div>
-                        <br>
-                        <div class="input-group">
                             <span class="input-group-addon">VALOR &nbsp;&nbsp;&nbsp;</span>
                             <input type="text" class="form-control" placeholder="FITS" name="valor">
                         </div>
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon">RANKING</span>
-                            <select class="form-control" placeholder="Maior ranking" name="pontuacao">
+                            <select class="form-control" name="pontuacao">
+                                <option value="">Pontuação</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -80,16 +132,22 @@
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon">SERVIÇO</span>
-                            <select class="form-control" placeholder="Serviço" name="servico">
-                                <option value="AC">Boxe</option>
-                                <option value="AL">Ioga</option>
-                                <option value="AM">Musculação</option>
+                            <select class="form-control" name="servico">
+                                <option value="">Selecione o serviço</option>
+                                @if (listaServico != null)
+                                {
+                                    foreach (var item in listaServico)
+                                    {
+                                        <option value="@item.Chave">@item.Nome</option>
+                                    }
+                                }
                             </select>
                         </div>
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon">ESTADO &nbsp;</span>
-                            <select class="form-control" placeholder="Estados">
+                            <select class="form-control" name="estado">
+                                <option value="">Selecione o estado</option>
                                 <option value="AC">Acre</option>
                                 <option value="AL">Alagoas</option>
                                 <option value="AM">Amazonas</option>
@@ -133,26 +191,18 @@
                     <li class="list-group-item disabled">
                         <h3 style="text-align: center;">RANKING</h3>
                     </li>
-                    <li class="list-group-item">
-                        <span class="badge">14 <span class="glyphicon glyphicon-star"></span></span>
-                        Cras justo odio
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">14 <span class="glyphicon glyphicon-star"></span></span>
-                        Cras justo odio
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">14 <span class="glyphicon glyphicon-star"></span></span>
-                        Cras justo odio
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">14 <span class="glyphicon glyphicon-star"></span></span>
-                        Cras justo odio
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">14 <span class="glyphicon glyphicon-star"></span></span>
-                        Cras justo odio
-                    </li>
+
+                    @if (ranking != null)
+                    {
+                        foreach (var item in ranking)
+                        {
+                            <li class="list-group-item">
+                                <span class="badge" style="font-family:monospace">@item.Pontuacao <span class="glyphicon glyphicon-star"></span></span>
+                                @item.Nome
+                            </li>
+                        }
+                    }
+
                 </ul>
 
             </div>

@@ -8,6 +8,7 @@ namespace Processo.Entidades
 {
    public class Avaliacao : EntidadeBase
     {
+       public virtual int PessoaJuridicaId { get; set; }
         public virtual int Pontuacao { get; set; }
         public PessoaFisica PessoaFisica { get; set; }
         public PessoaJuridica PessoaJuridica { get; set; }

@@ -15,5 +15,7 @@ namespace Processo.Entidades
         public virtual string Imagem { get; set; }
         public virtual string Descricao { get; set; }
         public virtual string RazaoSocial { get; set; }
+        public virtual IList<ServicoPessoaJuridica> Servicos { get; set; }
+        public virtual IList<Avaliacao> Avaliacoes { get; set; }
     }
 }

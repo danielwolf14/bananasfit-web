@@ -8,6 +8,9 @@ namespace Processo.Entidades
 {
     public class ServicoPessoaJuridica : EntidadeBase
     {
+
+        public virtual int PessoaJuridicaId { get; set; }
+
         public virtual Servico Servico { get; set; }
         public virtual int Valor { get; set; }
         public virtual string QRCode { get; set; }

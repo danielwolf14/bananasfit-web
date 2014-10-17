@@ -134,5 +134,12 @@ namespace Web.ViewModels
         [MaxLength(50)]
         public virtual string Estado { get; set; }
     }
+
+    public class RankingViewModel
+    {
+        public virtual int Pontuacao { get; set; }
+        public virtual string Nome { get; set; }
+        
+    }
     #endregion
 }

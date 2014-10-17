@@ -85,49 +85,54 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult BuscarPessoaJuridica(string nome, string bairro, int? valor,
-            int? page, int? pontuacao, string servico, int? estado)
+        public ActionResult BuscarPessoaJuridica(string nome, int? valor,
+            int? page, int? pontuacao, int? servico, string estado)
         {
 
-            //var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(1012);
-            //var model = Map.Mapper.DynamicMap<DetalharBuscaPessoaJuridicaViewModel>(usuario);
-            //model.QuantidadeAvaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaJuridica.Chave == 1012).Count();
-
-            //ViewBag.Pontuacao = model.QuantidadeAvaliacao;
-
+            ViewBag.ListaServico = unityOfWork.ServicoNegocio.Consultar(e => e.IsHabilitado);
             var pessoasJuridicas = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
             var servicosPessoaJuridica = unityOfWork.ServicoPessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
 
-            //Func<PessoaJuridica, Servico, IEnumerable<PessoaJuridica>> x = (e,y) => 
             if (valor != null)
             {
-
+                pessoasJuridicas = pessoasJuridicas.ToList().Where(e => e.Servicos.Any(s => s.Valor <= valor));
             }
             if (pontuacao != null)
             {
-
+                pessoasJuridicas = pessoasJuridicas.ToList().Where(e => e.Avaliacoes.Count != 0 &&
+                    e.Avaliacoes.Average(f => f.Pontuacao) == pontuacao);
             }
             if (servico != null)
             {
+                pessoasJuridicas = pessoasJuridicas.ToList().Where(x => x.Servicos.Any(z => z.Servico.Chave == servico));
             }
             if (!string.IsNullOrEmpty(nome))
             {
                 pessoasJuridicas = pessoasJuridicas.Where(s => s.Nome.ToUpper().Contains(nome.ToString().ToUpper()));
             }
-            if (!string.IsNullOrEmpty(bairro))
-            {
-                pessoasJuridicas = pessoasJuridicas.Where(e => e.Endereco.Bairro.ToUpper().Contains(bairro.ToString().ToUpper()));
-            }
+
             if (estado != null)
             {
-                //pessoasJuridicas = pessoasJuridicas.Where(e => e.Endereco.Estado == ((EstadoEnum)estado));
+                pessoasJuridicas = pessoasJuridicas.ToList().Where(e => e.Endereco.Estado.ToUpper().Contains(estado.ToString().ToUpper()));
+            }
+            if (pessoasJuridicas == null || pessoasJuridicas.Count() == 0)
+            {
+                ExibirMensagemErro("Nenhuma academia encontrada!");
             }
 
             pessoasJuridicas = pessoasJuridicas.OrderBy(e => e.Nome);
 
+            ViewBag.Ranking = unityOfWork.PessoaJuridicaNegocio
+                .Consultar(e => e.Avaliacoes.Count > 0)
+                .OrderByDescending(e => e.Avaliacoes.Average(f => f.Pontuacao))
+                .Take(5)
+                .Select(e => new RankingViewModel { Nome = e.Nome, Pontuacao = (int)e.Avaliacoes.Average(f => f.Pontuacao) }); ;
+
+
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(pessoasJuridicas.ToPagedList(pageNumber, pageSize));
+
         }
         #endregion
 
@@ -290,7 +295,7 @@ namespace Web.Controllers
         #endregion
 
 
-        #region Minha Conta, Atualizar e Inativar usuário       
+        #region Minha Conta, Atualizar e Inativar usuário
 
         public ActionResult MinhaConta()
         {

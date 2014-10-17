@@ -21,10 +21,11 @@ namespace Processo.Database.Mapeamento
             Property(e => e.Valor).HasColumnName("valor");
             Property(e => e.IsHabilitado).HasColumnName("isHabilitado");
             Property(e => e.QRCode).HasColumnName("qrcode");
+            Property(e => e.PessoaJuridicaId).HasColumnName("id_P_Juridica");
 
             HasRequired(e => e.PessoaJuridica)
-                .WithMany()
-                .Map(e => e.MapKey("id_P_Juridica"));
+                .WithMany( d => d.Servicos)
+                .HasForeignKey(e => e.PessoaJuridicaId);
 
             HasRequired(e => e.Servico)
                .WithMany()

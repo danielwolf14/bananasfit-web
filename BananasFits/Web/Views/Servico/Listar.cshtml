@@ -19,7 +19,6 @@
                                     <table id="mytable" class="table table-bordred table-striped">
                                         <thead>
                                             <tr>
-                                                <th></th>
                                                 <th>ID</th>
                                                 <th>Imagem</th>
                                                 <th>Nome</th>
@@ -31,7 +30,6 @@
                                             @foreach (var item in Model)
                                             {
                                                 <tr>
-                                                    <td><input type="checkbox" class="checkthis" /></td>
                                                     <td>@item.Chave</td>
                                                     <td> <img class="media-object img-rounded img-responsive" src="@item.Imagem" alt="placehold.it/50x50" style="max-height:50px; max-width:50px;"> </td>
                                                     <td id="Nome @item.Chave">@item.Nome</td>
