@@ -14,7 +14,7 @@ using Processo.Negocio;
 using Web.ApiModel;
 using Web.Areas.WebService.Models;
 
-namespace Web.Controllers
+namespace Web.Areas.WebService.Controllers
 {
     public class UsuarioApiController : BaseApiController
     {
@@ -98,6 +98,38 @@ namespace Web.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK, usuario);
             else
                 return Request.CreateResponse(HttpStatusCode.NotFound);
+        }
+
+        [HttpGet]
+        [Route("api/usuarioapi/buscarpessoajuridica")]
+        public HttpResponseMessage BuscarPessoaJuridica(string nome, int? servico)
+        {
+            var pessoasJuridicas = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
+
+            if (servico != null)
+            {
+                pessoasJuridicas = pessoasJuridicas.ToList().Where(x => x.Servicos.Any(z => z.Servico.Chave == servico));
+            }
+            if (!string.IsNullOrEmpty(nome))
+            {
+                pessoasJuridicas = pessoasJuridicas.Where(s => s.Nome.ToUpper().Contains(nome.ToString().ToUpper()));
+            }
+
+            if (pessoasJuridicas == null || pessoasJuridicas.Count() == 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            pessoasJuridicas = pessoasJuridicas.OrderBy(e => e.Nome) ;
+
+            return Request.CreateResponse(HttpStatusCode.OK,
+                pessoasJuridicas.Select(e => new
+                {
+                    Nome = e.Nome,
+                    Avaliacao = e.Avaliacoes.Count > 0 ? e.Avaliacoes.Average(d => d.Pontuacao) : 0,
+                    Imagem = e.Imagem,
+                    Chave = e.Chave
+                }).ToList());
         }
     }
 }

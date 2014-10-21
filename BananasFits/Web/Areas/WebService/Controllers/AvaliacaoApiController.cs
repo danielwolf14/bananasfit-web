@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Http;
 using Web.ApiModel;
 
-namespace Web.Controllers
+namespace Web.Areas.WebService.Controllers
 {
     public class AvaliacaoApiController : BaseApiController
     {

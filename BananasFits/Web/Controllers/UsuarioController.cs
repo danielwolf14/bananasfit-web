@@ -88,10 +88,8 @@ namespace Web.Controllers
         public ActionResult BuscarPessoaJuridica(string nome, int? valor,
             int? page, int? pontuacao, int? servico, string estado)
         {
-
             ViewBag.ListaServico = unityOfWork.ServicoNegocio.Consultar(e => e.IsHabilitado);
             var pessoasJuridicas = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
-            var servicosPessoaJuridica = unityOfWork.ServicoPessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
 
             if (valor != null)
             {

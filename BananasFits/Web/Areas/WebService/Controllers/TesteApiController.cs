@@ -11,7 +11,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http;
 
-namespace Web.Controllers
+namespace Web.Areas.WebService.Controllers
 {
     public class TesteApiController : BaseApiController
     {

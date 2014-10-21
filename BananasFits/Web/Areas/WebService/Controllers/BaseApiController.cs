@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Web.Controllers
+namespace Web.Areas.WebService.Controllers
 {
     public class BaseApiController : ApiController
     {
