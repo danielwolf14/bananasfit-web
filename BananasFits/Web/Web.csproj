@@ -155,12 +155,15 @@
   <ItemGroup>
     <Folder Include="ApiModel\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\WebService\Views\Movimentacao\" />
     <Folder Include="Areas\WebService\Views\ServicoApi\" />
     <Folder Include="Areas\WebService\Views\Shared\" />
     <Folder Include="images\ImagemServico\" />
     <Folder Include="Views\Avaliacao\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\WebService\Controllers\HttpPost.cs" />
+    <Compile Include="Areas\WebService\Controllers\MovimentacaoApiController.cs" />
     <Compile Include="Areas\WebService\Controllers\ServicoApiController.cs" />
     <Compile Include="Areas\WebService\Models\EfetuarLoginApiModel.cs" />
     <Compile Include="Areas\WebService\Models\ErroMessageApiModel.cs" />
@@ -170,6 +173,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\WebService\Models\MovimentacaoApiModel.cs" />
     <Compile Include="Areas\WebService\WebApiConfig.cs" />
     <Compile Include="Areas\WebService\WebServiceAreaRegistration.cs" />
     <Compile Include="Areas\WebService\Controllers\AvaliacaoApiController.cs" />
@@ -179,6 +183,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\WebService\Controllers\TesteApiController.cs" />
     <Compile Include="Areas\WebService\Controllers\UsuarioApiController.cs" />
+    <Compile Include="Controllers\MovimentacaoController.cs" />
     <Compile Include="Controllers\ServicoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Extensions\HtmlHelperExtension.cs" />
@@ -187,6 +192,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MovimentacaoViewModel.cs" />
     <Compile Include="ViewModels\UsuarioViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ServicoViewModel.cs" />
@@ -295,6 +301,10 @@
     <ProjectReference Include="..\Processo\Processo.csproj">
       <Project>{81d14e72-1fcc-448c-b98c-c94a4a672233}</Project>
       <Name>Processo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Uol.PagSeguro\Uol.PagSeguro.csproj">
+      <Project>{babc5658-6afd-4f8e-81f1-434553663d99}</Project>
+      <Name>Uol.PagSeguro</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

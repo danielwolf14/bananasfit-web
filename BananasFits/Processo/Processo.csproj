@@ -88,7 +88,6 @@
     <Compile Include="Entidades\Servico.cs" />
     <Compile Include="Entidades\Endereco.cs" />
     <Compile Include="Entidades\EntidadeBase.cs" />
-    <Compile Include="Entidades\Moeda.cs" />
     <Compile Include="Entidades\PessoaFisica.cs" />
     <Compile Include="Entidades\PessoaJuridica.cs" />
     <Compile Include="Entidades\ServicoPessoaJuridica.cs" />

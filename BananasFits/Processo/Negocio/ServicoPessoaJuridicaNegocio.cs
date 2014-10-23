@@ -13,10 +13,12 @@ namespace Processo.Negocio
 {
     public class ServicoPessoaJuridicaNegocio : NegocioBase<ServicoPessoaJuridica>, IServicoPessoaJuridicaNegocio
     {
+        private PessoaFisicaNegocio pessoaFisicaNegocio;
         internal ServicoPessoaJuridicaNegocio(DatabaseContext contexto)
             : base(contexto)
         {
             this.repositorio = new ServicoPessoaJuridicaRepositorio(contexto);
+            this.pessoaFisicaNegocio = new PessoaFisicaNegocio(contexto);
         }
 
         public void Cadastrar(ServicoPessoaJuridica servicoPessoaJuridica)
@@ -26,6 +28,40 @@ namespace Processo.Negocio
             base.Inserir(servicoPessoaJuridica);
         }
 
-      
+        public void Comprar(string qrCode, int chavePessoaFisica)
+        {
+            IList<string> mensagens = new List<string>();
+
+            var servico = repositorio.Consultar(e => e.QRCode == qrCode).SingleOrDefault();
+            var usuario = pessoaFisicaNegocio.BuscarPorChave(chavePessoaFisica);
+            ValidarCompra(usuario, servico, mensagens);
+            VerificarNegocioException(mensagens);
+            usuario.QuantidadeMoedas -= servico.Valor;
+            servico.PessoaJuridica.QuantidadeMoedas += servico.Valor;
+            base.Atualizar(servico);
+            //historicoCompraServico.Inserir(new HistoricoCompraServico
+            //{ NomeServico = servico.Nome,
+            //    NomeUsuario = usuario.Nome,
+            //    Valor = servico.Valor,
+            //    NomePessoaJuridica = servico.PessoaJuridica.Nome, 
+            //    Servico = servico,
+            //    PessoaFisica = usuario 
+            //});
+            pessoaFisicaNegocio.Atualizar(usuario);
+        }
+
+        private void ValidarCompra(PessoaFisica pessoaFisica, ServicoPessoaJuridica servico, IList<string> mensagens)
+        {
+            if (pessoaFisica == null)
+                mensagens.Add("Pessoa física inexistente");
+            if (servico == null)
+                mensagens.Add("QRCode com código inválido.");
+            if (pessoaFisica.QuantidadeMoedas < servico.Valor)
+                mensagens.Add("Fits insuficientes.");
+            
+
+        }
+
+
     }
 }

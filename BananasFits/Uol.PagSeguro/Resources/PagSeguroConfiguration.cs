@@ -28,8 +28,7 @@ namespace Uol.PagSeguro.Resources
     public static class PagSeguroConfiguration
     {
         //PagSeguro .NET Library Tests
-        private const string urlXmlConfiguration = ".../.../Configuration/PagSeguroConfig.xml";
-
+        private const string urlXmlConfiguration = "C:\\BananasFit\\Projeto WSWEB\\BananasFits\\Uol.PagSeguro\\Configuration\\PagSeguroConfig.xml";
         //Website
         //private static string urlXmlConfiguration = HttpRuntime.AppDomainAppPath + "PagSeguroConfig.xml";
 

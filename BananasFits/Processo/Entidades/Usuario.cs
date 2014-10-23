@@ -14,5 +14,6 @@ namespace Processo.Entidades
         public virtual string Celular { get; set; }
         public virtual string Telefone { get; set; }
         public virtual Endereco Endereco { get; set; }
+        public virtual int QuantidadeMoedas { get; set; }
     }
 }

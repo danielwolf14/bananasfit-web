@@ -22,8 +22,8 @@ namespace Uol.PagSeguro.Domain
     /// </summary>
     public class AccountCredentials : Credentials
     {
-        private const string EmailParameterName = "email";
-        private const string TokenParameterName = "token";
+        private const string EmailParameterName = "raphael.marques.info@gmail.com";
+        private const string TokenParameterName = "97C53B843B05407C9FD0891DB55BF8DB";
 
         /// <summary>
         /// Initializes a new instance of the AccountCredentials class
