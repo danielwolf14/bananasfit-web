@@ -21,7 +21,6 @@ namespace Processo.Database.Mapeamento
             Property(e => e.CPF).HasColumnName("cpf");
             Property(e => e.IsAdministrador).HasColumnName("isAdmin");
             Property(e => e.Nome).HasColumnName("nome");   
-            Property(e => e.QuantidadeMoedas).HasColumnName("qtdMoeda");   
         }
 
     }

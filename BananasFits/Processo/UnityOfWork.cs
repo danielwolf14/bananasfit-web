@@ -25,6 +25,8 @@ namespace Processo
 
         public virtual ServicoPessoaJuridicaNegocio ServicoPessoaJuridicaNegocio { get; private set; }
 
+        public virtual HistoricoCompraServicoNegocio HistoricoCompraServicoNegocio { get; private set; }
+
         public void Commit()
         {
             contexto.Commit();
@@ -43,6 +45,7 @@ namespace Processo
             ServicoNegocio = new ServicoNegocio(contexto);
             AvaliacaoNegocio = new AvaliacaoNegocio(contexto);
             ServicoPessoaJuridicaNegocio = new ServicoPessoaJuridicaNegocio(contexto);
+            HistoricoCompraServicoNegocio = new HistoricoCompraServicoNegocio(contexto);
         }
         
         public static UnityOfWork GetInstancia()

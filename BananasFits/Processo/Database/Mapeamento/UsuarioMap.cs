@@ -17,8 +17,8 @@ namespace Processo.Database.Mapeamento
             Property(e => e.Email).HasColumnName("email");
             Property(e => e.IsHabilitado).HasColumnName("isHabilitado");
             Property(e => e.Password).HasColumnName("senha");
+            Property(e => e.QuantidadeMoedas).HasColumnName("qtdMoeda");   
 
-            //Ignore(e => e.Endereco);
             HasRequired(e => e.Endereco)
                 .WithMany()
                 .Map(e => e.MapKey("idEndereco"));

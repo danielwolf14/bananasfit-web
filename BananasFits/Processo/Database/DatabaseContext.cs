@@ -24,6 +24,7 @@ namespace Processo.Database
             modelBuilder.Configurations.Add(new ServicoMap());
             modelBuilder.Configurations.Add(new AvaliacaoMap());
             modelBuilder.Configurations.Add(new ServicoPessoaJuridicaMap());
+            modelBuilder.Configurations.Add(new HistoricoCompraServicoMap());
 
             base.OnModelCreating(modelBuilder);
         }

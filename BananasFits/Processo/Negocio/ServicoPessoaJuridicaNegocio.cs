@@ -14,11 +14,14 @@ namespace Processo.Negocio
     public class ServicoPessoaJuridicaNegocio : NegocioBase<ServicoPessoaJuridica>, IServicoPessoaJuridicaNegocio
     {
         private PessoaFisicaNegocio pessoaFisicaNegocio;
+        private HistoricoCompraServicoNegocio historicoCompraServicoNegocio;
+
         internal ServicoPessoaJuridicaNegocio(DatabaseContext contexto)
             : base(contexto)
         {
             this.repositorio = new ServicoPessoaJuridicaRepositorio(contexto);
             this.pessoaFisicaNegocio = new PessoaFisicaNegocio(contexto);
+            this.historicoCompraServicoNegocio = new HistoricoCompraServicoNegocio(contexto);
         }
 
         public void Cadastrar(ServicoPessoaJuridica servicoPessoaJuridica)
@@ -34,19 +37,28 @@ namespace Processo.Negocio
 
             var servico = repositorio.Consultar(e => e.QRCode == qrCode).SingleOrDefault();
             var usuario = pessoaFisicaNegocio.BuscarPorChave(chavePessoaFisica);
+
             ValidarCompra(usuario, servico, mensagens);
             VerificarNegocioException(mensagens);
             usuario.QuantidadeMoedas -= servico.Valor;
             servico.PessoaJuridica.QuantidadeMoedas += servico.Valor;
             base.Atualizar(servico);
-            //historicoCompraServico.Inserir(new HistoricoCompraServico
-            //{ NomeServico = servico.Nome,
-            //    NomeUsuario = usuario.Nome,
-            //    Valor = servico.Valor,
-            //    NomePessoaJuridica = servico.PessoaJuridica.Nome, 
-            //    Servico = servico,
-            //    PessoaFisica = usuario 
-            //});
+
+           //historicoCompraServicoNegocio.Cadastrar(new HistoricoCompraServico
+           // {
+           //     //NomeServico = servico.Servico.Nome,
+           //     //NomeUsuario = usuario.Nome,
+           //     //NomePessoaJuridica = servico.PessoaJuridica.Nome,
+           //     //Servico = servico,
+           //     //PessoaFisica = usuario,
+           //     //valor = servico.Valor,
+           //     //data = DateTime.Now
+           //     PessoaFisica = usuario.Chave,
+           //     ServicoPessoaJuridica = servico.Chave,
+           //     valor = servico.Valor,
+           //     data = DateTime.Now
+           // });
+
             pessoaFisicaNegocio.Atualizar(usuario);
         }
 
