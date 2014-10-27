@@ -165,6 +165,7 @@
     <Compile Include="Areas\WebService\Controllers\HttpPost.cs" />
     <Compile Include="Areas\WebService\Controllers\MovimentacaoApiController.cs" />
     <Compile Include="Areas\WebService\Controllers\ServicoApiController.cs" />
+    <Compile Include="Areas\WebService\Models\UsuarioApiModel.cs" />
     <Compile Include="Areas\WebService\Models\EfetuarLoginApiModel.cs" />
     <Compile Include="Areas\WebService\Models\ErroMessageApiModel.cs" />
     <Compile Include="Areas\WebService\Models\InserirAvaliacaoApiModel.cs" />

@@ -1,5 +1,4 @@
 ﻿﻿using AutoMapper;
-using Web.ViewModels;
 using Processo.Entidades;
 using System;
 using System.Collections.Generic;
@@ -61,7 +60,7 @@ namespace Web.Areas.WebService.Controllers
 
                 if (usuario != null && (usuario.Password == model.Password))
                 {
-                    var usuarioLogado = Mapper.DynamicMap<UsuarioLogadoModel>(usuario);
+                    var usuarioLogado = Mapper.DynamicMap<UsuarioApiModel>(usuario);
                     usuarioLogado.IsPessoaFisica = usuario is PessoaFisica;
 
                     return Request.CreateResponse(HttpStatusCode.OK, usuarioLogado);
@@ -126,7 +125,7 @@ namespace Web.Areas.WebService.Controllers
                 pessoasJuridicas.Select(e => new
                 {
                     Nome = e.Nome,
-                    Avaliacao = e.Avaliacoes.Count > 0 ? e.Avaliacoes.Average(d => d.Pontuacao) : 0,
+                    Avaliacao = e.Avaliacoes.Count > 0 ? (int)e.Avaliacoes.Average(d => d.Pontuacao) : 0,
                     Imagem = e.Imagem,
                     Chave = e.Chave
                 }).ToList());
