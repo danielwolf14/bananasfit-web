@@ -15,12 +15,7 @@ namespace Web.Controllers
 {
     public class UsuarioController : BaseController
     {
-        #region Comprar Fits
-        public ActionResult ComprarFits()
-        {
-            return View();
-        }
-        #endregion
+        
 
         #region Listar e buscar
         public ActionResult ListarPessoaFisica(string currentFilter, string searchString, int? page)

@@ -47,7 +47,7 @@
     <!-- your email here -->
     <Email>raphael.marques.info@gmail.com</Email>
     <!-- your token here -->
-    <Token>97C53B843B05407C9FD0891DB55BF8DB</Token>
+    <Token>361D9F58B14749E6A11CB74E4BA51A1E</Token>
     <!-- your sandbox email here -->
     <SandboxEmail>raphael.marques.info@gmail.com</SandboxEmail>
     <!-- your sandbox token here -->
@@ -62,6 +62,6 @@
     <!-- encoding of the outcoming/incoming communication to/from PagSeguro API -->
     <Encoding>ISO-8859-1</Encoding>
     <!-- default request timeout for call service -->
-    <RequestTimeout>10000</RequestTimeout>
+    <RequestTimeout>100000000</RequestTimeout>
   </Configuration>
 </PagSeguroConfiguration>

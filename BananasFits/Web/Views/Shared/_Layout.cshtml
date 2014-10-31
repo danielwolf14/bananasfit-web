@@ -37,8 +37,6 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("HOME", "Index", "Home")</li>
                 <li>@Html.ActionLink("BUSCAR ACADEMIAS", "BuscarPessoaJuridica", "Usuario")</li>
-                <li>@Html.ActionLink("COMPRAR FITS", "ComprarFits", "Usuario")</li>
-
 
             </ul>
             <b style=" margin-top: 5px; display: inline-block; font-size: 20px;">
@@ -90,6 +88,14 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> PAINEL <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Minha Conta", "MinhaConta", "Usuario")</li>
+                            @if (((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
+                            {
+                                <li>@Html.ActionLink("Comprar Fits", "ComprarFits", "Movimentacao")</li>
+                                <li>@Html.ActionLink("Histórico Compra Fits", "HistoricoCompraFits", "Movimentacao")</li>
+                                <li>@Html.ActionLink("Histórico Compra Serviços", "HistoricoCompraServico", "Movimentacao")</li>
+
+                            }
+
                             @if (((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsAdministrador)
                             {
                                 <li>@Html.ActionLink("Listar Serviços", "Listar", "Servico")</li>
@@ -138,7 +144,7 @@
     <!--FOOTER-->
 
 
-    <div  id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style=" background-color:white;">
+    <div id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style=" background-color:white;">
         <div style="text-align:center">
 
             <span class="label" style="cursor: pointer; margin-top: 7px; float: right;">@Html.ActionLink("Contato", "Contato", "Home")</span>
@@ -156,7 +162,7 @@
 
 
         var altContent = alturaJanela - alturaHeader - alturaFooter;
-        $("#container1").css("min-height", altContent-40);
+        $("#container1").css("min-height", altContent - 40);
     </script>
 </body>
 </html>

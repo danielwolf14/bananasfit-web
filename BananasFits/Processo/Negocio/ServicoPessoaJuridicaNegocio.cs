@@ -44,20 +44,21 @@ namespace Processo.Negocio
             servico.PessoaJuridica.QuantidadeMoedas += servico.Valor;
             base.Atualizar(servico);
 
-           //historicoCompraServicoNegocio.Cadastrar(new HistoricoCompraServico
-           // {
-           //     //NomeServico = servico.Servico.Nome,
-           //     //NomeUsuario = usuario.Nome,
-           //     //NomePessoaJuridica = servico.PessoaJuridica.Nome,
-           //     //Servico = servico,
-           //     //PessoaFisica = usuario,
-           //     //valor = servico.Valor,
-           //     //data = DateTime.Now
-           //     PessoaFisica = usuario.Chave,
-           //     ServicoPessoaJuridica = servico.Chave,
-           //     valor = servico.Valor,
-           //     data = DateTime.Now
-           // });
+            //Quantidade de moedas 
+            //historicoCompraServicoNegocio.Cadastrar(new HistoricoCompraServico
+            // {
+            //     //NomeServico = servico.Servico.Nome,
+            //     //NomeUsuario = usuario.Nome,
+            //     //NomePessoaJuridica = servico.PessoaJuridica.Nome,
+            //     //Servico = servico,
+            //     //PessoaFisica = usuario,
+            //     //valor = servico.Valor,
+            //     //data = DateTime.Now
+            //     PessoaFisica = usuario.Chave,
+            //     ServicoPessoaJuridica = servico.Chave,
+            //     valor = servico.Valor,
+            //     data = DateTime.Now
+            // });
 
             pessoaFisicaNegocio.Atualizar(usuario);
         }
@@ -70,7 +71,7 @@ namespace Processo.Negocio
                 mensagens.Add("QRCode com código inválido.");
             if (pessoaFisica.QuantidadeMoedas < servico.Valor)
                 mensagens.Add("Fits insuficientes.");
-            
+
 
         }
 

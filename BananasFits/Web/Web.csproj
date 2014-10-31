@@ -272,7 +272,9 @@
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -295,8 +297,10 @@
     <Content Include="Views\Servico\Atualizar.cshtml" />
     <Content Include="Views\Usuario\ListarPessoaJuridica.cshtml" />
     <Content Include="Views\Usuario\ListarPessoaFisica.cshtml" />
-    <Content Include="Views\Usuario\ComprarFits.cshtml" />
+    <Content Include="Views\Movimentacao\ComprarFits.cshtml" />
     <Content Include="Views\Servico\Qrcode.cshtml" />
+    <Content Include="Views\Movimentacao\HistoricoCompraServico.cshtml" />
+    <Content Include="Views\Movimentacao\HistoricoCompraFits.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Processo\Processo.csproj">

@@ -139,6 +139,7 @@ namespace Uol.PagSeguro.Util
                         requestStream.Close();
                     }
                 }
+
                 return (HttpWebResponse)request.GetResponse();
             }
             catch (WebException exception)
