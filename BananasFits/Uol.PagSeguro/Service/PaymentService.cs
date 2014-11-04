@@ -57,6 +57,8 @@ namespace Uol.PagSeguro.Service
                     {
                         using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
                         {
+                           
+
                             PaymentRequestResponse paymentResponse = new PaymentRequestResponse(PagSeguroConfiguration.PaymentRedirectUri);
                             PaymentSerializer.Read(reader, paymentResponse);
                             PagSeguroTrace.Info(String.Format(CultureInfo.InvariantCulture, "PaymentService.Register({0}) - end {1}", payment, paymentResponse.PaymentRedirectUri));

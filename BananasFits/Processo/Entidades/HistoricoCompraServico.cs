@@ -8,9 +8,12 @@ namespace Processo.Entidades
 {
     public class HistoricoCompraServico : EntidadeBase
     {
-        public virtual ServicoPessoaJuridica ServicoPessoaJuridica { get; set; }
-        public virtual ServicoPessoaJuridica PessoaFisica { get; set; }
-        public virtual DateTime data { get; set; }
-        public virtual int valor { get; set; }
+        public virtual ServicoPessoaJuridica Servico { get; set; }
+        public virtual PessoaFisica PessoaFisica { get; set; }
+        public virtual DateTime Data { get; set; }
+        public virtual int Valor { get; set; }
+        public virtual string NomeServico { get; set; }
+        public virtual string NomePessoaFisica { get; set; }
+        public virtual string NomePessoaJuridica { get; set; }
     }
 }

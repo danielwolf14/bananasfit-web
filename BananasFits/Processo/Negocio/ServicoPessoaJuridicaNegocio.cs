@@ -45,20 +45,16 @@ namespace Processo.Negocio
             base.Atualizar(servico);
 
             //Quantidade de moedas 
-            //historicoCompraServicoNegocio.Cadastrar(new HistoricoCompraServico
-            // {
-            //     //NomeServico = servico.Servico.Nome,
-            //     //NomeUsuario = usuario.Nome,
-            //     //NomePessoaJuridica = servico.PessoaJuridica.Nome,
-            //     //Servico = servico,
-            //     //PessoaFisica = usuario,
-            //     //valor = servico.Valor,
-            //     //data = DateTime.Now
-            //     PessoaFisica = usuario.Chave,
-            //     ServicoPessoaJuridica = servico.Chave,
-            //     valor = servico.Valor,
-            //     data = DateTime.Now
-            // });
+            historicoCompraServicoNegocio.Cadastrar(new HistoricoCompraServico
+             {
+                 NomeServico = servico.Servico.Nome,
+                 NomePessoaFisica = usuario.Nome,
+                 NomePessoaJuridica = servico.PessoaJuridica.Nome,
+                 Servico = servico,
+                 PessoaFisica = usuario,
+                 Valor = servico.Valor,
+                 Data = DateTime.Now,
+             });
 
             pessoaFisicaNegocio.Atualizar(usuario);
         }

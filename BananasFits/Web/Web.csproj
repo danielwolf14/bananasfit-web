@@ -162,6 +162,7 @@
     <Folder Include="Views\Avaliacao\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\WebService\Models\ComprarFitsModel.cs" />
     <Compile Include="Areas\WebService\Controllers\HttpPost.cs" />
     <Compile Include="Areas\WebService\Controllers\MovimentacaoApiController.cs" />
     <Compile Include="Areas\WebService\Controllers\ServicoApiController.cs" />
@@ -299,7 +300,7 @@
     <Content Include="Views\Usuario\ListarPessoaFisica.cshtml" />
     <Content Include="Views\Movimentacao\ComprarFits.cshtml" />
     <Content Include="Views\Servico\Qrcode.cshtml" />
-    <Content Include="Views\Movimentacao\HistoricoCompraServico.cshtml" />
+    <Content Include="Views\Movimentacao\ListarHistoricoServico.cshtml" />
     <Content Include="Views\Movimentacao\HistoricoCompraFits.cshtml" />
   </ItemGroup>
   <ItemGroup>

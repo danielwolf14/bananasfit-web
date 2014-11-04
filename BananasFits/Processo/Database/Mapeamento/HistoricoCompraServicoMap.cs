@@ -18,11 +18,13 @@ namespace Processo.Database.Mapeamento
                 .HasColumnName("idHistorico_Compra_Servico")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            Property(e => e.valor).HasColumnName("valor");
-            Property(e => e.data).HasColumnName("data");
+            Property(e => e.Valor).HasColumnName("valor");
+            Property(e => e.Data).HasColumnName("data");
+            Property(e => e.NomePessoaJuridica).HasColumnName("nomePessoaJuridica");
+            Property(e => e.NomePessoaFisica).HasColumnName("nomePessoaFisica");
+            Property(e => e.NomeServico).HasColumnName("nomeServico");
 
-
-            HasRequired(e => e.ServicoPessoaJuridica)
+            HasRequired(e => e.Servico)
                .WithMany()
                .Map(e => e.MapKey("idP_Juridica_Servico"));
 

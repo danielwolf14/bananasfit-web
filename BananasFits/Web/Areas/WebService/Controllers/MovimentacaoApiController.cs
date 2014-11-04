@@ -13,12 +13,11 @@ namespace Web.Areas.WebService.Controllers
     public class MovimentacaoApiController : BaseApiController
     {
 
-
         [HttpPost]
         [Route("api/movimentacaoapi/comprarservicos")]
         public HttpResponseMessage Comprar([FromBody]MovimentacaoApiModel model)
         {
-            if (string.IsNullOrEmpty(model.QrCode) ||  model.IdPessoaFisica == 0)
+            if (string.IsNullOrEmpty(model.QrCode) || model.IdPessoaFisica == 0)
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             else
             {
@@ -31,11 +30,37 @@ namespace Web.Areas.WebService.Controllers
                 }
                 catch (NegocioException ex)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, ex.Mensagens);                    
+                    return Request.CreateResponse(HttpStatusCode.OK, ex.Mensagens);
                 }
-                
+
             }
         }
 
+        [HttpPost]
+        [Route("api/movimentacaoapi/comprarfits")]
+        public HttpResponseMessage ComprarFits([FromBody]ComprarFitsModel model)
+        {
+            if (model.QuantidadeFits != 0 && model.ChavePessoaFisica != 0)
+            {
+
+                try
+                {
+                    var usuario = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(model.ChavePessoaFisica);
+                    usuario.QuantidadeMoedas += model.QuantidadeFits;
+                    unityOfWork.PessoaFisicaNegocio.Atualizar(usuario);
+                    unityOfWork.Commit();
+
+                    return Request.CreateResponse(HttpStatusCode.OK);
+
+                }
+                catch (NegocioException ex)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, ex.Mensagens);
+                }
+
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
+
+        }
     }
 }
