@@ -41,8 +41,6 @@ namespace Uol.PagSeguro.XmlParse
                 return;
             }
 
-            //XmlReaderSettings settings = new XmlReaderSettings();
-            //settings.ProhibitDtd = false;
 
             string rootElement = reader.Name;
             reader.ReadStartElement();

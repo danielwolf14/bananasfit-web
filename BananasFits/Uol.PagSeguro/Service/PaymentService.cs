@@ -55,7 +55,10 @@ namespace Uol.PagSeguro.Service
 
                     if (HttpStatusCode.OK.Equals(response.StatusCode))
                     {
-                        using (XmlReader reader = XmlReader.Create(response.GetResponseStream()))
+
+                        XmlReaderSettings settings = new XmlReaderSettings();
+                        settings.ProhibitDtd = false;
+                        using (XmlReader reader = XmlReader.Create(response.GetResponseStream(), settings))
                         {
                            
 
