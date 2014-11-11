@@ -17,8 +17,19 @@ namespace Web.Areas.WebService.Controllers
         [Route("api/movimentacaoapi/comprarservicos")]
         public HttpResponseMessage Comprar([FromBody]MovimentacaoApiModel model)
         {
-            if (string.IsNullOrEmpty(model.QrCode) || model.IdPessoaFisica == 0)
+            if (model == null || string.IsNullOrEmpty(model.QrCode) || model.IdPessoaFisica == 0)
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
+            if (!model.FinalizarCompra)
+            {
+                var servico = unityOfWork.ServicoPessoaJuridicaNegocio.Consultar(e => e.QRCode == model.QrCode).SingleOrDefault();
+
+                return Request.CreateResponse(HttpStatusCode.OK, new
+                {
+                    NomeServico = servico.Servico.Nome,
+                    PessoaJuridica = servico.PessoaJuridica.Nome,
+                    Valor = servico.Valor
+                });
+            }
             else
             {
                 try
@@ -26,11 +37,10 @@ namespace Web.Areas.WebService.Controllers
                     unityOfWork.ServicoPessoaJuridicaNegocio.Comprar(model.QrCode, model.IdPessoaFisica);
                     unityOfWork.Commit();
                     return Request.CreateResponse(HttpStatusCode.OK);
-
                 }
                 catch (NegocioException ex)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, ex.Mensagens);
+                    return Request.CreateResponse(HttpStatusCode.OK, new ErroMessageApiModel { ListaMensagem = ex.Mensagens });
                 }
 
             }

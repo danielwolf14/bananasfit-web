@@ -10,7 +10,5 @@ namespace Web.ApiModel
         public virtual int MediaDeAvaliacoes { get; set; }
         public virtual int TotalDeAvaliacoes { get; set; }
         public virtual int Pontuacao { get; set; }
-
-           
     }
 }

@@ -4,11 +4,11 @@
   <Urls>
     <!-- url for payment service -->
     <Payment>
-      <Link>https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html</Link>
+      <Link>https://ws.pagseguro.uol.com.br/v2/checkout</Link>
     </Payment>
     <!-- url for paymentRedirect service -->
     <PaymentRedirect>
-      <Link>https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html</Link>
+      <Link>https://pagseguro.uol.com.br/v2/checkout/payment.html</Link>
     </PaymentRedirect>
     <!-- url for notifications service -->
     <Notification>
@@ -24,7 +24,7 @@
     </PreApproval>
     <!-- url for preApprovalRedirect service -->
     <PreApprovalRedirect>
-      <Link>https://sandbox.pagseguro.uol.com.br/v2/pre-approvals/request.html</Link>
+      <Link>https://pagseguro.uol.com.br/v2/pre-approvals/request.html</Link>
     </PreApprovalRedirect>
     <!-- url for preApproval notifications service -->
     <PreApprovalNotification>
@@ -62,6 +62,6 @@
     <!-- encoding of the outcoming/incoming communication to/from PagSeguro API -->
     <Encoding>ISO-8859-1</Encoding>
     <!-- default request timeout for call service -->
-    <RequestTimeout>100000</RequestTimeout>
+    <RequestTimeout>10000</RequestTimeout>
   </Configuration>
 </PagSeguroConfiguration>

@@ -39,7 +39,7 @@ namespace Web.Areas.WebService.Controllers
                         ListaMensagem = ex.Mensagens
                     };
 
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, erroMensagemApiModel);
+                    return Request.CreateResponse(HttpStatusCode.OK, erroMensagemApiModel);
                 }
             }
             else
@@ -71,7 +71,7 @@ namespace Web.Areas.WebService.Controllers
                     {
                         Mensagem = "Login ou senha incorretos."
                     };
-                    return Request.CreateResponse(HttpStatusCode.NotFound, erroMensagemApiModel);
+                    return Request.CreateResponse(HttpStatusCode.OK, erroMensagemApiModel);
                 }
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -88,13 +88,32 @@ namespace Web.Areas.WebService.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, lista.ToList());
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/usuarioapi/detalharpessoajuridica")]
-        public HttpResponseMessage DetalharPessoaJuridica(int chave)
+        public HttpResponseMessage DetalharPessoaJuridica([FromBody]ParametrosPessoaJuridicaModel model)
         {
-            var usuario = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(chave);
-            if (usuario.IsHabilitado)
-                return Request.CreateResponse(HttpStatusCode.OK, usuario);
+            var avalicao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaFisica.Chave == model.ChavePessoaFisica
+                && e.PessoaJuridica.Chave == model.ChavePessoaJuridica).FirstOrDefault().Pontuacao;
+            var pessoaJuridica = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(model.ChavePessoaJuridica);
+            if (pessoaJuridica.IsHabilitado)
+            {
+                var modelResposta = new DetalhePessoaJuridicaModel
+                {
+                    Nome = pessoaJuridica.Nome,
+                    CNPJ = pessoaJuridica.CNPJ,
+                    Descricao = pessoaJuridica.Descricao,
+                    Imagem = pessoaJuridica.Imagem,
+                    RazaoSocial = pessoaJuridica.RazaoSocial,
+                    UltimaAvaliacao = avalicao,
+                    Servicos = pessoaJuridica.Servicos.Select(e => e.Servico.Nome).ToList(),
+                    Telefone = pessoaJuridica.Telefone,
+                    Celular = pessoaJuridica.Celular,
+                    Email = pessoaJuridica.Email,
+                    Endereco = Mapper.DynamicMap<EnderecoModel>(pessoaJuridica.Endereco)
+                };
+                return Request.CreateResponse(HttpStatusCode.OK, modelResposta);
+
+            }
             else
                 return Request.CreateResponse(HttpStatusCode.NotFound);
         }
@@ -119,7 +138,7 @@ namespace Web.Areas.WebService.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            pessoasJuridicas = pessoasJuridicas.OrderBy(e => e.Nome) ;
+            pessoasJuridicas = pessoasJuridicas.OrderBy(e => e.Nome);
 
             return Request.CreateResponse(HttpStatusCode.OK,
                 pessoasJuridicas.Select(e => new

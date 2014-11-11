@@ -9,5 +9,6 @@ namespace Web.Areas.WebService.Models
     {
         public string QrCode { get; set; }
         public int IdPessoaFisica { get; set; }
+        public bool FinalizarCompra { get; set; }
     }
 }

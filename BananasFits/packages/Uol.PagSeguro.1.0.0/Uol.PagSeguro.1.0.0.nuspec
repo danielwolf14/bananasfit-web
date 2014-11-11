@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Uol.PagSeguro</id>
+    <version>1.0.0</version>
+    <authors>PagSeguro Team</authors>
+    <owners>PagSeguro Team</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/pagseguro/dotnet</projectUrl>
+    <iconUrl>https://avatars3.githubusercontent.com/u/123060</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>PagSeguro SDK for .NET (Biblioteca de integração em .NET)</description>
+    <releaseNotes>First release. See https://github.com/pagseguro/dotnet for more details.</releaseNotes>
+    <copyright>Copyright 2014 PagSeguro Internet LTDA</copyright>
+    <tags>PagSeguro</tags>
+  </metadata>
+</package>

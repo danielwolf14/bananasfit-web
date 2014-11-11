@@ -50,7 +50,7 @@ namespace Uol.PagSeguro.XmlParse
         /// <param name="reader"></param>
         internal static void SkipElement(XmlReader reader)
         {
-            if (reader.IsEmptyElement)
+            if (!reader.IsEmptyElement)
             {
                 reader.Read();
             }

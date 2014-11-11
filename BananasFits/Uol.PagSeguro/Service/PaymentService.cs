@@ -58,6 +58,9 @@ namespace Uol.PagSeguro.Service
 
                         XmlReaderSettings settings = new XmlReaderSettings();
                         settings.ProhibitDtd = false;
+                        settings.CheckCharacters = false;
+                        //settings.IgnoreWhitespace = false;
+
                         using (XmlReader reader = XmlReader.Create(response.GetResponseStream(), settings))
                         {
                            
