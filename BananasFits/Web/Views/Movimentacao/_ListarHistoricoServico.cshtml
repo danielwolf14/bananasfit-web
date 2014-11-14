@@ -1,0 +1,71 @@
+﻿@model PagedList.IPagedList<Processo.Entidades.HistoricoCompraServico>
+@using PagedList.Mvc;
+
+@{
+    Layout = null;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table id="mytable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Pessoa Física</th>
+                            <th>Serviço</th>
+                            @if (((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
+                            {
+                                <th>Academia</th>
+                            }
+                            <th>Data</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model == null || Model.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="5">
+                                    Não há nenhum registro de compra de serviço.
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Chave</td>
+                                    <td id="PessoaFisicaNome">@item.NomePessoaFisica</td>
+                                    <td id="ServicoNome">@item.NomeServico</td>
+                                    @if (((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
+                                    {
+                                        <td id="AcademiaNome">@item.NomePessoaJuridica</td>
+                                    }
+                                    <td id="Data">@item.Data</td>
+                                    <td id="ValorServico">@item.Valor</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr class="info">
+                            @if (((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
+                            {
+                                <td colspan="5">Valor Total</td>
+                            }
+                            @if (!((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
+                            {
+                                <td colspan="4">Valor Total</td>
+                            }
+                            <td>@ViewBag.Total</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="clearfix"></div>
+                @Html.PagedListPager(Model, page => Url.Action("ListarHistoricoServico", new { ViewBag.PessoaFisica, ViewBag.Academia, ViewBag.DataInicial, ViewBag.DataFinal, page }))
+            </div>
+        </div>
+    </div>
+</div>

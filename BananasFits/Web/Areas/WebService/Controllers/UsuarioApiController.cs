@@ -35,8 +35,7 @@ namespace Web.Areas.WebService.Controllers
                 {
                     var erroMensagemApiModel = new ErroMessageApiModel
                     {
-                        Mensagem = ex.Message,
-                        ListaMensagem = ex.Mensagens
+                        Mensagem = ex.Mensagens.FirstOrDefault(),
                     };
 
                     return Request.CreateResponse(HttpStatusCode.OK, erroMensagemApiModel);

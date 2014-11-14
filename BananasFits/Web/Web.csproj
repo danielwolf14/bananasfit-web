@@ -205,6 +205,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\datepicker3.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -248,6 +250,7 @@
     <Content Include="Areas\WebService\Views\web.config" />
     <None Include="Properties\PublishProfiles\Raphael.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -302,15 +305,12 @@
     <Content Include="Views\Servico\Qrcode.cshtml" />
     <Content Include="Views\Movimentacao\ListarHistoricoServico.cshtml" />
     <Content Include="Views\Movimentacao\HistoricoCompraFits.cshtml" />
+    <Content Include="Views\Movimentacao\_ListarHistoricoServico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Processo\Processo.csproj">
       <Project>{81d14e72-1fcc-448c-b98c-c94a4a672233}</Project>
       <Name>Processo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Uol.PagSeguro\Uol.PagSeguro.csproj">
-      <Project>{babc5658-6afd-4f8e-81f1-434553663d99}</Project>
-      <Name>Uol.PagSeguro</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

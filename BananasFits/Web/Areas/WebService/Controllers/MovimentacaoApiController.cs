@@ -40,7 +40,7 @@ namespace Web.Areas.WebService.Controllers
                 }
                 catch (NegocioException ex)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, new ErroMessageApiModel { ListaMensagem = ex.Mensagens });
+                    return Request.CreateResponse(HttpStatusCode.OK, new ErroMessageApiModel { Mensagem = ex.Mensagens.FirstOrDefault() });
                 }
 
             }

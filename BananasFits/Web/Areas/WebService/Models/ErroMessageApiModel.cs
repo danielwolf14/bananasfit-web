@@ -8,7 +8,6 @@ namespace Web.Areas.WebService.Models
     public class ErroMessageApiModel
     {
         public virtual string Mensagem { get; set; }
-        public virtual IList<string> ListaMensagem { get; set; }
 
     }
 }

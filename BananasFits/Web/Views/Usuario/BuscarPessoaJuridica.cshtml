@@ -97,7 +97,7 @@
                 </a>
             }
             <br>
-            @Html.PagedListPager(Model, page => Url.Action("BuscarPessoaJuridica", new { page, }))
+            @Html.PagedListPager(Model, page => Url.Action("BuscarPessoaJuridica", new { ViewBag.Nome, ViewBag.Valor, page, ViewBag.Pontuacao, ViewBag.Servico, ViewBag.Estado }))
 
         </div>
     </div>

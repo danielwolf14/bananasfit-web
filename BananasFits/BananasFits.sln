@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Processo", "Processo\Proces
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{0CEF3C27-9058-4FA2-9880-707699FB535E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uol.PagSeguro", "Uol.PagSeguro\Uol.PagSeguro.csproj", "{BABC5658-6AFD-4F8E-81F1-434553663D99}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{0CEF3C27-9058-4FA2-9880-707699FB535E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CEF3C27-9058-4FA2-9880-707699FB535E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CEF3C27-9058-4FA2-9880-707699FB535E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BABC5658-6AFD-4F8E-81F1-434553663D99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

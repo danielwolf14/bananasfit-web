@@ -1,5 +1,4 @@
 ﻿@model PagedList.IPagedList<Processo.Entidades.HistoricoCompraServico>
-@using PagedList.Mvc;
 
 <div class="container">
     <div class="row">
@@ -10,59 +9,37 @@
                         <span style="font-size:25px; font-weight:bold;">Histórico de Compra de Serviços</span>
                     </h1>
                 </div>
-                <div class="panel-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table id="mytable" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Pessoa Física</th>
-                                                <th>Serviço</th>
-                                                @if (((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
-                                                {
-                                                    <th>Academia</th>
-                                                }
-                                                <th>Data</th>
-                                                <th>Valor</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if (Model == null || Model.Count == 0)
-                                            {
-                                                <tr>
-                                                    <td colspan="5">
-                                                        Não há nenhum registro de compra de serviço.
-                                                    </td>
-                                                </tr>
-                                            }
-                                            else
-                                            {
-                                                foreach (var item in Model)
-                                                {
-                                                    <tr>
-                                                        <td>@item.Chave</td>
-                                                        <td id="PessoaFisicaNome">@item.NomePessoaFisica</td>
-                                                        <td id="ServicoNome">@item.NomeServico</td>
-                                                        @if (((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
-                                                        {
-                                                          <td id="AcademiaNome">@item.NomePessoaJuridica</td>
-                                                        }
-                                                        <td id="Data">@item.Data</td>
-                                                        <td id="ValorServico">@item.Valor</td>
-                                                    </tr>
-                                                }
-                                            }
-                                        </tbody>
-                                    </table>
-                                    <div class="clearfix"></div>
-                                    @Html.PagedListPager(Model, page => Url.Action("Listar", new { page, }))
-                                </div>
-                            </div>
+                @using (Html.BeginForm("ListarHistoricoServico", "Movimentacao", FormMethod.Get))
+                {
+                    <div class="form-inline col-md-10" style="padding-left:30px; padding-bottom:20px;">                        
+                        <input type="text" name="pessoaFisica" placeholder="Nome Pessoa Física" class="form-control" />
+
+                        <input type="text" name="academia" placeholder="Academia" class="form-control" />
+
+                        <div class="input-daterange input-group" id="datepicker">
+                            <input type="text" name="dataInicial"  placeholder="DataInicial" class="input-sm form-control" />
+                            <span class="input-group-addon">até</span>
+                            <input type="text" name="dataFinal"  placeholder="DataFinal" class="input-sm form-control" />
                         </div>
+
+                        <script>
+                            $(function () {
+                                $('.input-daterange').datepicker({
+                                    format: "dd/MM/yyyy",
+                                    todayBtn: "linked",
+                                    language: "pt-BR",
+                                    todayHighlight: true
+                                });
+                            });
+                        </script>
+
+                        <input type="submit" value="Filtrar" class="btn btn-info" />
+                        <a href="@Url.Action("GerarExcel","Movimentacao")" class=" btn btn-success">XLS</a>
+
                     </div>
+                }
+                <div class="panel-body" id="resultado">
+                    @Html.Partial("_ListarHistoricoServico", Model)
                 </div>
             </div>
         </div>

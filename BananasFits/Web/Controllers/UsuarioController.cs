@@ -83,6 +83,13 @@ namespace Web.Controllers
         public ActionResult BuscarPessoaJuridica(string nome, int? valor,
             int? page, int? pontuacao, int? servico, string estado)
         {
+
+            ViewBag.Nome = nome;
+            ViewBag.Valor = valor;
+            ViewBag.Pontuacao = pontuacao;
+            ViewBag.Servico = servico;
+            ViewBag.Estado = estado;
+
             ViewBag.ListaServico = unityOfWork.ServicoNegocio.Consultar(e => e.IsHabilitado);
             var pessoasJuridicas = unityOfWork.PessoaJuridicaNegocio.Consultar(e => e.IsHabilitado);
 
