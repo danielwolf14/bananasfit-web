@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using Web.ViewModels;
 using PagedList;
 using Processo.Entidades;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System.IO;
 
 namespace Web.Controllers
 {
@@ -28,7 +31,7 @@ namespace Web.Controllers
         #endregion
 
         #region Listar Histórico de Serviços
-        public ActionResult ListarHistoricoServico(string pessoaFisica, string academia, 
+        public ActionResult ListarHistoricoServico(string pessoaFisica, string academia,
             DateTime? dataInicial, DateTime? dataFinal, int? page)
         {
             var usuario = (UsuarioLogadoModel)Session["usuario"];
@@ -51,7 +54,68 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IEnumerable<HistoricoCompraServico> GerarHistoricoServico(UsuarioLogadoModel usuario, string pessoaFisica, string academia, 
+        public ActionResult GerarExcel(string pessoaFisica, string academia,
+            DateTime? dataInicial, DateTime? dataFinal, int? page)
+        {
+            var usuario =(UsuarioLogadoModel)Session["usuario"];
+            var historico = GerarHistoricoServico(usuario, pessoaFisica, academia, dataInicial, dataFinal,null);
+
+            IWorkbook workbook = new XSSFWorkbook();
+
+            ISheet sheet = workbook.CreateSheet("Historico");
+
+            int rowNumer = 0;
+
+            IRow row = sheet.CreateRow(rowNumer);
+            ICell cell;
+
+            ICellStyle style = workbook.CreateCellStyle();
+            style.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey25Percent.Index;
+            style.FillPattern = FillPattern.SolidForeground;
+
+            cell = row.CreateCell(0);
+            cell.SetCellValue("Pessoa Física");
+            cell.CellStyle = style;
+
+            cell = row.CreateCell(1);
+            cell.SetCellValue("Serviço");
+            cell.CellStyle = style;
+
+            cell = row.CreateCell(2);
+            cell.SetCellValue("Academia");
+            cell.CellStyle = style;
+
+            cell = row.CreateCell(3);
+            cell.SetCellValue("Data");
+            cell.CellStyle = style;
+
+            cell = row.CreateCell(4);
+            cell.SetCellValue("Valor");
+            cell.CellStyle = style;
+
+            //---- row
+            
+            foreach (var item in historico)
+            {
+                rowNumer++;
+                row = sheet.CreateRow(rowNumer);
+                row.CreateCell(0).SetCellValue(item.NomePessoaFisica);
+                row.CreateCell(1).SetCellValue(item.NomeServico);
+                row.CreateCell(2).SetCellValue(item.NomePessoaJuridica);
+                row.CreateCell(3).SetCellValue(item.Data.ToString());
+                row.CreateCell(4).SetCellFormula(item.Valor.ToString());
+                
+            }
+        
+            MemoryStream stream = new MemoryStream();
+            workbook.Write(stream);
+
+            return File(stream.ToArray(), //The binary data of the XLS file
+                "application/vnd.ms-excel", //MIME type of Excel files
+                string.Format("HistoricoCompraServico.xlsx", DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")));
+        }
+
+        public IEnumerable<HistoricoCompraServico> GerarHistoricoServico(UsuarioLogadoModel usuario, string pessoaFisica, string academia,
             DateTime? dataInicial, DateTime? dataFinal, int? page)
         {
 

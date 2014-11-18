@@ -36,7 +36,13 @@ namespace Web.Areas.WebService.Controllers
                 {
                     unityOfWork.ServicoPessoaJuridicaNegocio.Comprar(model.QrCode, model.IdPessoaFisica);
                     unityOfWork.Commit();
-                    return Request.CreateResponse(HttpStatusCode.OK);
+
+                    var usuario = unityOfWork.PessoaFisicaNegocio.Consultar(e => e.Chave == model.IdPessoaFisica).SingleOrDefault();
+
+                    return Request.CreateResponse(HttpStatusCode.OK, new
+                    {
+                        QtdMoedas = usuario.QuantidadeMoedas
+                    });
                 }
                 catch (NegocioException ex)
                 {
@@ -60,7 +66,13 @@ namespace Web.Areas.WebService.Controllers
                     unityOfWork.PessoaFisicaNegocio.Atualizar(usuario);
                     unityOfWork.Commit();
 
-                    return Request.CreateResponse(HttpStatusCode.OK);
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                     new
+                     {
+                         QtdMoedas = usuario.QuantidadeMoedas
+                     }
+
+                        );
 
                 }
                 catch (NegocioException ex)
