@@ -19,15 +19,15 @@ namespace Processo.Database.Mapeamento
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(e => e.Pontuacao).HasColumnName("avaliacao");
             Property(e => e.PessoaJuridicaId).HasColumnName("idP_Juridica");
-
+            Property(e => e.PessoaFisicaId).HasColumnName("idP_Fisica");
            
             HasRequired(e => e.PessoaJuridica)
                 .WithMany(e => e.Avaliacoes)
                 .HasForeignKey(e => e.PessoaJuridicaId);
 
             HasRequired(e => e.PessoaFisica)
-                .WithMany()
-                .Map(e => e.MapKey("idP_Fisica"));
+                .WithMany(e => e.Avaliacoes)
+                .HasForeignKey(e => e.PessoaFisicaId);
         
         }
 

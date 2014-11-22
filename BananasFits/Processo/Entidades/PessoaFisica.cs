@@ -11,5 +11,6 @@ namespace Processo.Entidades
         public virtual string Nome { get; set; }
         public virtual string CPF { get; set; }
         public virtual bool IsAdministrador { get; set; }
+        public virtual List<Avaliacao> Avaliacoes { get; set; }
     }
 }

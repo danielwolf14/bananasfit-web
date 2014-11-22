@@ -9,6 +9,8 @@ using Processo.Entidades;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System.IO;
+using PayPal.Api.Payments;
+using PayPal;
 
 namespace Web.Controllers
 {
@@ -57,8 +59,8 @@ namespace Web.Controllers
         public ActionResult GerarExcel(string pessoaFisica, string academia,
             DateTime? dataInicial, DateTime? dataFinal, int? page)
         {
-            var usuario =(UsuarioLogadoModel)Session["usuario"];
-            var historico = GerarHistoricoServico(usuario, pessoaFisica, academia, dataInicial, dataFinal,null);
+            var usuario = (UsuarioLogadoModel)Session["usuario"];
+            var historico = GerarHistoricoServico(usuario, pessoaFisica, academia, dataInicial, dataFinal, null);
 
             IWorkbook workbook = new XSSFWorkbook();
 
@@ -94,7 +96,7 @@ namespace Web.Controllers
             cell.CellStyle = style;
 
             //---- row
-            
+
             foreach (var item in historico)
             {
                 rowNumer++;
@@ -104,9 +106,9 @@ namespace Web.Controllers
                 row.CreateCell(2).SetCellValue(item.NomePessoaJuridica);
                 row.CreateCell(3).SetCellValue(item.Data.ToString());
                 row.CreateCell(4).SetCellFormula(item.Valor.ToString());
-                
+
             }
-        
+
             MemoryStream stream = new MemoryStream();
             workbook.Write(stream);
 
@@ -149,5 +151,70 @@ namespace Web.Controllers
 
         #region Comprar PagSeguro
         #endregion
+
+
+        public ActionResult ComprarFites()
+        {
+            Dictionary<string, string> payPalConfig = new Dictionary<string, string>();
+            payPalConfig.Add("mode", "sandbox");
+
+            OAuthTokenCredential tokenCredential =
+      new OAuthTokenCredential("AUoYdBAqgl5mugEOu-xrxNeLj0DW2CohcYODtyxzsozi-me48ymybDi6dtw2", "ELyImxCvpvxoiFRyfqzScMZbfo84f2Au4l-TJX78ymKuHskG_pDAcJHHt3uf", payPalConfig);
+
+            string accessToken = tokenCredential.GetAccessToken();
+
+            Address billingAddress = new Address();
+            billingAddress.line1 = "52 N Main ST";
+            billingAddress.city = "Johnstown";
+            billingAddress.country_code = "US";
+            billingAddress.postal_code = "43210";
+            billingAddress.state = "OH";
+
+            CreditCard creditCard = new CreditCard();
+            creditCard.number = "4002358193682418";
+            creditCard.type = "visa";
+            creditCard.expire_month = 11;
+            creditCard.expire_year = 2019;
+            creditCard.cvv2 = 111;
+            creditCard.first_name = "Joe";
+            creditCard.last_name = "Shopper";
+            creditCard.billing_address = billingAddress;
+            
+            Details amountDetails = new Details();
+            amountDetails.subtotal = "7.41";
+            amountDetails.tax = "0.03";
+            amountDetails.shipping = "0.03";
+
+            Amount amount = new Amount();
+            amount.total = "7.47";
+            amount.currency = "USD";
+            amount.details = amountDetails;
+
+            Transaction transaction = new Transaction();
+            transaction.amount = amount;
+            transaction.description = "This is the payment transaction description.";
+
+            List<Transaction> transactions = new List<Transaction>();
+            transactions.Add(transaction);
+
+            FundingInstrument fundingInstrument = new FundingInstrument();
+            fundingInstrument.credit_card = creditCard;
+
+            List<FundingInstrument> fundingInstruments = new List<FundingInstrument>();
+            fundingInstruments.Add(fundingInstrument);
+
+            Payer payer = new Payer();
+            payer.funding_instruments = fundingInstruments;
+            payer.payment_method = "credit_card";
+
+            Payment payment = new Payment();
+            payment.intent = "sale";
+            payment.payer = payer;
+            payment.transactions = transactions;
+
+            Payment createdPayment = payment.Create(accessToken);
+
+            return null;
+        }
     }
 }

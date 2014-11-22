@@ -28,7 +28,7 @@ namespace Web.ApiModel
         public virtual string Imagem { get; set; }
         public virtual string Descricao { get; set; }
         public virtual string RazaoSocial { get; set; }
-        public virtual IList<string> Servicos { get; set; }
+        public virtual string Servicos { get; set; }
         public virtual int UltimaAvaliacao { get; set; }
 
         public virtual string Email { get; set; }

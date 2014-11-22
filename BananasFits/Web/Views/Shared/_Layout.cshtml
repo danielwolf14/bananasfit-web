@@ -91,7 +91,7 @@
                             @if (((Web.ViewModels.UsuarioLogadoModel)Session["usuario"]).IsPessoaFisica)
                             {
                                 <li>@Html.ActionLink("Comprar Fits", "ComprarFits", "Movimentacao")</li>
-                                @*<li>@Html.ActionLink("Histórico Compra Fits", "HistoricoCompraFits", "Movimentacao")</li>*@
+                                <li>@Html.ActionLink("Histórico Compra Fits", "HistoricoCompraFits", "Movimentacao")</li>
                             }
                             @if (Session["usuario"] != null)
                             {

@@ -91,17 +91,6 @@ namespace Web.Areas.WebService.Controllers
         [Route("api/usuarioapi/detalharpessoajuridica")]
         public HttpResponseMessage DetalharPessoaJuridica([FromBody]ParametrosPessoaJuridicaModel model)
         {
-            int avaliacao = 0;
-            try
-            {
-                avaliacao = unityOfWork.AvaliacaoNegocio.Consultar(e => e.PessoaFisica.Chave == model.ChavePessoaFisica
-                && e.PessoaJuridica.Chave == model.ChavePessoaJuridica).FirstOrDefault().Pontuacao;
-            }
-            catch (Exception)
-            {
-
-                avaliacao = 0;
-            }
             var pessoaJuridica = unityOfWork.PessoaJuridicaNegocio.BuscarPorChave(model.ChavePessoaJuridica);
             if (pessoaJuridica.IsHabilitado)
             {
@@ -112,15 +101,15 @@ namespace Web.Areas.WebService.Controllers
                     Descricao = pessoaJuridica.Descricao,
                     Imagem = pessoaJuridica.Imagem,
                     RazaoSocial = pessoaJuridica.RazaoSocial,
-                    UltimaAvaliacao = avaliacao,
-                    Servicos = pessoaJuridica.Servicos.Select(e => e.Servico.Nome).ToList(),
+                    UltimaAvaliacao = pessoaJuridica.Avaliacoes.Any(e => e.PessoaFisicaId == model.ChavePessoaFisica )
+                    ? pessoaJuridica.Avaliacoes.Where(e => e.PessoaFisicaId == model.ChavePessoaFisica ).FirstOrDefault().Pontuacao : 0, //avaliacao != null ? avaliacao.Pontuacao : 0,
+                    Servicos = string.Join(",",pessoaJuridica.Servicos.Select(e => e.Servico.Nome).ToList()),
                     Telefone = pessoaJuridica.Telefone,
                     Celular = pessoaJuridica.Celular,
                     Email = pessoaJuridica.Email,
                     Endereco = Mapper.DynamicMap<EnderecoModel>(pessoaJuridica.Endereco)
                 };
                 return Request.CreateResponse(HttpStatusCode.OK, modelResposta);
-
             }
             else
                 return Request.CreateResponse(HttpStatusCode.NotFound);
