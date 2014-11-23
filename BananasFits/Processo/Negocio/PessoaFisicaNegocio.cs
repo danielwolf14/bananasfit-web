@@ -41,6 +41,22 @@ namespace Processo.Negocio
             VerificarNegocioException(mensagens);
             base.Atualizar(usuario);
         }
+
+        public void CreditarFits(PessoaFisica pessoaFisica, int quantidadeFits)
+        {
+            pessoaFisica.QuantidadeMoedas += quantidadeFits;
+            //Criar histórico
+            //var historicoCompraFits = new HistoricoCompraFits 
+            //{
+            //    PessoaFisica = pessoaFisica,
+            //    QuantidadeFits = quantidadeFits,
+            //    DataCompra = DateTime.Now
+            //};
+            
+            this.Atualizar(pessoaFisica);
+
+            throw new NotImplementedException();
+        }
     }
 }
     

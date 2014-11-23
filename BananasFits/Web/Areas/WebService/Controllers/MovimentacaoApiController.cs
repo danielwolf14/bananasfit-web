@@ -1,4 +1,5 @@
-﻿using Processo.Negocio;
+﻿using PayPal.Api.Payments;
+using Processo.Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,6 +83,32 @@ namespace Web.Areas.WebService.Controllers
 
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
+
+        }
+
+
+        [HttpPost]
+        [Route("api/movimentacaoapi/comprarfits2")]
+        public HttpResponseMessage ComprarFits2([FromBody]ComprarFitsApiModel model)
+        {
+            Util.PayPalNegocio paypalNegocio = new Util.PayPalNegocio("AUoYdBAqgl5mugEOu-xrxNeLj0DW2CohcYODtyxzsozi-me48ymybDi6dtw2",
+          "ELyImxCvpvxoiFRyfqzScMZbfo84f2Au4l-TJX78ymKuHskG_pDAcJHHt3uf", "sandbox", 5);
+
+            CreditCard creditCard = new CreditCard();
+            creditCard.number = model.NumeroCartao;
+            creditCard.type = model.TipoCartao;
+            creditCard.expire_month = Convert.ToInt32(model.Mes);
+            creditCard.expire_year = Convert.ToInt32(model.Ano);
+            creditCard.cvv2 = Convert.ToInt32(model.Cvv);
+
+            var pessoaFisica = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(model.ChavePessoaFisica)
+            //comprar
+            paypalNegocio.EfetuarCompra(pessoaFisica,
+                creditCard, model.QuantidadeFits);
+            //CreditarFits
+            unityOfWork.PessoaFisicaNegocio.CreditarFits(pessoaFisica, model.QuantidadeFits);
+            
+            return Request.CreateResponse(HttpStatusCode.OK);
 
         }
     }

@@ -21,7 +21,80 @@ namespace Web.Controllers
         #region View Comprar Fits
         public ActionResult ComprarFits()
         {
+            ViewBag.MesVencimento = new List<SelectListItem> 
+            {
+                new SelectListItem{ Text = "Janeiro", Value = "01"},
+                new SelectListItem{ Text = "Fevereiro", Value = "02"},
+                new SelectListItem{Text = "Março", Value = "03"},
+                new SelectListItem{Text = "Abril", Value = "04"},
+                new SelectListItem{Text = "Maio", Value = "05"},
+                new SelectListItem{Text = "Junho", Value = "06"},
+                new SelectListItem{Text = "Julho", Value = "07"},
+                new SelectListItem{Text = "Agosto", Value = "08"},
+                new SelectListItem{Text = "Setembro", Value = "09"},
+                new SelectListItem{Text = "Outubro", Value = "10"},
+                new SelectListItem{Text = "Novembro", Value = "11"},
+                new SelectListItem{Text = "Dezembro", Value = "12"},
+            };
+            List<SelectListItem> anos = new List<SelectListItem>();
+
+            for (int i = 0; i < 11; i++)
+            {
+                anos.Add(new SelectListItem
+                {
+                    Value = DateTime.Now.AddYears(i).Year.ToString(),
+                    Text = DateTime.Now.AddYears(i).Year.ToString()
+                });
+            }
+            ViewBag.AnoVencimento = anos;
+
+            ViewBag.TipoCartao = new List<SelectListItem> 
+            {
+                new SelectListItem{ Text = "Visa", Value = "visa"},
+                new SelectListItem{ Text = "MasterCard", Value = "master"},
+            };
+
+            ViewBag.Valor = new List<SelectListItem> 
+            {
+                new SelectListItem{ Text = "1 Fit ->  R$5,00", Value = "1"},
+                new SelectListItem{ Text = "5 Fits ->  R$25,00", Value = "5"},
+                new SelectListItem{ Text = "10 Fits ->  R$50,00", Value = "10"},
+                new SelectListItem{ Text = "15 Fits ->  R$75,00", Value = "15"},
+            };
+
             return View();
+        }
+        [HttpPost]
+        public ActionResult ComprarFits(ComprarFitsViewModel model)
+        {
+            Util.PayPalNegocio paypalNegocio = new Util.PayPalNegocio("AUoYdBAqgl5mugEOu-xrxNeLj0DW2CohcYODtyxzsozi-me48ymybDi6dtw2",
+          "ELyImxCvpvxoiFRyfqzScMZbfo84f2Au4l-TJX78ymKuHskG_pDAcJHHt3uf", "sandbox", 5);
+
+            var usuario = (UsuarioLogadoModel)Session["usuario"];
+
+            CreditCard creditCard = new CreditCard();
+            creditCard.number = model.NumeroCartao;
+            creditCard.type = model.TipoCartao;
+            creditCard.expire_month = Convert.ToInt32(model.Mes);
+            creditCard.expire_year = Convert.ToInt32(model.Ano);
+            creditCard.first_name = usuario.Email;
+            creditCard.cvv2 = Convert.ToInt32(model.Cvv);
+
+
+            if (usuario.IsPessoaFisica)
+            {
+                var pessoaFisica = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(usuario.Chave);
+                //realizou pagamento
+                paypalNegocio.EfetuarCompra(pessoaFisica,
+                    creditCard, model.QuantidadeFits);
+                //creditou fits
+                unityOfWork.PessoaFisicaNegocio.CreditarFits(pessoaFisica, model.QuantidadeFits);
+            }
+            else
+                ExibirMensagemErro("Compra não autorizada para usuários que sejam pessoa jurídica.");
+
+            ExibirMensagemSucesso("Compra realizada com sucesso.");
+            return RedirectToAction("ComprarFits");
         }
         #endregion
 
@@ -149,72 +222,6 @@ namespace Web.Controllers
 
         #endregion
 
-        #region Comprar PagSeguro
-        #endregion
 
-
-        public ActionResult ComprarFites()
-        {
-            Dictionary<string, string> payPalConfig = new Dictionary<string, string>();
-            payPalConfig.Add("mode", "sandbox");
-
-            OAuthTokenCredential tokenCredential =
-      new OAuthTokenCredential("AUoYdBAqgl5mugEOu-xrxNeLj0DW2CohcYODtyxzsozi-me48ymybDi6dtw2", "ELyImxCvpvxoiFRyfqzScMZbfo84f2Au4l-TJX78ymKuHskG_pDAcJHHt3uf", payPalConfig);
-
-            string accessToken = tokenCredential.GetAccessToken();
-
-            Address billingAddress = new Address();
-            billingAddress.line1 = "52 N Main ST";
-            billingAddress.city = "Johnstown";
-            billingAddress.country_code = "US";
-            billingAddress.postal_code = "43210";
-            billingAddress.state = "OH";
-
-            CreditCard creditCard = new CreditCard();
-            creditCard.number = "4002358193682418";
-            creditCard.type = "visa";
-            creditCard.expire_month = 11;
-            creditCard.expire_year = 2019;
-            creditCard.cvv2 = 111;
-            creditCard.first_name = "Joe";
-            creditCard.last_name = "Shopper";
-            creditCard.billing_address = billingAddress;
-            
-            Details amountDetails = new Details();
-            amountDetails.subtotal = "7.41";
-            amountDetails.tax = "0.03";
-            amountDetails.shipping = "0.03";
-
-            Amount amount = new Amount();
-            amount.total = "7.47";
-            amount.currency = "USD";
-            amount.details = amountDetails;
-
-            Transaction transaction = new Transaction();
-            transaction.amount = amount;
-            transaction.description = "This is the payment transaction description.";
-
-            List<Transaction> transactions = new List<Transaction>();
-            transactions.Add(transaction);
-
-            FundingInstrument fundingInstrument = new FundingInstrument();
-            fundingInstrument.credit_card = creditCard;
-
-            List<FundingInstrument> fundingInstruments = new List<FundingInstrument>();
-            fundingInstruments.Add(fundingInstrument);
-
-            Payer payer = new Payer();
-            payer.funding_instruments = fundingInstruments;
-            payer.payment_method = "credit_card";
-
-            Payment payment = new Payment();
-            payment.intent = "sale";
-            payment.payer = payer;
-            payment.transactions = transactions;
-
-            Payment createdPayment = payment.Create(accessToken);
-
-            return null;
-        }
     }
 }
