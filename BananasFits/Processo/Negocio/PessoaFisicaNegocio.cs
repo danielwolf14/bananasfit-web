@@ -50,6 +50,7 @@ namespace Processo.Negocio
             //{
             //    PessoaFisica = pessoaFisica,
             //    QuantidadeFits = quantidadeFits,
+            //    Valor = valor,    
             //    DataCompra = DateTime.Now
             //};
             

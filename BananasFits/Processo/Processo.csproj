@@ -62,6 +62,7 @@
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Database\Interfaces\IDatabaseContext.cs" />
     <Compile Include="Database\Interfaces\IAvaliacaoRepositorio.cs" />
+    <Compile Include="Database\Interfaces\IHistoricoCompraFitsRepositorio.cs" />
     <Compile Include="Database\Interfaces\IServicoPessoaJuridicaRepositorio.cs" />
     <Compile Include="Database\Interfaces\IHistoricoCompraServicoRepositorio.cs" />
     <Compile Include="Database\Interfaces\IServicoRepositorio.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Database\Interfaces\IEnderecoRepositorio.cs" />
     <Compile Include="Database\Interfaces\IUsuarioRepositorio.cs" />
     <Compile Include="Database\Mapeamento\AvaliacaoMap.cs" />
+    <Compile Include="Database\Mapeamento\HistoricoCompraFitsMap.cs" />
     <Compile Include="Database\Mapeamento\HistoricoCompraServicoMap.cs" />
     <Compile Include="Database\Mapeamento\ServicoPessoaJuridicaMap.cs" />
     <Compile Include="Database\Mapeamento\ServicoMap.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Database\Mapeamento\PessoaJuridicaMap.cs" />
     <Compile Include="Database\Mapeamento\UsuarioMap.cs" />
     <Compile Include="Database\Repositorios\AvaliacaoRepositorio.cs" />
+    <Compile Include="Database\Repositorios\HistoricoCompraFitsRepositorio.cs" />
     <Compile Include="Database\Repositorios\HistoricoCompraServicoRepositorio.cs" />
     <Compile Include="Database\Repositorios\ServicoPessoaJuridicaRepositorio.cs" />
     <Compile Include="Database\Repositorios\ServicoRepositorio.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="Database\Repositorios\PessoaFisicaRepositorio.cs" />
     <Compile Include="Database\Repositorios\UsuarioRepositorio.cs" />
     <Compile Include="Entidades\Avaliacao.cs" />
+    <Compile Include="Entidades\HistoricoCompraFits.cs" />
     <Compile Include="Entidades\Servico.cs" />
     <Compile Include="Entidades\Endereco.cs" />
     <Compile Include="Entidades\EntidadeBase.cs" />
@@ -96,6 +100,8 @@
     <Compile Include="Entidades\HistoricoCompraServico.cs" />
     <Compile Include="Entidades\ServicoPessoaJuridica.cs" />
     <Compile Include="Entidades\Usuario.cs" />
+    <Compile Include="Negocio\HistoricoCompraFitsNegocio.cs" />
+    <Compile Include="Negocio\Interfaces\IHistoricoCompraFitsNegocio.cs" />
     <Compile Include="Negocio\Interfaces\INegocioBase.cs" />
     <Compile Include="Negocio\Interfaces\IPessoaJuridicaNegocio.cs" />
     <Compile Include="Negocio\Interfaces\IPessoaFisicaNegocio.cs" />

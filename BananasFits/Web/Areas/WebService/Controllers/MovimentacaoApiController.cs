@@ -101,7 +101,7 @@ namespace Web.Areas.WebService.Controllers
             creditCard.expire_year = Convert.ToInt32(model.Ano);
             creditCard.cvv2 = Convert.ToInt32(model.Cvv);
 
-            var pessoaFisica = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(model.ChavePessoaFisica)
+            var pessoaFisica = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(model.ChavePessoaFisica);
             //comprar
             paypalNegocio.EfetuarCompra(pessoaFisica,
                 creditCard, model.QuantidadeFits);
