@@ -18,11 +18,13 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
                             @Html.TextBoxFor(e => e.NumeroCartao, new { placeholder = "Número do cartão", @class = "form-control" })
                         </div>
+                        @Html.ValidationMessageFor(e => e.NumeroCartao)
                         <br />
                         <div class="input-group ">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
                             @Html.TextBoxFor(e => e.Cvv, new { @class = "form-control", placeholder = "CVV" })
                         </div>
+                        @Html.ValidationMessageFor(e => e.Cvv)
                         <br />
                         @Html.DropDownListFor(e => e.Mes, ViewBag.MesVencimento as IEnumerable<SelectListItem>, new { @class = "form-control" })
                         <br />

@@ -21,6 +21,11 @@ namespace Web.Controllers
         #region View Comprar Fits
         public ActionResult ComprarFits()
         {
+            if(Session["usuario"] == null)
+            {
+                ExibirMensagemErro("Você precisa estar logado para efetuar esta compra.");
+                return RedirectToAction("Index", "Home");
+            }
             ViewBag.MesVencimento = new List<SelectListItem> 
             {
                 new SelectListItem{ Text = "Janeiro", Value = "01"},
@@ -85,10 +90,11 @@ namespace Web.Controllers
             {
                 var pessoaFisica = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(usuario.Chave);
                 //realizou pagamento
-                paypalNegocio.EfetuarCompra(pessoaFisica,
+                var valor = paypalNegocio.EfetuarCompra(pessoaFisica,
                     creditCard, model.QuantidadeFits);
                 //creditou fits
-                unityOfWork.PessoaFisicaNegocio.CreditarFits(pessoaFisica, model.QuantidadeFits);
+                unityOfWork.PessoaFisicaNegocio.CreditarFits(pessoaFisica, model.QuantidadeFits, valor);
+                unityOfWork.Commit();
             }
             else
                 ExibirMensagemErro("Compra não autorizada para usuários que sejam pessoa jurídica.");
@@ -99,10 +105,28 @@ namespace Web.Controllers
         #endregion
 
         #region View Historico Compra Fitis
-        public ActionResult HistoricoCompraFits()
+        public ActionResult ListarHistoricoCompraFits(int? page)
         {
-            return View();
+            var usuario = (UsuarioLogadoModel)Session["usuario"];
+            if (usuario != null && usuario.IsPessoaFisica)
+            {
+                IEnumerable<HistoricoCompraFits> historicoCompraFits = new List<HistoricoCompraFits>();
+                if (usuario.IsAdministrador)
+                    historicoCompraFits = unityOfWork.HistoricoCompraFitsNegocio.ConsultarTodos();
+                else
+                    historicoCompraFits = unityOfWork.HistoricoCompraFitsNegocio.Consultar(e => e.PessoaFisica.Chave == usuario.Chave);
+
+                historicoCompraFits = historicoCompraFits.OrderByDescending(e => e.DataCompra);
+
+                int pageSize = 10;
+                int pageNumber = (page ?? 1);
+
+                return View(historicoCompraFits.ToPagedList(pageNumber, pageSize));
+            }
+            ExibirMensagemErro("Esta ação não é permitida.");
+            return RedirectToAction("Index", "Home");
         }
+
         #endregion
 
         #region Listar Histórico de Serviços

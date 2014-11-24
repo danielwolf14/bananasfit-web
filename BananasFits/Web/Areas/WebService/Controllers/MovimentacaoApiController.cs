@@ -103,10 +103,10 @@ namespace Web.Areas.WebService.Controllers
 
             var pessoaFisica = unityOfWork.PessoaFisicaNegocio.BuscarPorChave(model.ChavePessoaFisica);
             //comprar
-            paypalNegocio.EfetuarCompra(pessoaFisica,
+            var valor = paypalNegocio.EfetuarCompra(pessoaFisica,
                 creditCard, model.QuantidadeFits);
             //CreditarFits
-            unityOfWork.PessoaFisicaNegocio.CreditarFits(pessoaFisica, model.QuantidadeFits);
+            unityOfWork.PessoaFisicaNegocio.CreditarFits(pessoaFisica, model.QuantidadeFits, valor);
             
             return Request.CreateResponse(HttpStatusCode.OK);
 

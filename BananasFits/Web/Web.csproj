@@ -326,7 +326,7 @@
     <Content Include="Views\Movimentacao\ComprarFits.cshtml" />
     <Content Include="Views\Servico\Qrcode.cshtml" />
     <Content Include="Views\Movimentacao\ListarHistoricoServico.cshtml" />
-    <Content Include="Views\Movimentacao\HistoricoCompraFits.cshtml" />
+    <Content Include="Views\Movimentacao\ListarHistoricoCompraFits.cshtml" />
     <Content Include="Views\Movimentacao\_ListarHistoricoServico.cshtml" />
   </ItemGroup>
   <ItemGroup>

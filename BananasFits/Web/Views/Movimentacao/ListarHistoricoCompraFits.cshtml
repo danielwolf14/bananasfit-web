@@ -1,0 +1,62 @@
+﻿@model PagedList.IPagedList<Processo.Entidades.HistoricoCompraFits>
+@using PagedList.Mvc;
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1 toppad">
+            <div class="panel panel-">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        <span style="font-size:25px; font-weight:bold;">Histórico de Compra de FITS</span>
+                    </h1>
+                </div>
+                <div class="panel-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table id="mytable" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nome Pessoa Física</th>
+                                                <th>Quatidade Moedas</th>
+                                                <th>Valor</th>
+                                                <th>Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model == null || Model.Count == 0)
+                                            {
+                                                <tr>
+                                                    <td colspan="4">
+                                                        Nenhuma compra foi realizada.
+                                                    </td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Chave</td>
+                                                        <td>@item.NomePessoaFisica</td>
+                                                        <td>@item.QuantidadeFits</td>
+                                                        <td>R$ @item.Valor</td>
+                                                        <td>@item.DataCompra.ToString()</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>                                   
+                                    @Html.PagedListPager(Model, page => Url.Action("ListarHistoricoCompraFits", new { page, }))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

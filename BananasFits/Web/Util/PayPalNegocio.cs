@@ -23,8 +23,10 @@ namespace Web.Util
             this.valorFits = valorFits;
         }
 
-        public void EfetuarCompra(PessoaFisica pessoaFisica, CreditCard creditCard, int quantidadeFits)
+        public string EfetuarCompra(PessoaFisica pessoaFisica, CreditCard creditCard, int quantidadeFits)
         {
+            string valor = (quantidadeFits * valorFits).ToString();
+
             Dictionary<string, string> payPalConfig = new Dictionary<string, string>();
             payPalConfig.Add("mode", this.mode);
 
@@ -42,7 +44,7 @@ namespace Web.Util
             creditCard.billing_address = billingAddress;
 
             Details amountDetails = new Details();
-            amountDetails.subtotal = (quantidadeFits * valorFits).ToString();
+            amountDetails.subtotal = valor;
             amountDetails.tax = "0.00";
             amountDetails.shipping = "0.00";
 
@@ -73,7 +75,9 @@ namespace Web.Util
             payment.payer = payer;
             payment.transactions = transactions;
 
-            Payment createdPayment = payment.Create(accessToken);            
+            Payment createdPayment = payment.Create(accessToken);
+
+            return valor;
         }
     }
 }

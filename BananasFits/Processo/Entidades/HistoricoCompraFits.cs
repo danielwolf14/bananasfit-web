@@ -13,5 +13,5 @@ namespace Processo.Entidades
         public virtual string Valor { get; set; }
         public virtual string NomePessoaFisica { get; set; }
         public virtual int QuantidadeFits { get; set; }
-         }
+    }
 }

@@ -15,12 +15,14 @@ namespace Processo.Negocio
     public class PessoaFisicaNegocio : UsuarioNegocio<PessoaFisica>, IPessoaFisicaNegocio
     {
         private IPessoaJuridicaNegocio pessoaJuridicaNegocio;
+        private IHistoricoCompraFitsNegocio historicoCompraFitsNegocio;
 
         internal PessoaFisicaNegocio(DatabaseContext contexto)
             : base(contexto)
         {
             this.repositorio = new PessoaFisicaRepositorio(contexto);
             this.pessoaJuridicaNegocio = new PessoaJuridicaNegocio(contexto);
+            this.historicoCompraFitsNegocio = new HistoricoCompraFitsNegocio(contexto);
         }
 
         public override void Cadastrar(PessoaFisica usuario)
@@ -42,21 +44,21 @@ namespace Processo.Negocio
             base.Atualizar(usuario);
         }
 
-        public void CreditarFits(PessoaFisica pessoaFisica, int quantidadeFits)
+        public void CreditarFits(PessoaFisica pessoaFisica, int quantidadeFits, string valor)
         {
+            pessoaFisica = base.BuscarPorChave(pessoaFisica.Chave);
             pessoaFisica.QuantidadeMoedas += quantidadeFits;
             //Criar histórico
-            //var historicoCompraFits = new HistoricoCompraFits 
-            //{
-            //    PessoaFisica = pessoaFisica,
-            //    QuantidadeFits = quantidadeFits,
-            //    Valor = valor,    
-            //    DataCompra = DateTime.Now
-            //};
-            
+            var historicoCompraFits = new HistoricoCompraFits
+            {
+                PessoaFisica = pessoaFisica,
+                QuantidadeFits = quantidadeFits,
+                NomePessoaFisica = pessoaFisica.Nome,
+                Valor = valor,
+                DataCompra = DateTime.Now
+            };
+            this.historicoCompraFitsNegocio.Inserir(historicoCompraFits);
             this.Atualizar(pessoaFisica);
-
-            throw new NotImplementedException();
         }
     }
 }
